@@ -80,6 +80,7 @@ namespace PlainCore.Window
             GLFW.WindowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
             GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
             GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 3);
+            GLFW.WindowHint(GLFW.RESIZABLE, resizable ? 1 : 0);
 
             Handle = GLFW.CreateWindow((int)width, (int)height, title, IntPtr.Zero, IntPtr.Zero);
             if(Handle == IntPtr.Zero)
