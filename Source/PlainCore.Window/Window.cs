@@ -8,13 +8,13 @@ namespace PlainCore.Window
 {
     public class Window: IWindow
     {
-        public Window(uint width = 800, uint height = 600, string title = "PlainCore", bool resizable = false)
+        public Window(uint width, uint height, string title, bool resizable, ContextSettings settings)
         {
             this.width = width;
             this.height = height;
             this.resizable = resizable;
             this.title = title;
-            Open();
+            Open(settings);
         }
 
         protected uint width;
@@ -71,7 +71,7 @@ namespace PlainCore.Window
             GLFW.PollEvents();
         }
 
-        protected virtual void Open()
+        protected virtual void Open(ContextSettings settings)
         {
             if (GLFW.Init() == 0) throw new NotSupportedException("GLFW init failed");
 
