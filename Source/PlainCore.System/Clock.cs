@@ -5,20 +5,21 @@ namespace PlainCore.System
 {
     public class Clock
     {
-        public Clock()
-        {
-
-        }
-
-        private Stopwatch stopwatch;
+        private Stopwatch stopwatch = new Stopwatch();
 
         public void Start()
         {
+#if DEBUG
+            if (stopwatch.IsRunning) throw new NotSupportedException("Clock already running");
+#endif
             stopwatch.Start();
         }
 
         public void Stop()
         {
+#if DEBUG
+            if (!stopwatch.IsRunning) throw new NotSupportedException("Clock not running");
+#endif
             stopwatch.Stop();
         }
 
@@ -29,14 +30,16 @@ namespace PlainCore.System
 
         public TimeSpan Restart()
         {
+#if DEBUG
+            if (!stopwatch.IsRunning) throw new NotSupportedException("Clock not running");
+#endif
             var elapsed = stopwatch.Elapsed;
             stopwatch.Restart();
             return elapsed;
         }
 
-        public TimeSpan Elapsed
-        {
-            get => stopwatch.Elapsed;
-        }
+        public TimeSpan Elapsed => stopwatch.Elapsed;
+
+        public bool IsRunning => stopwatch.IsRunning;
     }
 }
