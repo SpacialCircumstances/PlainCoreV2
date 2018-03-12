@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlainCore.Graphics.Core", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "Examples\HelloWorld\HelloWorld.csproj", "{3286C36B-648A-444C-BD81-F619D037CF5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlainCore.Window.Test", "Test\PlainCore.Window.Test\PlainCore.Window.Test.csproj", "{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3286C36B-648A-444C-BD81-F619D037CF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3286C36B-648A-444C-BD81-F619D037CF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3286C36B-648A-444C-BD81-F619D037CF5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{9F3C2097-67D8-4122-89A2-A9A174298EE5} = {5917E623-5F7C-4119-89F6-C92F13F2AE2B}
 		{DCB81F70-98FD-4D6C-B8C5-3C341B9792FA} = {5917E623-5F7C-4119-89F6-C92F13F2AE2B}
 		{3286C36B-648A-444C-BD81-F619D037CF5F} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
+		{D86D5BB9-2C5A-47ED-A9FF-B325B7B2DF84} = {F56F160B-2629-434F-8C84-39D78D447E10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5CA394-7E0E-4480-883C-D83A3C02008F}
