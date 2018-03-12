@@ -12,4 +12,12 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="OpenGL.Net" Version="0.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlainCore.Window\PlainCore.Window.csproj" />
+  </ItemGroup>
+
 </Project>
