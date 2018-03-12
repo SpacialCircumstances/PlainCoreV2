@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Xunit;
 
@@ -8,7 +9,7 @@ namespace PlainCore.Window.Test
     public class WindowTest
     {
         [Fact]
-        void TestCreate()
+        public void TestCreate()
         {
             //Default window settings
             var window1 = new Window();
@@ -18,15 +19,19 @@ namespace PlainCore.Window.Test
         }
 
         [Fact]
-        void TestLoop()
+        public void TestLoop()
         {
             //Should not crash
             var window1 = new Window(640, 480, "Test", true);
-            var counter = 0;
+            var sw = new Stopwatch();
+            sw.Start();
             while (window1.IsOpen)
             {
-                counter++;
-                if (counter > 50) window1.Close();
+                if(sw.ElapsedMilliseconds > 2000)
+                {
+                    window1.Close();
+                    break;
+                }
                 window1.PollEvents();
                 window1.Display();
             }
