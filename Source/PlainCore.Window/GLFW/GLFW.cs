@@ -1,4 +1,6 @@
-﻿// MIT License
+﻿// MODIFIED
+//
+// MIT License
 // Copyright (c) 2016 - 2017 Zachary Snow
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2067,7 +2069,14 @@ namespace GLFWDotNet
         {
             internal void Init()
             {
-                this.LoadUnmanagedDllFromPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Environment.Is64BitProcess ? "x64" : "x86", Library));
+                //Modified from original source code:
+                //Use OS + actual architecture for finding native library
+                var arch = RuntimeInformation.ProcessArchitecture.ToString();
+                string os;
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) os = "Windows";
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) os = "OSX";
+                else os = "Linux";
+                this.LoadUnmanagedDllFromPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), os, arch, Library));
             }
 
             protected override Assembly Load(AssemblyName assemblyName) => null;
