@@ -12,9 +12,9 @@ namespace PlainCore.Graphics
         {
         }
 
-        public void Clear(float r = 0f, float g = 0f, float b = 0f, float a = 0f)
+        public void Clear(Color4 color)
         {
-            Gl.ClearColor(r, g, b, a);
+            Gl.ClearColor(color.R, color.G, color.B, color.A);
             Gl.Clear(ClearBufferMask.ColorBufferBit);
         }
 
