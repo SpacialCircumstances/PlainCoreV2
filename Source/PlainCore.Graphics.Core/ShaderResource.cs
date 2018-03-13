@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    public class ShaderResource
+    public class ShaderResource: IDisposable
     {
         public static ShaderResource FromFile(ShaderType type, string filename)
         {
@@ -16,6 +16,7 @@ namespace PlainCore.Graphics.Core
         public ShaderResource(ShaderType type, string[] code)
         {
             handle = Gl.CreateShader(ToShaderType(type));
+            Verify.VerifyResourceCreated(handle);
 
             Gl.ShaderSource(handle, code);
             Gl.CompileShader(handle);
@@ -36,6 +37,11 @@ namespace PlainCore.Graphics.Core
             }
 
             return 0;
+        }
+
+        public void Dispose()
+        {
+            Gl.DeleteShader(handle);
         }
     }
 }

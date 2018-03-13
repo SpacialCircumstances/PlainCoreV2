@@ -5,19 +5,19 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    public class ShaderPipeline
+    public class ShaderPipeline: IBindable
     {
         public ShaderPipeline(List<ShaderResource> shaders)
         {
             handle = Gl.CreateProgram();
-
+            Verify.VerifyResourceCreated(handle);
             UploadShaders(shaders.ToArray());
         }
 
         public ShaderPipeline(params ShaderResource[] shaders)
         {
             handle = Gl.CreateProgram();
-
+            Verify.VerifyResourceCreated(handle);
             UploadShaders(shaders);
         }
 
@@ -25,7 +25,7 @@ namespace PlainCore.Graphics.Core
 
         protected void UploadShaders(ShaderResource[] shaders)
         {
-            if (!VerifyShaders(shaders)) throw new NotSupportedException("Shader resources invalid");
+            Verify.VerifyShaders(shaders);
 
             foreach(var shader in shaders)
             {
@@ -40,10 +40,19 @@ namespace PlainCore.Graphics.Core
             }
         }
 
-        protected bool VerifyShaders(ShaderResource[] shaders)
+        public void Bind()
         {
-            //TODO: Check if stages present
-            return true;
+            Gl.UseProgram(handle);
+        }
+
+        public void Unbind()
+        {
+            //Empty, no need to unbind?
+        }
+
+        public void Dispose()
+        {
+            Gl.DeleteProgram(handle);
         }
     }
 }
