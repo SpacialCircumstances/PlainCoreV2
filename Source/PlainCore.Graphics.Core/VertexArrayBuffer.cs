@@ -7,17 +7,19 @@ namespace PlainCore.Graphics.Core
 {
     public class VertexArrayBuffer<T>: IDeviceBuffer where T: struct
     {
-        public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, int initialCapacity = 3)
+        public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, PrimitiveType primitive = PrimitiveType.Triangles, int initialCapacity = 3)
         {
             vertices = new T[initialCapacity];
             this.vertexSize = vertexSize;
             this.usage = usage;
+            this.primitive = primitive;
 
             handle = Gl.GenBuffer();
             Verify.VerifyResourceCreated(handle);
         }
 
         protected readonly BufferUsage usage;
+        protected readonly PrimitiveType primitive;
         protected uint vertexSize;
         protected T[] vertices;
         protected uint handle;
@@ -51,6 +53,11 @@ namespace PlainCore.Graphics.Core
         public void Unbind()
         {
             Gl.BindBuffer(BufferTarget.ArrayBuffer, 0);
+        }
+
+        public void Draw()
+        {
+            Gl.DrawArrays(primitive, 0, vertices.Length);
         }
     }
 }
