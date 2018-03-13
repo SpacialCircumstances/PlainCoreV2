@@ -26,14 +26,21 @@ namespace PlainCore.Graphics.Core
             return other.vector == vector;
         }
 
-        public static Color4 White = new Color4(1f, 1f, 1f, 0f);
+        public static Color4 White = new Color4(1f, 1f, 1f);
         public static Color4 Transparent = new Color4(1f, 1f, 1f, 1f);
-        public static Color4 Black = new Color4(0f, 0f, 0f, 0f);
-        public static Color4 Red = new Color4(1f, 0f, 0f, 0f);
-        public static Color4 Lime = new Color4(0f, 1f, 0f, 0f);
-        public static Color4 Blue = new Color4(0f, 0f, 1f, 0f);
-        public static Color4 Yellow = new Color4(1f, 1f, 0f, 0f);
-        public static Color4 Cyan = new Color4(0f, 1f, 1f, 0f);
-        public static Color4 Magenta = new Color4(1f, 0f, 1f, 0f);
+        public static Color4 Black = new Color4(0f, 0f, 0f);
+        public static Color4 Red = new Color4(1f, 0f, 0f);
+        public static Color4 Lime = new Color4(0f, 1f, 0f);
+        public static Color4 Blue = new Color4(0f, 0f, 1f);
+        public static Color4 Yellow = new Color4(1f, 1f, 0f);
+        public static Color4 Cyan = new Color4(0f, 1f, 1f);
+        public static Color4 Magenta = new Color4(1f, 0f, 1f);
+        public static Color4 Gray = new Color4(0.5f, 0.5f, 0.5f);
+        public static Color4 Olive = new Color4(0.5f, 0.5f, 0f);
+        public static Color4 Maroon = new Color4(0.5f, 0f, 0f);
+        public static Color4 Green = new Color4(0f, 0.5f, 0f);
+        public static Color4 Purple = new Color4(0.5f, 0f, 0.5f);
+        public static Color4 Teal = new Color4(0f, 0.5f, 0.5f);
+        public static Color4 Navy = new Color4(0f, 0f, 0.5f);
     }
 }
