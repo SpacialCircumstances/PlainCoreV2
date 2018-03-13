@@ -13,6 +13,8 @@ namespace PlainCore.Graphics.Core
         public Color4 Color;
         public Vector2 TextureCoordinates;
 
+        public const uint Size = Color4.Size + 16;
+
         public VertexPositionColorTexture(Vector2 position, Color4 color, Vector2 textureCoordinates)
         {
             Position = position;

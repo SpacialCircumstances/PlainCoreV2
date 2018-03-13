@@ -9,6 +9,8 @@ namespace PlainCore.Graphics.Core
         public Vector2 Position;
         public Color4 Color;
 
+        public const uint Size = Color4.Size + 8;
+
         public VertexPositionColor(Vector2 position, Color4 color)
         {
             Position = position;
