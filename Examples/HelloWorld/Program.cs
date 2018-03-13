@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlainCore.Graphics.Core;
+using System;
 
 namespace HelloWorld
 {
@@ -6,7 +7,16 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var window = new OpenGLWindow(800, 600, "PlainCore Hello World!", false);
+
+            while(window.IsOpen)
+            {
+                window.PollEvents();
+
+                window.Display();
+            }
+
+            window.Dispose();
         }
     }
 }

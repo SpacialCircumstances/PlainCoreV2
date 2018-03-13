@@ -5,4 +5,16 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\PlainCore.Graphics.Core\PlainCore.Graphics.Core.csproj" />
+    <ProjectReference Include="..\..\Source\PlainCore.System\PlainCore.System.csproj" />
+    <ProjectReference Include="..\..\Source\PlainCore.Window\PlainCore.Window.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Windows\X64\glfw3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
