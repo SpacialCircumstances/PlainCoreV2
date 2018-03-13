@@ -6,7 +6,7 @@ namespace PlainCore.Graphics
 {
     public interface IRenderTarget
     {
-        void Clear();
+        void Clear(float r, float g, float b, float a);
         void Draw(IDrawable drawable);
     }
 }

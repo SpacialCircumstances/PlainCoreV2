@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Source\PlainCore.Graphics.Core\PlainCore.Graphics.Core.csproj" />
+    <ProjectReference Include="..\..\Source\PlainCore.Graphics\PlainCore.Graphics.csproj" />
     <ProjectReference Include="..\..\Source\PlainCore.System\PlainCore.System.csproj" />
     <ProjectReference Include="..\..\Source\PlainCore.Window\PlainCore.Window.csproj" />
   </ItemGroup>
