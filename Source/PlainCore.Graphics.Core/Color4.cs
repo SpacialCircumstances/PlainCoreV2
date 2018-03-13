@@ -7,7 +7,7 @@ namespace PlainCore.Graphics.Core
 {
     public struct Color4 : IEquatable<Color4>
     {
-        public Color4(float r, float g, float b, float a)
+        public Color4(float r, float g, float b, float a = 0f)
         {
             vector = new Vector4(r, g, b, a);
         }
