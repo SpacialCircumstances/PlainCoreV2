@@ -12,6 +12,11 @@ namespace PlainCore.Graphics.Core
             vector = new Vector4(r, g, b, a);
         }
 
+        public Color4(byte r, byte g, byte b, byte a = 0)
+        {
+            vector = new Vector4(r / 256f, g / 256f, b / 256f, a / 256f);
+        }
+
         private Vector4 vector;
 
         public float R => vector.X;
@@ -42,5 +47,6 @@ namespace PlainCore.Graphics.Core
         public static readonly Color4 Purple = new Color4(0.5f, 0f, 0.5f);
         public static readonly Color4 Teal = new Color4(0f, 0.5f, 0.5f);
         public static readonly Color4 Navy = new Color4(0f, 0f, 0.5f);
+        public static readonly Color4 CornflowerBlue = new Color4(0.3921f, 0.5843f, 0.9294f);
     }
 }

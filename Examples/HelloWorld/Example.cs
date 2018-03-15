@@ -19,7 +19,7 @@ namespace HelloWorld
             while (window.IsOpen)
             {
                 window.PollEvents();
-                window.Clear(Color4.Cyan);
+                window.Clear(Color4.CornflowerBlue);
 
                 _Angle = (_Angle + 0.1f) % 45.0f;
                 RenderControl_RenderGL320();
