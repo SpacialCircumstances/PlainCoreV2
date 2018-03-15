@@ -45,6 +45,12 @@ namespace PlainCore.Graphics.Core
                     return OpenGL.ShaderType.FragmentShader;
                 case ShaderType.Vertex:
                     return OpenGL.ShaderType.VertexShader;
+                case ShaderType.Geometry:
+                    return OpenGL.ShaderType.GeometryShader;
+                case ShaderType.TesselationControl:
+                    return OpenGL.ShaderType.TessControlShader;
+                case ShaderType.TesselationEval:
+                    return OpenGL.ShaderType.TessEvaluationShader;
             }
 
             return 0;

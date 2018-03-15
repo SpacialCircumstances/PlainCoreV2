@@ -7,6 +7,9 @@ namespace PlainCore.Graphics.Core
     public enum ShaderType
     {
         Vertex,
-        Fragment
+        Fragment,
+        Geometry,
+        TesselationControl,
+        TesselationEval
     }
 }
