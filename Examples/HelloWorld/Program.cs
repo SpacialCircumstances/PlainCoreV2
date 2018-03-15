@@ -9,7 +9,7 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            new Example().Run();
+            new HelloWorld().Run();
         }
     }
 }
