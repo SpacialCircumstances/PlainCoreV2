@@ -23,8 +23,7 @@ namespace PlainCore.Graphics.Core
             Gl.ShaderSource(handle, code);
             Gl.CompileShader(handle);
 
-            int compiled = 0;
-            Gl.GetShader(handle, ShaderParameterName.CompileStatus, out compiled);
+            Gl.GetShader(handle, ShaderParameterName.CompileStatus, out int compiled);
             if (compiled != 0)
                 return;
 
@@ -61,7 +60,7 @@ namespace PlainCore.Graphics.Core
             Gl.DeleteShader(handle);
         }
 
-        static string ReadShaderLog(uint shader)
+        protected static string ReadShaderLog(uint shader)
         {
             var infolog = new StringBuilder(MAX_LOG);
             Gl.GetShaderInfoLog(shader, MAX_LOG, out int infologLength, infolog);

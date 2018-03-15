@@ -49,7 +49,6 @@ namespace PlainCore.Graphics.Core
 
                 throw new InvalidOperationException($"Shader linking failed: {log}");
             }
-
         }
 
         public void Bind()
@@ -75,11 +74,11 @@ namespace PlainCore.Graphics.Core
             return (uint)pos;
         }
 
-        static string ReadProgramLog(uint id)
+        protected static string ReadProgramLog(uint id)
         {
             var infolog = new StringBuilder(MAX_LOG);
             Gl.GetProgramInfoLog(id, MAX_LOG, out int infologLength, infolog);
             return infolog.ToString();
-        } 
+        }
     }
 }

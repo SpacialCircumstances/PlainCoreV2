@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HelloWorld
 {
-    class Example
+    public class Example
     {
         public void Run()
         {
@@ -285,7 +285,7 @@ namespace HelloWorld
             0.0f, 0.0f, 1.0f
         };
 
-        float _Angle;
+        private float _Angle;
     }
 }
 #endregion

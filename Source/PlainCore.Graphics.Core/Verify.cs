@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    static class Verify
+    internal static class Verify
     {
         public static void VerifyResourceCreated(uint handle)
         {
