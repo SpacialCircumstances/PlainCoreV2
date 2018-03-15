@@ -14,15 +14,15 @@ namespace PlainCore.Graphics.Core
             this.usage = usage;
             this.primitive = primitive;
 
-            handle = Gl.GenBuffer();
-            Verify.VerifyResourceCreated(handle);
+            Handle = Gl.GenBuffer();
+            Verify.VerifyResourceCreated(Handle);
         }
 
         protected readonly BufferUsage usage;
         protected readonly PrimitiveType primitive;
         protected uint vertexSize;
         protected T[] vertices;
-        protected uint handle;
+        public readonly uint Handle;
 
         public T[] Vertices
         {
@@ -35,7 +35,7 @@ namespace PlainCore.Graphics.Core
 
         public void Bind()
         {
-            Gl.BindBuffer(BufferTarget.ArrayBuffer, handle);
+            Gl.BindBuffer(BufferTarget.ArrayBuffer, Handle);
         }
 
         public void CopyData()
@@ -45,7 +45,7 @@ namespace PlainCore.Graphics.Core
 
         public void Dispose()
         {
-            Gl.DeleteBuffers(handle);
+            Gl.DeleteBuffers(Handle);
         }
 
         public void Unbind()

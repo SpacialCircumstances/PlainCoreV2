@@ -10,8 +10,8 @@ namespace PlainCore.Graphics.Core
         public VertexArrayObject(VertexArrayBuffer<T> buffer, ShaderPipeline pipeline, params VertexAttributeDescription[] attributes)
         {
             this.buffer = buffer;
-            handle = Gl.GenVertexArray();
-            Verify.VerifyResourceCreated(handle);
+            Handle = Gl.GenVertexArray();
+            Verify.VerifyResourceCreated(Handle);
 
             this.pipeline = pipeline;
 
@@ -29,16 +29,16 @@ namespace PlainCore.Graphics.Core
 
         protected VertexArrayBuffer<T> buffer;
         protected ShaderPipeline pipeline;
-        protected uint handle;
+        public readonly uint Handle;
 
         public void Bind()
         {
-            Gl.BindVertexArray(handle);
+            Gl.BindVertexArray(Handle);
         }
 
         public void Dispose()
         {
-            Gl.DeleteVertexArrays(handle);
+            Gl.DeleteVertexArrays(Handle);
         }
 
         public void Unbind()

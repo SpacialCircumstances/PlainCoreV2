@@ -11,19 +11,19 @@ namespace PlainCore.Graphics.Core
 
         public ShaderPipeline(List<ShaderResource> shaders)
         {
-            handle = Gl.CreateProgram();
-            Verify.VerifyResourceCreated(handle);
+            Handle = Gl.CreateProgram();
+            Verify.VerifyResourceCreated(Handle);
             UploadShaders(shaders.ToArray());
         }
 
         public ShaderPipeline(params ShaderResource[] shaders)
         {
-            handle = Gl.CreateProgram();
-            Verify.VerifyResourceCreated(handle);
+            Handle = Gl.CreateProgram();
+            Verify.VerifyResourceCreated(Handle);
             UploadShaders(shaders);
         }
 
-        protected uint handle;
+        public readonly uint Handle;
 
         protected void UploadShaders(ShaderResource[] shaders)
         {
@@ -31,21 +31,21 @@ namespace PlainCore.Graphics.Core
 
             foreach(var shader in shaders)
             {
-                Gl.AttachShader(handle, shader.Handle);
+                Gl.AttachShader(Handle, shader.Handle);
             }
 
-            Gl.LinkProgram(handle);
+            Gl.LinkProgram(Handle);
 
             foreach(var shader in shaders)
             {
-                Gl.DetachShader(handle, shader.Handle);
+                Gl.DetachShader(Handle, shader.Handle);
             }
 
-            Gl.GetProgram(handle, ProgramProperty.LinkStatus, out int linked);
+            Gl.GetProgram(Handle, ProgramProperty.LinkStatus, out int linked);
 
             if(linked == 0)
             {
-                var log = ReadProgramLog(handle);
+                var log = ReadProgramLog(Handle);
 
                 throw new InvalidOperationException($"Shader linking failed: {log}");
             }
@@ -54,7 +54,7 @@ namespace PlainCore.Graphics.Core
 
         public void Bind()
         {
-            Gl.UseProgram(handle);
+            Gl.UseProgram(Handle);
         }
 
         public void Unbind()
@@ -64,12 +64,12 @@ namespace PlainCore.Graphics.Core
 
         public void Dispose()
         {
-            Gl.DeleteProgram(handle);
+            Gl.DeleteProgram(Handle);
         }
 
         public uint GetAttributeLocation(string name)
         {
-            int pos = Gl.GetAttribLocation(handle, name);
+            int pos = Gl.GetAttribLocation(Handle, name);
             Verify.VerifyAttribute(name, pos);
 
             return (uint)pos;
