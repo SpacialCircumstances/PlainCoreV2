@@ -28,7 +28,7 @@ namespace PlainCore.Graphics.Core
 
         public bool Equals(Color4 other)
         {
-            return other.vector == vector;
+            return other.vector.Equals(vector);
         }
 
         public static readonly Color4 White = new Color4(1f, 1f, 1f);
