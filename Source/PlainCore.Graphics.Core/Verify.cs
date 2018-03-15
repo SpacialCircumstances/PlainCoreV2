@@ -29,5 +29,14 @@ namespace PlainCore.Graphics.Core
                 throw new InvalidOperationException($"Attribute {attribute} not found in shader pipeline: {error}");
             }
         }
+
+        public static void VerifyUniform(string name, int position)
+        {
+            if (position == -1)
+            {
+                var error = Gl.GetError();
+                throw new InvalidOperationException($"Uniform {name} not found in shader pipeline: {error}");
+            }
+        }
     }
 }

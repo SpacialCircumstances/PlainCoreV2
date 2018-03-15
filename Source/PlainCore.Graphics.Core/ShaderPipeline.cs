@@ -24,6 +24,7 @@ namespace PlainCore.Graphics.Core
         }
 
         public readonly uint Handle;
+        protected Dictionary<string, int> UniformLocations = new Dictionary<string, int>();
 
         protected void UploadShaders(ShaderResource[] shaders)
         {
@@ -72,6 +73,21 @@ namespace PlainCore.Graphics.Core
             Verify.VerifyAttribute(name, pos);
 
             return (uint)pos;
+        }
+
+        public int GetUniformLocation(string name)
+        {
+            if (UniformLocations.ContainsKey(name))
+            {
+                return UniformLocations[name];
+            }
+            else
+            {
+                int location = Gl.GetUniformLocation(Handle, name);
+                Verify.VerifyUniform(name, location);
+                UniformLocations.Add(name, location);
+                return location;
+            }
         }
 
         protected static string ReadProgramLog(uint id)
