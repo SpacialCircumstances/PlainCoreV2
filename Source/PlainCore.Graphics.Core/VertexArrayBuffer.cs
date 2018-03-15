@@ -40,9 +40,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData()
         {
-            Bind();
             Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), this.vertices, usage);
-            Unbind();
         }
 
         public void Dispose()
