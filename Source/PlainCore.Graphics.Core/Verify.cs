@@ -20,5 +20,14 @@ namespace PlainCore.Graphics.Core
         {
 
         }
+
+        public static void VerifyAttribute(string attribute, int position)
+        {
+            if (position == -1)
+            {
+                var error = Gl.GetError();
+                throw new InvalidOperationException($"Attribute {attribute} not found in shader pipeline: {error}");
+            }
+        }
     }
 }

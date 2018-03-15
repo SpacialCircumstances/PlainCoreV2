@@ -67,6 +67,14 @@ namespace PlainCore.Graphics.Core
             Gl.DeleteProgram(handle);
         }
 
+        public uint GetAttributeLocation(string name)
+        {
+            int pos = Gl.GetAttribLocation(handle, name);
+            Verify.VerifyAttribute(name, pos);
+
+            return (uint)pos;
+        }
+
         static string ReadProgramLog(uint id)
         {
             var infolog = new StringBuilder(MAX_LOG);
