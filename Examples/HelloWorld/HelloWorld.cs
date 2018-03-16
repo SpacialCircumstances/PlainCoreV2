@@ -10,8 +10,8 @@ namespace HelloWorld
     class HelloWorld
     {
         ShaderPipeline pipeline;
-        VertexArrayObject<float> vao;
-        VertexArrayBuffer<float> buffer;
+        VertexArrayObject<Vector2> vao;
+        VertexArrayBuffer<Vector2> buffer;
         Matrix4fUniform worldMatrix;
 
         public void Run()
@@ -36,9 +36,9 @@ namespace HelloWorld
         protected void Setup()
         {
             pipeline = new ShaderPipeline(new ShaderResource(ShaderType.Vertex, _VertexSourceGL), new ShaderResource(ShaderType.Fragment, _FragmentSourceGL));
-            buffer = new VertexArrayBuffer<float>(8, OpenGL.BufferUsage.StaticDraw);
+            buffer = new VertexArrayBuffer<Vector2>(8, OpenGL.BufferUsage.StaticDraw);
             buffer.Vertices = _ArrayPosition;
-            vao = new VertexArrayObject<float>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 0, 0));
+            vao = new VertexArrayObject<Vector2>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 0, 0));
             buffer.Bind();
             buffer.CopyData();
             buffer.Unbind();
@@ -72,10 +72,10 @@ namespace HelloWorld
             "}\n"
         };
 
-        private static readonly float[] _ArrayPosition = new float[] {
-            0.0f, 0.0f,
-            1.0f, 0.0f,
-            1.0f, 1.0f
+        private static readonly Vector2[] _ArrayPosition = new Vector2[] {
+            new Vector2(0.0f, 0.0f),
+            new Vector2(1.0f, 0.0f),
+            new Vector2(1.0f, 1.0f)
         };
     }
 }
