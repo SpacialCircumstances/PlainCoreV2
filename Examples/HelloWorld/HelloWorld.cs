@@ -10,8 +10,8 @@ namespace HelloWorld
     class HelloWorld
     {
         ShaderPipeline pipeline;
-        VertexArrayObject<Vector2> vao;
-        VertexArrayBuffer<Vector2> buffer;
+        VertexArrayObject<VertexPositionColor> vao;
+        VertexArrayBuffer<VertexPositionColor> buffer;
         Matrix4fUniform worldMatrix;
 
         public void Run()
@@ -36,9 +36,9 @@ namespace HelloWorld
         protected void Setup()
         {
             pipeline = new ShaderPipeline(new ShaderResource(ShaderType.Vertex, _VertexSourceGL), new ShaderResource(ShaderType.Fragment, _FragmentSourceGL));
-            buffer = new VertexArrayBuffer<Vector2>(8, OpenGL.BufferUsage.StaticDraw);
+            buffer = new VertexArrayBuffer<VertexPositionColor>(24, OpenGL.BufferUsage.StaticDraw);
             buffer.Vertices = _ArrayPosition;
-            vao = new VertexArrayObject<Vector2>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 0, 0));
+            vao = new VertexArrayObject<VertexPositionColor>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 0, 0), new VertexAttributeDescription("vColor", 4, OpenGL.VertexAttribType.Float, false, 0, 8));
             buffer.Bind();
             buffer.CopyData();
             buffer.Unbind();
@@ -47,7 +47,7 @@ namespace HelloWorld
 
         protected void Draw()
         {
-            Matrix4x4 projection = Matrix4x4.CreateOrthographic(-1.0f, +1.0f, -1.0f, +1.0f);
+            Matrix4x4 projection = Matrix4x4.CreateOrthographic(2.0f, 2.0f, -1.0f, +1.0f);
             worldMatrix.Matrix = projection;
             pipeline.Bind();
             worldMatrix.Set(pipeline);
@@ -60,22 +60,26 @@ namespace HelloWorld
             "#version 150 compatibility\n",
             "uniform mat4 uMVP;\n",
             "in vec2 aPosition;\n",
+            "in vec4 vColor;\n",
+            "out vec4 frColor;\n",
             "void main() {\n",
             "	gl_Position = uMVP * vec4(aPosition, 0.0, 1.0);\n",
+            "   frColor = vColor;\n",
             "}\n"
         };
 
         private readonly string[] _FragmentSourceGL = {
             "#version 150 compatibility\n",
+            "in vec4 frColor;\n",
             "void main() {\n",
-            "	gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);\n",
+            "	gl_FragColor = frColor;\n",
             "}\n"
         };
 
-        private static readonly Vector2[] _ArrayPosition = new Vector2[] {
-            new Vector2(0.0f, 0.0f),
-            new Vector2(1.0f, 0.0f),
-            new Vector2(1.0f, 1.0f)
+        private static readonly VertexPositionColor[] _ArrayPosition = new VertexPositionColor[] {
+            new VertexPositionColor(new Vector2(0.0f, 0.0f), new Color4(1f, 0f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(1.0f, 0.0f), new Color4(1f, 1f, 1f, 1f)),
+            new VertexPositionColor(new Vector2(1.0f, 1.0f), new Color4(0f, 0f, 1f, 1f))
         };
     }
 }
