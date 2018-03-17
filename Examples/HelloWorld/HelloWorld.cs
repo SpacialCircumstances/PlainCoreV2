@@ -53,7 +53,7 @@ namespace HelloWorld
             worldMatrix.Set(pipeline);
             buffer.Bind();
             vao.Bind();
-            buffer.Draw();
+            buffer.DrawDirect();
         }
 
         private readonly string[] _VertexSourceGL = {

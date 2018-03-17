@@ -53,7 +53,7 @@ namespace PlainCore.Graphics.Core
             Gl.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 
-        public void Draw()
+        public void DrawDirect()
         {
             Gl.DrawArrays(primitive, 0, vertices.Length);
         }
