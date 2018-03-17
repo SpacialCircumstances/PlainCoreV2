@@ -12,10 +12,10 @@ namespace PlainCore.Graphics.Core
         }
 
         public readonly uint Handle;
-        protected uint[] indices;
+        protected int[] indices;
         protected readonly BufferUsage usage;
 
-        public uint[] Indices
+        public int[] Indices
         {
             get => indices;
             set
@@ -31,7 +31,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData()
         {
-            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * 4, indices, usage);
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), indices, usage);
         }
 
         public void Dispose()
@@ -46,7 +46,7 @@ namespace PlainCore.Graphics.Core
 
         public void DrawIndexed(VertexArrayBuffer<T> buffer)
         {
-            Gl.DrawElements(buffer.Primitive, indices.Length, DrawElementsType.UnsignedInt, indices);
+            Gl.DrawElements(buffer.Primitive, indices.Length, DrawElementsType.UnsignedInt, null);
         }
     }
 }
