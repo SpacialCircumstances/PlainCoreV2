@@ -33,6 +33,8 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        public PrimitiveType Primitive => primitive;
+
         public void Bind()
         {
             Gl.BindBuffer(BufferTarget.ArrayBuffer, Handle);
