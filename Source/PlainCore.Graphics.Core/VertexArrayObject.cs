@@ -51,7 +51,7 @@ namespace PlainCore.Graphics.Core
             uint position = pipeline.GetAttributeLocation(attr.Name);
 
             Gl.EnableVertexAttribArray(position);
-            Gl.VertexAttribPointer(position, attr.Size, attr.AttributeType, attr.Normalized, attr.Stride, new IntPtr(attr.Offset));
+            Gl.VertexAttribPointer(position, attr.Size, attr.AttributeType, attr.Normalized, attr.VertexSize, new IntPtr(attr.Offset));
         }
     }
 }

@@ -8,16 +8,16 @@ namespace PlainCore.Graphics.Core
         public readonly int Size;
         public readonly VertexAttribType AttributeType;
         public readonly bool Normalized;
-        public readonly int Stride;
+        public readonly int VertexSize;
         public readonly int Offset;
 
-        public VertexAttributeDescription(string name, int size, VertexAttribType attributeType, bool normalized, int stride, int offset)
+        public VertexAttributeDescription(string name, int size, VertexAttribType attributeType, bool normalized, int vertexSize, int offset)
         {
             Name = name;
             Size = size;
             AttributeType = attributeType;
             Normalized = normalized;
-            Stride = stride;
+            VertexSize = vertexSize;
             Offset = offset;
         }
     }

@@ -38,7 +38,7 @@ namespace HelloWorld
             pipeline = new ShaderPipeline(new ShaderResource(ShaderType.Vertex, _VertexSourceGL), new ShaderResource(ShaderType.Fragment, _FragmentSourceGL));
             buffer = new VertexArrayBuffer<VertexPositionColor>(24, OpenGL.BufferUsage.StaticDraw);
             buffer.Vertices = _ArrayPosition;
-            vao = new VertexArrayObject<VertexPositionColor>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 0, 0), new VertexAttributeDescription("vColor", 4, OpenGL.VertexAttribType.Float, false, 0, 8));
+            vao = new VertexArrayObject<VertexPositionColor>(buffer, pipeline, new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 24, 0), new VertexAttributeDescription("vColor", 4, OpenGL.VertexAttribType.Float, false, 24, 8));
             buffer.Bind();
             buffer.CopyData();
             buffer.Unbind();
@@ -77,9 +77,12 @@ namespace HelloWorld
         };
 
         private static readonly VertexPositionColor[] _ArrayPosition = new VertexPositionColor[] {
-            new VertexPositionColor(new Vector2(0.0f, 0.0f), new Color4(1f, 0f, 0f, 1f)),
-            new VertexPositionColor(new Vector2(1.0f, 0.0f), new Color4(1f, 1f, 1f, 1f)),
-            new VertexPositionColor(new Vector2(1.0f, 1.0f), new Color4(0f, 0f, 1f, 1f))
+            new VertexPositionColor(new Vector2(0.0f, 0.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(1.0f, 0.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(1.0f, 1.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(0.0f, 0.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(0.0f, 1.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(1.0f, 1.0f), new Color4(1f, 1f, 0f, 1f)),
         };
     }
 }
