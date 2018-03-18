@@ -25,7 +25,7 @@ namespace PlainCore.Graphics.Core
 
         public void Set(ShaderPipeline pipeline)
         {
-            Gl.ProgramUniformMatrix4f(pipeline.Handle, pipeline.GetUniformLocation(name), 1, false, ref matrix);
+            Gl.UniformMatrix4f(pipeline.GetUniformLocation(name), 1, false, ref matrix);
         }
     }
 }
