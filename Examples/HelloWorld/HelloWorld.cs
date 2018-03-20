@@ -78,8 +78,9 @@ namespace HelloWorld
         private readonly string[] _FragmentSourceGL = {
             "#version 330\n",
             "in vec4 frColor;\n",
+            "out vec4 outColor;\n",
             "void main() {\n",
-            "	gl_FragColor = frColor;\n",
+            "	outColor = frColor;\n",
             "}\n"
         };
 
