@@ -9,7 +9,7 @@ namespace HelloWorld
     {
         public static void Main(string[] args)
         {
-            new HelloWorld().Run();
+            new HelloTexture().Run();
         }
     }
 }
