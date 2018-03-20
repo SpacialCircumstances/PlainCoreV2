@@ -64,7 +64,7 @@ namespace HelloWorld
         }
 
         private readonly string[] _VertexSourceGL = {
-            "#version 150 compatibility\n",
+            "#version 330\n",
             "uniform mat4 uMVP;\n",
             "in vec2 aPosition;\n",
             "in vec4 vColor;\n",
@@ -76,7 +76,7 @@ namespace HelloWorld
         };
 
         private readonly string[] _FragmentSourceGL = {
-            "#version 150 compatibility\n",
+            "#version 330\n",
             "in vec4 frColor;\n",
             "void main() {\n",
             "	gl_FragColor = frColor;\n",
