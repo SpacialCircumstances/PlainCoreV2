@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlainCore.Graphics.Core\PlainCore.Graphics.Core.csproj" />
+    <ProjectReference Include="..\PlainCore.System\PlainCore.System.csproj" />
   </ItemGroup>
 
 </Project>
