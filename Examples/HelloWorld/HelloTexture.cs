@@ -10,9 +10,9 @@ namespace HelloWorld
     class HelloTexture
     {
         ShaderPipeline pipeline;
-        VertexArrayObject<VertexPositionTexture> vao;
-        VertexArrayBuffer<VertexPositionTexture> buffer;
-        IndexBuffer<VertexPositionTexture> indexBuffer;
+        VertexArrayObject<VertexPositionColorTexture> vao;
+        VertexArrayBuffer<VertexPositionColorTexture> buffer;
+        IndexBuffer<VertexPositionColorTexture> indexBuffer;
         Matrix4fUniform worldMatrix;
         DeviceTexture texture;
 
@@ -38,13 +38,14 @@ namespace HelloWorld
         protected void Setup()
         {
             pipeline = new ShaderPipeline(new ShaderResource(PlainCore.Graphics.Core.ShaderType.Vertex, _VertexSourceGL), new ShaderResource(PlainCore.Graphics.Core.ShaderType.Fragment, _FragmentSourceGL));
-            buffer = new VertexArrayBuffer<VertexPositionTexture>(16, OpenGL.BufferUsage.StaticDraw);
+            buffer = new VertexArrayBuffer<VertexPositionColorTexture>(32, OpenGL.BufferUsage.StaticDraw);
             buffer.Vertices = _ArrayPosition;
-            indexBuffer = new IndexBuffer<VertexPositionTexture>(OpenGL.BufferUsage.StaticDraw);
+            indexBuffer = new IndexBuffer<VertexPositionColorTexture>(OpenGL.BufferUsage.StaticDraw);
             indexBuffer.Indices = indexArray;
-            vao = new VertexArrayObject<VertexPositionTexture>(buffer, pipeline,
-                new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 16, 0),
-                new VertexAttributeDescription("texCoords", 2, OpenGL.VertexAttribType.Float, true, 16, 8));
+            vao = new VertexArrayObject<VertexPositionColorTexture>(buffer, pipeline,
+                new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 32, 0),
+                new VertexAttributeDescription("Color", 4, VertexAttribType.Float, false, 32, 8),
+                new VertexAttributeDescription("texCoords", 2, OpenGL.VertexAttribType.Float, true, 32, 24));
             texture = new DeviceTexture("tex", 100, 100, true);
             texture.Data = Image.Load("Example.png").SavePixelData();
             texture.Bind();
@@ -75,29 +76,33 @@ namespace HelloWorld
             "#version 330\n",
             "uniform mat4 uMVP;\n",
             "in vec2 aPosition;\n",
+            "in vec4 Color;\n",
             "in vec2 texCoords;\n",
+            "out vec4 frColor;\n",
             "out vec2 textureCoords;\n",
             "void main() {\n",
             "	 gl_Position = uMVP * vec4(aPosition, 0.0, 1.0);\n",
             "    textureCoords = texCoords;\n",
+            "    frColor = Color;\n",
             "}\n"
         };
 
         private readonly string[] _FragmentSourceGL = {
             "#version 330\n",
             "uniform sampler2D tex;\n",
+            "in vec4 frColor;\n",
             "in vec2 textureCoords;\n",
             "out vec4 outColor;\n",
             "void main() {\n",
-            "	outColor = texture(tex, textureCoords);\n",
+            "	outColor = texture(tex, textureCoords) * frColor;\n",
             "}\n"
         };
 
-        private static readonly VertexPositionTexture[] _ArrayPosition = new VertexPositionTexture[] {
-            new VertexPositionTexture(new Vector2(0.0f, 0.0f), new Vector2(0f, 1f)),
-            new VertexPositionTexture(new Vector2(1.0f, 0.0f), new Vector2(1f, 1f)),
-            new VertexPositionTexture(new Vector2(1.0f, 1.0f), new Vector2(1f, 0f)),
-            new VertexPositionTexture(new Vector2(0.0f, 1.0f), new Vector2(0f, 0f))
+        private static readonly VertexPositionColorTexture[] _ArrayPosition = new VertexPositionColorTexture[] {
+            new VertexPositionColorTexture(new Vector2(0.0f, 0.0f), Color4.Blue, new Vector2(0f, 1f)),
+            new VertexPositionColorTexture(new Vector2(1.0f, 0.0f), Color4.Blue, new Vector2(1f, 1f)),
+            new VertexPositionColorTexture(new Vector2(1.0f, 1.0f), Color4.Blue, new Vector2(1f, 0f)),
+            new VertexPositionColorTexture(new Vector2(0.0f, 1.0f), Color4.Blue, new Vector2(0f, 0f))
         };
 
         private static readonly int[] indexArray = new int[]
