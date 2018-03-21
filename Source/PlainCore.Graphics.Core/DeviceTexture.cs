@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    public class DeviceTexture : IDeviceBuffer, IUniform
+    public class DeviceTexture : IBindable, IUniform
     {
         public DeviceTexture(string name, int width, int height, bool genMipmaps = true)
         {
@@ -22,26 +22,15 @@ namespace PlainCore.Graphics.Core
         protected readonly int height;
         protected readonly bool genMipmaps;
 
-        protected byte[] data;
-
         public readonly uint Handle;
         public string Name => name;
-
-        public byte[] Data
-        {
-            get => data;
-            set
-            {
-                data = value;
-            }
-        }
 
         public void Bind()
         {
             Gl.BindTexture(TextureTarget.Texture2d, Handle);
         }
 
-        public void CopyData()
+        public void CopyData(byte[] data)
         {
             Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
             if(genMipmaps)

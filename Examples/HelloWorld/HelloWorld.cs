@@ -47,9 +47,9 @@ namespace HelloWorld
                 new VertexAttributeDescription("Color", 4, VertexAttribType.Float, false, 32, 8),
                 new VertexAttributeDescription("texCoords", 2, OpenGL.VertexAttribType.Float, true, 32, 24));
             texture = new DeviceTexture("tex", 100, 100, true);
-            texture.Data = Image.Load("Example.png").SavePixelData();
+            var imageData = Image.Load("Example.png").SavePixelData();
             texture.Bind();
-            texture.CopyData();
+            texture.CopyData(imageData);
             buffer.Bind();
             buffer.CopyData();
             buffer.Unbind();
