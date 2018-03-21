@@ -65,7 +65,7 @@ namespace PlainCore.Graphics.Core
 
         public void Unbind()
         {
-            Gl.BindTexture(TextureTarget.Texture2d, 0);
+            //Somehow its not a good idea to unbind a texture...
         }
     }
 }
