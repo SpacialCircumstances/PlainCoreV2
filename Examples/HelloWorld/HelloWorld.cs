@@ -85,10 +85,10 @@ namespace HelloWorld
         };
 
         private static readonly VertexPositionColor[] _ArrayPosition = new VertexPositionColor[] {
-            new VertexPositionColor(new Vector2(0.0f, 0.0f), new Color4(1f, 1f, 0f, 1f)),
-            new VertexPositionColor(new Vector2(1.0f, 0.0f), new Color4(1f, 1f, 0f, 1f)),
-            new VertexPositionColor(new Vector2(1.0f, 1.0f), new Color4(1f, 1f, 0f, 1f)),
-            new VertexPositionColor(new Vector2(0.0f, 1.0f), new Color4(1f, 1f, 0f, 1f)),
+            new VertexPositionColor(new Vector2(0.0f, 0.0f), Color4.Lime),
+            new VertexPositionColor(new Vector2(1.0f, 0.0f), Color4.Yellow),
+            new VertexPositionColor(new Vector2(1.0f, 1.0f), Color4.Black),
+            new VertexPositionColor(new Vector2(0.0f, 1.0f), Color4.Red),
         };
 
         private static readonly int[] indexArray = new int[]

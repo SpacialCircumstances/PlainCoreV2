@@ -7,7 +7,7 @@ namespace PlainCore.Graphics.Core
 {
     public struct Color4 : IEquatable<Color4>
     {
-        public Color4(float r, float g, float b, float a = 0f)
+        public Color4(float r, float g, float b, float a = 1f)
         {
             vector = new Vector4(r, g, b, a);
         }
@@ -37,7 +37,7 @@ namespace PlainCore.Graphics.Core
         }
 
         public static readonly Color4 White = new Color4(1f, 1f, 1f);
-        public static readonly Color4 Transparent = new Color4(1f, 1f, 1f, 1f);
+        public static readonly Color4 Transparent = new Color4(1f, 1f, 1f, 0f);
         public static readonly Color4 Black = new Color4(0f, 0f, 0f);
         public static readonly Color4 Red = new Color4(1f, 0f, 0f);
         public static readonly Color4 Lime = new Color4(0f, 1f, 0f);
