@@ -7,7 +7,7 @@ namespace PlainCore.Graphics.Core
 {
     public class DeviceTexture : IBindable, IUniform
     {
-        public DeviceTexture(string name, int width, int height, bool genMipmaps = true)
+        public DeviceTexture(string name, int width, int height, bool genMipmaps = true, bool repeated = false)
         {
             this.name = name;
             this.width = width;
@@ -21,6 +21,7 @@ namespace PlainCore.Graphics.Core
         protected readonly int width;
         protected readonly int height;
         protected readonly bool genMipmaps;
+        protected readonly bool repeated;
 
         public readonly uint Handle;
         public string Name => name;
@@ -32,6 +33,17 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData(byte[] data)
         {
+            if (repeated)
+            {
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.REPEAT);
+            }
+            else
+            {
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.CLAMP_TO_EDGE);
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.CLAMP_TO_EDGE);
+            }
+
             Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
             if(genMipmaps)
             {
