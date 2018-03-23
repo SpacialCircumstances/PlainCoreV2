@@ -13,6 +13,7 @@ namespace PlainCore.Graphics.Core
             this.width = width;
             this.height = height;
             this.genMipmaps = genMipmaps;
+            this.repeated = repeated;
             Handle = Gl.GenTexture();
             Verify.VerifyResourceCreated(Handle);
         }
