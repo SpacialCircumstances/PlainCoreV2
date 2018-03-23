@@ -15,12 +15,74 @@ namespace PlainCore.Graphics.Core
         {
             switch (name)
             {
-                case "VertexPosition":
-                    return new ShaderResource(stage, null);
-                default:
-                    return null;
+                case "VertexPositionTexture":
+                    if(stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_TEXTURE_FRAGMENT);
+                    }
+                    else if(stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION_TEXTURE_VERTEX);
+                    }
+                    break;
+
+                case "VertexPositionColor":
+                    if(stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_FRAGMENT);
+                    }
+                    else if(stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_VERTEX);
+                    }
+                    break;
+
+                case "VertexPositionColorTexture":
+                    if(stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_TEXTURE_FRAGMENT);
+                    }
+                    else if (stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_TEXTURE_VERTEX);
+                    }
+                    break;
+
+                case "VertexPosition3Texture":
+                    if (stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_TEXTURE_FRAGMENT);
+                    }
+                    else if (stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION3_TEXTURE_VERTEX);
+                    }
+                    break;
+
+                case "VertexPosition3Color":
+                    if (stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_FRAGMENT);
+                    }
+                    else if (stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION3_COLOR_VERTEX);
+                    }
+                    break;
+
+                case "VertexPosition3ColorTexture":
+                    if (stage == ShaderType.Fragment)
+                    {
+                        return new ShaderResource(stage, POSITION_COLOR_TEXTURE_FRAGMENT);
+                    }
+                    else if (stage == ShaderType.Vertex)
+                    {
+                        return new ShaderResource(stage, POSITION3_COLOR_TEXTURE_VERTEX);
+                    }
                     break;
             }
+
+            return null;
         }
 
         public const string POSITION_NAME = "Position";
@@ -44,8 +106,8 @@ namespace PlainCore.Graphics.Core
         private static readonly string F_OUT_COLOR = $"out vec4 {OUT_COLOR_NAME};";
         private static readonly string U_MVP = $"uniform mat4 {MVP_UNIFORM_NAME};";
         private static readonly string U_DEFAULT_TEXTURE = $"uniform sampler2D {DEFFAULT_TEXTURE_UNIFORM_NAME};";
-        private static readonly string MAIN_FUNCTION = "void main() {";
-        private static readonly string CLOSE_BRACE = "}";
+        private const string MAIN_FUNCTION = "void main() {";
+        private const string CLOSE_BRACE = "}";
         private static readonly string V_ASSIGN_POSITION = $"gl_Position = {MVP_UNIFORM_NAME} * vec4({POSITION_NAME}, 0.0, 1.0);";
         private static readonly string V_ASSIGN_POSITION3 = $"gl_Position = {MVP_UNIFORM_NAME} * vec4({POSITION_NAME}, 1.0);";
         private static readonly string V_ASSIGN_COLOR = $"{FRAGMENT_COLOR_NAME} = {COLOR_NAME};";
