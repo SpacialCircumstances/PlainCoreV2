@@ -54,5 +54,113 @@ namespace PlainCore.Graphics.Core
         private static readonly string F_TEXTURE_GET = $"texture({DEFFAULT_TEXTURE_UNIFORM_NAME}, {FRAGMENT_TEXTURE_COORDINATES_NAME})";
         private static readonly string F_ASSIGN_TEXTURE = $"{OUT_COLOR_NAME} = {F_TEXTURE_GET};";
         private static readonly string F_ASSIGN_TEXTURE_COLOR = $"{OUT_COLOR_NAME} = {F_TEXTURE_GET} * {FRAGMENT_COLOR_NAME};";
+
+        private static readonly string[] POSITION_TEXTURE_VERTEX = $@"
+{GLSL_VERSION}
+{V_IN_POSITION}
+{V_IN_TEXCOORDS}
+{U_MVP}
+{V_OUT_TEXCOORDS}
+{MAIN_FUNCTION}
+{V_ASSIGN_POSITION}
+{V_ASSIGN_TEXCOORDS}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION_TEXTURE_FRAGMENT = $@"
+{GLSL_VERSION}
+{F_IN_TEXCOORDS}
+{U_DEFAULT_TEXTURE}
+{F_OUT_COLOR}
+{MAIN_FUNCTION}
+{F_ASSIGN_TEXTURE}
+{CLOSE_BRACE}
+".Split('\n');
+
+        private static readonly string[] POSITION3_TEXTURE_VERTEX = $@"
+{GLSL_VERSION}
+{V_IN_POSITION3}
+{V_IN_TEXCOORDS}
+{U_MVP}
+{V_OUT_TEXCOORDS}
+{MAIN_FUNCTION}
+{V_ASSIGN_POSITION3}
+{V_ASSIGN_TEXCOORDS}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION_COLOR_VERTEX = $@"
+ {GLSL_VERSION}
+{V_IN_POSITION}
+{V_IN_COLOR}
+{U_MVP}
+{V_OUT_COLOR}
+{MAIN_FUNCTION}
+{V_ASSIGN_COLOR}
+{V_ASSIGN_POSITION}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION_COLOR_FRAGMENT = $@"
+ {GLSL_VERSION}
+{F_IN_COLOR}
+{F_OUT_COLOR}
+{MAIN_FUNCTION}
+{F_ASSIGN_COLOR}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION3_COLOR_VERTEX = $@"
+ {GLSL_VERSION}
+{V_IN_POSITION3}
+{V_IN_COLOR}
+{U_MVP}
+{V_OUT_COLOR}
+{MAIN_FUNCTION}
+{V_ASSIGN_COLOR}
+{V_ASSIGN_POSITION3}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION_COLOR_TEXTURE_VERTEX = $@"
+ {GLSL_VERSION}
+{V_IN_POSITION}
+{V_IN_COLOR}
+{V_IN_TEXCOORDS}
+{U_MVP}
+{V_OUT_COLOR}
+{V_OUT_TEXCOORDS}
+{MAIN_FUNCTION}
+{V_ASSIGN_COLOR}
+{V_ASSIGN_TEXCOORDS}
+{V_ASSIGN_POSITION}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION_COLOR_TEXTURE_FRAGMENT = $@"
+{GLSL_VERSION}
+{F_IN_COLOR}
+{F_IN_TEXCOORDS}
+{U_DEFAULT_TEXTURE}
+{F_OUT_COLOR}
+{MAIN_FUNCTION}
+{F_ASSIGN_TEXTURE_COLOR}
+{CLOSE_BRACE}
+            ".Split('\n');
+
+        private static readonly string[] POSITION3_COLOR_TEXTURE_VERTEX = $@"
+ {GLSL_VERSION}
+{V_IN_POSITION3}
+{V_IN_COLOR}
+{V_IN_TEXCOORDS}
+{U_MVP}
+{V_OUT_COLOR}
+{V_OUT_TEXCOORDS}
+{MAIN_FUNCTION}
+{V_ASSIGN_COLOR}
+{V_ASSIGN_TEXCOORDS}
+{V_ASSIGN_POSITION3}
+{CLOSE_BRACE}
+            ".Split('\n');
     }
 }
