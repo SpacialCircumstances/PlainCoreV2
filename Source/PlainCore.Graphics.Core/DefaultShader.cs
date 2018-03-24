@@ -100,9 +100,9 @@ namespace PlainCore.Graphics.Core
         private static readonly string V_IN_COLOR = $"in vec4 {COLOR_NAME};";
         private static readonly string V_IN_TEXCOORDS = $"in vec2 {TEXTURE_COORDINATES_NAME};";
         private static readonly string V_OUT_COLOR = $"out vec4 {FRAGMENT_COLOR_NAME};";
-        private static readonly string V_OUT_TEXCOORDS = $"out vec2 {TEXTURE_COORDINATES_NAME};";
+        private static readonly string V_OUT_TEXCOORDS = $"out vec2 {FRAGMENT_TEXTURE_COORDINATES_NAME};";
         private static readonly string F_IN_COLOR = $"in vec4 {FRAGMENT_COLOR_NAME};";
-        private static readonly string F_IN_TEXCOORDS = $"in vec2 {TEXTURE_COORDINATES_NAME};";
+        private static readonly string F_IN_TEXCOORDS = $"in vec2 {FRAGMENT_TEXTURE_COORDINATES_NAME};";
         private static readonly string F_OUT_COLOR = $"out vec4 {OUT_COLOR_NAME};";
         private static readonly string U_MVP = $"uniform mat4 {MVP_UNIFORM_NAME};";
         private static readonly string U_DEFAULT_TEXTURE = $"uniform sampler2D {DEFFAULT_TEXTURE_UNIFORM_NAME};";
