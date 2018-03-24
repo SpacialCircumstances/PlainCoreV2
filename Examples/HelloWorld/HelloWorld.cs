@@ -37,16 +37,16 @@ namespace HelloWorld
 
         protected void Setup()
         {
-            pipeline = new ShaderPipeline(new ShaderResource(PlainCore.Graphics.Core.ShaderType.Vertex, _VertexSourceGL), new ShaderResource(PlainCore.Graphics.Core.ShaderType.Fragment, _FragmentSourceGL));
+            var vs = DefaultShader.FromType(typeof(VertexPositionColorTexture), PlainCore.Graphics.Core.ShaderType.Vertex);
+            var fs = DefaultShader.FromType(typeof(VertexPositionColorTexture), PlainCore.Graphics.Core.ShaderType.Fragment);
+            pipeline = new ShaderPipeline(vs,  fs);
             buffer = new VertexArrayBuffer<VertexPositionColorTexture>(32, OpenGL.BufferUsage.StaticDraw);
             buffer.Vertices = _ArrayPosition;
             indexBuffer = new IndexBuffer<VertexPositionColorTexture>(OpenGL.BufferUsage.StaticDraw);
             indexBuffer.Indices = indexArray;
             vao = new VertexArrayObject<VertexPositionColorTexture>(buffer, pipeline,
-                new VertexAttributeDescription("aPosition", 2, OpenGL.VertexAttribType.Float, false, 32, 0),
-                new VertexAttributeDescription("Color", 4, VertexAttribType.Float, false, 32, 8),
-                new VertexAttributeDescription("texCoords", 2, OpenGL.VertexAttribType.Float, true, 32, 24));
-            texture = new DeviceTexture("tex", 100, 100, true);
+                DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
+            texture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, 100, 100, true);
             var imageData = Image.Load("Example.png").SavePixelData();
             texture.Bind();
             texture.CopyData(imageData);
@@ -56,7 +56,7 @@ namespace HelloWorld
             indexBuffer.Bind();
             indexBuffer.CopyData();
             indexBuffer.Unbind();
-            worldMatrix = new Matrix4fUniform("uMVP");
+            worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
         }
 
         protected void Draw()
@@ -71,32 +71,6 @@ namespace HelloWorld
             texture.Set(pipeline);
             indexBuffer.DrawIndexed(buffer);
         }
-
-        private readonly string[] _VertexSourceGL = {
-            "#version 330\n",
-            "uniform mat4 uMVP;\n",
-            "in vec2 aPosition;\n",
-            "in vec4 Color;\n",
-            "in vec2 texCoords;\n",
-            "out vec4 frColor;\n",
-            "out vec2 textureCoords;\n",
-            "void main() {\n",
-            "	 gl_Position = uMVP * vec4(aPosition, 0.0, 1.0);\n",
-            "    textureCoords = texCoords;\n",
-            "    frColor = Color;\n",
-            "}\n"
-        };
-
-        private readonly string[] _FragmentSourceGL = {
-            "#version 330\n",
-            "uniform sampler2D tex;\n",
-            "in vec4 frColor;\n",
-            "in vec2 textureCoords;\n",
-            "out vec4 outColor;\n",
-            "void main() {\n",
-            "	outColor = texture(tex, textureCoords) * frColor;\n",
-            "}\n"
-        };
 
         private static readonly VertexPositionColorTexture[] _ArrayPosition = new VertexPositionColorTexture[] {
             new VertexPositionColorTexture(new Vector2(0.0f, 0.0f), Color4.Blue, new Vector2(0f, 1f)),
