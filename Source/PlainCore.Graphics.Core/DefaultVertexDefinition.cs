@@ -15,7 +15,45 @@ namespace PlainCore.Graphics.Core
         {
             switch(name)
             {
+                case "VertexPositionColor":
+                    return new VertexAttributeDescription[] {
+                        GetPositionAttribute((int)VertexPositionColor.Size, 0),
+                        GetColorAttribute((int)VertexPositionColor.Size, 8)
+                    };
 
+                case "VertexPosition3Color":
+                    return new VertexAttributeDescription[] {
+                        GetPosition3Attribute((int)VertexPosition3Color.Size, 0),
+                        GetColorAttribute((int)VertexPosition3Color.Size, 12)
+                    };
+
+                case "VertexPositionTexture":
+                    return new VertexAttributeDescription[] {
+                        GetPositionAttribute((int)VertexPositionTexture.Size, 0),
+                        GetTextureCoordinatesAttribute((int)VertexPositionTexture.Size, 8)
+                    };
+
+                case "VertexPosition3Texture":
+                    return new VertexAttributeDescription[] {
+                        GetPositionAttribute((int)VertexPosition3Texture.Size, 0),
+                        GetTextureCoordinatesAttribute((int)VertexPosition3Texture.Size, 12)
+                    };
+
+                case "VertexPositionColorTexture":
+                    return new VertexAttributeDescription[]
+                    {
+                        GetPositionAttribute((int)VertexPositionColorTexture.Size, 0),
+                        GetColorAttribute((int)VertexPositionColorTexture.Size, 8),
+                        GetTextureCoordinatesAttribute((int)VertexPositionColorTexture.Size, 24)
+                    };
+
+                case "VertexPosition3ColorTexture":
+                    return new VertexAttributeDescription[]
+                    {
+                        GetPosition3Attribute((int)VertexPosition3ColorTexture.Size, 0),
+                        GetColorAttribute((int)VertexPosition3ColorTexture.Size, 12),
+                        GetTextureCoordinatesAttribute((int)VertexPosition3ColorTexture.Size, 28)
+                    };
             }
 
             return null;
