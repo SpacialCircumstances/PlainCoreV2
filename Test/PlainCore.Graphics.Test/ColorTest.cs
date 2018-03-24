@@ -11,7 +11,7 @@ namespace PlainCore.Graphics.Test
         {
             var col1 = new Color4(255, 255, 255);
             var col2 = new Color4(1f, 1f, 1f);
-            var col3 = new Color4(new Vector4(1f, 1f, 1f, 0f));
+            var col3 = new Color4(new Vector4(1f, 1f, 1f, 1f));
             Assert.Equal(col1.R, col2.R, 2);
             Assert.Equal(col1.G, col2.G, 2);
             Assert.Equal(col1.B, col2.B, 2);
@@ -29,11 +29,11 @@ namespace PlainCore.Graphics.Test
             Assert.Equal(0.5f, col2.R);
             Assert.Equal(0.5f, col2.G);
             Assert.Equal(0.5f, col2.B);
-            Assert.Equal(0f, col2.A);
+            Assert.Equal(1f, col2.A);
             Assert.Equal(0.5f, col4.R);
             Assert.Equal(0.5f, col4.G);
             Assert.Equal(0.5f, col4.B);
-            Assert.Equal(0f, col4.A);
+            Assert.Equal(1f, col4.A);
         }
     }
 }
