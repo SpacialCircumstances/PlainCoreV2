@@ -20,4 +20,10 @@
     <ProjectReference Include="..\..\Source\PlainCore.Window\PlainCore.Window.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Windows\X64\glfw3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
