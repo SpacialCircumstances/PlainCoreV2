@@ -29,11 +29,11 @@ namespace PlainCore.Graphics.Test
             Assert.Equal(0.5f, col2.R);
             Assert.Equal(0.5f, col2.G);
             Assert.Equal(0.5f, col2.B);
-            Assert.Equal(1f, col2.A);
+            Assert.Equal(0.5f, col2.A);
             Assert.Equal(0.5f, col4.R);
             Assert.Equal(0.5f, col4.G);
             Assert.Equal(0.5f, col4.B);
-            Assert.Equal(1f, col4.A);
+            Assert.Equal(2f, col4.A);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PlainCore.Graphics.Core
             vector = new Vector4(r, g, b, a);
         }
 
-        public Color4(byte r, byte g, byte b, byte a = 0)
+        public Color4(byte r, byte g, byte b, byte a = 255)
         {
             vector = new Vector4(r / 256f, g / 256f, b / 256f, a / 256f);
         }
