@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    static class DefaultShader
+    public static class DefaultShader
     {
         public static ShaderResource FromType(Type type, ShaderType stage)
         {
