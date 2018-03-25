@@ -1,6 +1,7 @@
 ﻿using OpenGL;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace PlainCore.Graphics.Core
@@ -44,6 +45,18 @@ namespace PlainCore.Graphics.Core
         public void Unbind()
         {
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+        }
+
+        public byte[] Read(int width, int height)
+        {
+            var size = width * height * 4;
+            IntPtr data = Marshal.AllocHGlobal(size);
+            var outData = new byte[size];
+            Gl.ReadPixels(0, 0, width, height, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+            Marshal.Copy(data, outData, 0, size);
+            Marshal.FreeHGlobal(data);
+
+            return outData;
         }
     }
 }

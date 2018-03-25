@@ -1,5 +1,4 @@
-﻿using OpenGL;
-using PlainCore.Graphics;
+﻿using PlainCore.Graphics;
 using PlainCore.Graphics.Core;
 using SixLabors.ImageSharp;
 using System.Numerics;
@@ -15,6 +14,9 @@ namespace HelloWorld
         IndexBuffer<VertexPositionColorTexture> indexBuffer;
         Matrix4fUniform worldMatrix;
         DeviceTexture texture;
+        Framebuffer defaultFramebuffer;
+
+        int counter;
 
         public void Run()
         {
@@ -47,6 +49,7 @@ namespace HelloWorld
             vao = new VertexArrayObject<VertexPositionColorTexture>(buffer, pipeline,
                 DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
             texture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, 100, 100, true);
+            defaultFramebuffer = Framebuffer.GetDefault();
             var imageData = Image.Load("Example.png").SavePixelData();
             texture.Bind();
             texture.CopyData(imageData);
@@ -61,6 +64,7 @@ namespace HelloWorld
 
         protected void Draw()
         {
+            counter++;
             var projection = Matrix4x4.CreateOrthographic(2.0f, 2.0f, -1.0f, +1.0f);
             worldMatrix.Matrix = projection;
             pipeline.Bind();
@@ -70,6 +74,17 @@ namespace HelloWorld
             vao.Bind();
             texture.Set(pipeline);
             indexBuffer.DrawIndexed(buffer);
+            if(counter == 100)
+            {
+                SaveScreenshot();
+            }
+        }
+
+        private void SaveScreenshot()
+        {
+            var imageData = defaultFramebuffer.Read(800, 600);
+            var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
+            image.Save("Screenshot.png");
         }
 
         private static readonly VertexPositionColorTexture[] _ArrayPosition = new VertexPositionColorTexture[] {
