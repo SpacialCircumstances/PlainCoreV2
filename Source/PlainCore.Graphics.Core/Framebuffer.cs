@@ -42,6 +42,13 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        public void AttachDepthBuffer(DepthBuffer depthBuffer)
+        {
+            depthBuffer.Bind();
+            Gl.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthAttachment, RenderbufferTarget.Renderbuffer, depthBuffer.Handle);
+            depthBuffer.Unbind();
+        }
+
         public void Unbind()
         {
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
