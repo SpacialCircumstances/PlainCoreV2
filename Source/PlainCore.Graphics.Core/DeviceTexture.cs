@@ -7,13 +7,14 @@ namespace PlainCore.Graphics.Core
 {
     public class DeviceTexture : IBindable, IUniform
     {
-        public DeviceTexture(string name, int width, int height, bool genMipmaps = true, bool repeated = false)
+        public DeviceTexture(string name, int width, int height, bool genMipmaps = true, bool smooth = false, bool repeated = false)
         {
             this.name = name;
             this.width = width;
             this.height = height;
             this.genMipmaps = genMipmaps;
             this.repeated = repeated;
+            this.smooth = smooth;
             Handle = Gl.GenTexture();
             Verify.VerifyResourceCreated(Handle);
         }
@@ -23,6 +24,7 @@ namespace PlainCore.Graphics.Core
         protected readonly int height;
         protected readonly bool genMipmaps;
         protected readonly bool repeated;
+        protected readonly bool smooth;
 
         public readonly uint Handle;
         public string Name => name;
@@ -43,6 +45,17 @@ namespace PlainCore.Graphics.Core
             {
                 Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.CLAMP_TO_EDGE);
                 Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapT, Gl.CLAMP_TO_EDGE);
+            }
+
+            if (smooth)
+            {
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.LINEAR);
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, Gl.LINEAR);
+            }
+            else
+            {
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.NEAREST);
+                Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, Gl.NEAREST);
             }
 
             Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
