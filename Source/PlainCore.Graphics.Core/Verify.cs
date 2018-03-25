@@ -9,7 +9,7 @@ namespace PlainCore.Graphics.Core
     {
         public static void VerifyResourceCreated(uint handle)
         {
-            if (handle == 0)
+            if (handle <= 0)
             {
                 var err = Gl.GetError();
                 throw new InvalidOperationException($"OpenGL resource creation failed: {err}");
