@@ -48,5 +48,10 @@ namespace PlainCore.Graphics.Core
         {
             Gl.DrawElements(buffer.Primitive, indices.Length, DrawElementsType.UnsignedInt, null);
         }
+
+        public void CopyRawData(byte[] data)
+        {
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), data, usage);
+        }
     }
 }

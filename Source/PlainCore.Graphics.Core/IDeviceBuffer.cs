@@ -7,5 +7,6 @@ namespace PlainCore.Graphics.Core
     interface IDeviceBuffer: IBindable
     {
         void CopyData();
+        void CopyRawData(byte[] data);
     }
 }
