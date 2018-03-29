@@ -64,5 +64,10 @@ namespace PlainCore.Graphics.Core
         {
             Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), data, usage);
         }
+
+        public void CopyRawData(IntPtr pointer)
+        {
+            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), pointer, usage);
+        }
     }
 }

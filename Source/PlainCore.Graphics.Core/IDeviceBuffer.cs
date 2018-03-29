@@ -8,5 +8,6 @@ namespace PlainCore.Graphics.Core
     {
         void CopyData();
         void CopyRawData(byte[] data);
+        void CopyRawData(IntPtr pointer);
     }
 }

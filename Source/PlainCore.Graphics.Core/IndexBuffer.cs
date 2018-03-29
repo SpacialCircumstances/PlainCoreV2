@@ -1,4 +1,5 @@
-﻿using OpenGL;
+﻿using System;
+using OpenGL;
 
 namespace PlainCore.Graphics.Core
 {
@@ -52,6 +53,11 @@ namespace PlainCore.Graphics.Core
         public void CopyRawData(byte[] data)
         {
             Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), data, usage);
+        }
+
+        public void CopyRawData(IntPtr pointer)
+        {
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), pointer, usage);
         }
     }
 }
