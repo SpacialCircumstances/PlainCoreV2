@@ -3,7 +3,7 @@ using OpenGL;
 
 namespace PlainCore.Graphics.Core
 {
-    public class IndexBuffer<T> : IDeviceBuffer where T: struct
+    public class IndexBuffer<T> : IDeviceBuffer<int> where T: struct
     {
         public IndexBuffer(BufferUsage usage = BufferUsage.StreamDraw)
         {
@@ -13,26 +13,16 @@ namespace PlainCore.Graphics.Core
         }
 
         public readonly uint Handle;
-        protected int[] indices;
         protected readonly BufferUsage usage;
-
-        public int[] Indices
-        {
-            get => indices;
-            set
-            {
-                indices = value;
-            }
-        }
 
         public void Bind()
         {
             Gl.BindBuffer(BufferTarget.ElementArrayBuffer, Handle);
         }
 
-        public void CopyData()
+        public void CopyData(int[] data)
         {
-            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), indices, usage);
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)data.Length * sizeof(int), data, usage);
         }
 
         public void Dispose()
@@ -45,19 +35,19 @@ namespace PlainCore.Graphics.Core
             Gl.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
 
-        public void DrawIndexed(VertexArrayBuffer<T> buffer)
+        public void DrawIndexed(VertexArrayBuffer<T> buffer, int elements)
         {
-            Gl.DrawElements(buffer.Primitive, indices.Length, DrawElementsType.UnsignedInt, null);
+            Gl.DrawElements(buffer.Primitive, elements, DrawElementsType.UnsignedInt, null);
         }
 
         public void CopyRawData(byte[] data)
         {
-            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), data, usage);
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)data.Length, data, usage);
         }
 
-        public void CopyRawData(IntPtr pointer)
+        public void CopyRawData(IntPtr pointer, uint elements)
         {
-            Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)indices.Length * sizeof(int), pointer, usage);
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, elements * sizeof(int), pointer, usage);
         }
     }
 }

@@ -43,9 +43,7 @@ namespace HelloWorld
             var fs = DefaultShader.FromType(typeof(VertexPositionColorTexture), PlainCore.Graphics.Core.ShaderType.Fragment);
             pipeline = new ShaderPipeline(vs,  fs);
             buffer = new VertexArrayBuffer<VertexPositionColorTexture>(32, OpenGL.BufferUsage.StaticDraw);
-            buffer.Vertices = _ArrayPosition;
             indexBuffer = new IndexBuffer<VertexPositionColorTexture>(OpenGL.BufferUsage.StaticDraw);
-            indexBuffer.Indices = indexArray;
             vao = new VertexArrayObject<VertexPositionColorTexture>(buffer, pipeline,
                 DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
             texture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, 100, 100, true);
@@ -54,10 +52,10 @@ namespace HelloWorld
             texture.Bind();
             texture.CopyData(imageData);
             buffer.Bind();
-            buffer.CopyData();
+            buffer.CopyData(_ArrayPosition);
             buffer.Unbind();
             indexBuffer.Bind();
-            indexBuffer.CopyData();
+            indexBuffer.CopyData(indexArray);
             indexBuffer.Unbind();
             worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
         }
@@ -73,7 +71,7 @@ namespace HelloWorld
             indexBuffer.Bind();
             vao.Bind();
             texture.Set(pipeline);
-            indexBuffer.DrawIndexed(buffer);
+            indexBuffer.DrawIndexed(buffer, 6);
             if(counter == 100)
             {
                 SaveScreenshot();

@@ -5,11 +5,10 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    public class VertexArrayBuffer<T>: IDeviceBuffer where T: struct
+    public class VertexArrayBuffer<T>: IDeviceBuffer<T> where T: struct
     {
         public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, PrimitiveType primitive = PrimitiveType.Triangles, int initialCapacity = 3)
         {
-            vertices = new T[initialCapacity];
             this.vertexSize = vertexSize;
             this.usage = usage;
             this.primitive = primitive;
@@ -21,17 +20,7 @@ namespace PlainCore.Graphics.Core
         protected readonly BufferUsage usage;
         protected readonly PrimitiveType primitive;
         protected uint vertexSize;
-        protected T[] vertices;
         public readonly uint Handle;
-
-        public T[] Vertices
-        {
-            get => vertices;
-            set
-            {
-                vertices = value;
-            }
-        }
 
         public PrimitiveType Primitive => primitive;
 
@@ -40,9 +29,9 @@ namespace PlainCore.Graphics.Core
             Gl.BindBuffer(BufferTarget.ArrayBuffer, Handle);
         }
 
-        public void CopyData()
+        public void CopyData(T[] data)
         {
-            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), this.vertices, usage);
+            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)data.Length), data, usage);
         }
 
         public void Dispose()
@@ -55,19 +44,19 @@ namespace PlainCore.Graphics.Core
             Gl.BindBuffer(BufferTarget.ArrayBuffer, 0);
         }
 
-        public void DrawDirect()
+        public void DrawDirect(int elements)
         {
-            Gl.DrawArrays(primitive, 0, vertices.Length);
+            Gl.DrawArrays(primitive, 0, elements);
         }
 
         public void CopyRawData(byte[] data)
         {
-            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), data, usage);
+            Gl.BufferData(BufferTarget.ArrayBuffer, (uint)data.Length, data, usage);
         }
 
-        public void CopyRawData(IntPtr pointer)
+        public void CopyRawData(IntPtr pointer, uint elements)
         {
-            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)vertices.Length), pointer, usage);
+            Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * elements), pointer, usage);
         }
     }
 }

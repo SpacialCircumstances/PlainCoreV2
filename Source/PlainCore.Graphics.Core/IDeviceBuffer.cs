@@ -4,10 +4,10 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    interface IDeviceBuffer: IBindable
+    interface IDeviceBuffer<T>: IBindable
     {
-        void CopyData();
+        void CopyData(T[] data);
         void CopyRawData(byte[] data);
-        void CopyRawData(IntPtr pointer);
+        void CopyRawData(IntPtr pointer, uint elements);
     }
 }
