@@ -5,12 +5,14 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    class DataBuffer<T>
+    public class DataBuffer<T>
     {
         public DataBuffer(uint initialSize, IDeviceBuffer<T> buffer)
         {
             this.buffer = buffer;
+            this.buffer.Bind();
             this.buffer.CopyRawData(IntPtr.Zero, initialSize);
+            this.buffer.Unbind();
             Clear();
         }
 

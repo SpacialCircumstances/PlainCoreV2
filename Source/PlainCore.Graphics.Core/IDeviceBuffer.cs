@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    interface IDeviceBuffer<T>: IBindable
+    public interface IDeviceBuffer<T>: IBindable
     {
         void CopyData(T[] data);
         void CopyRawData(byte[] data);
