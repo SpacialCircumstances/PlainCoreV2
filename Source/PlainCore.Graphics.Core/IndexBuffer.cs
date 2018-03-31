@@ -45,9 +45,9 @@ namespace PlainCore.Graphics.Core
             Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)data.Length, data, usage);
         }
 
-        public void CopyRawData(IntPtr pointer, uint elements)
+        public void CopyRawData(IntPtr pointer, uint size)
         {
-            Gl.BufferData(BufferTarget.ElementArrayBuffer, elements * sizeof(int), pointer, usage);
+            Gl.BufferData(BufferTarget.ElementArrayBuffer, size, pointer, usage);
         }
 
         public void ReplaceData(byte[] data, IntPtr offset)

@@ -8,7 +8,7 @@ namespace PlainCore.Graphics.Core
     {
         void CopyData(T[] data);
         void CopyRawData(byte[] data);
-        void CopyRawData(IntPtr pointer, uint elements);
+        void CopyRawData(IntPtr pointer, uint size);
         void ReplaceData(byte[] data, IntPtr offset);
         void ReplaceData(IntPtr data, uint size, IntPtr offset);
     }
