@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    interface IBindable: IDisposable
+    public interface IBindable: IDisposable
     {
         void Bind();
         void Unbind();
