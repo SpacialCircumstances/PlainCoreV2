@@ -58,5 +58,15 @@ namespace PlainCore.Graphics.Core
         {
             Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * elements), pointer, usage);
         }
+
+        public void ReplaceData(byte[] data, IntPtr offset)
+        {
+            Gl.BufferSubData(BufferTarget.ArrayBuffer, offset, (uint)data.Length, data);
+        }
+
+        public void ReplaceData(IntPtr data, uint size, IntPtr offset)
+        {
+            Gl.BufferSubData(BufferTarget.ArrayBuffer, offset, size, data);
+        }
     }
 }
