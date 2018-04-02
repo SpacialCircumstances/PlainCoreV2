@@ -63,8 +63,8 @@ namespace PlainCore.Graphics
 
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
             float upperX = texX2 * texture.Rectangle.End.X;
-            float lowerY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
-            float upperY = texY2 * texture.Rectangle.End.Y;
+            float upperY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
+            float lowerY = texY2 * texture.Rectangle.End.Y;
 
             PushVertex(x, y, color, lowerX, lowerY);
             PushVertex(x + width, y, color, upperX, lowerY);
