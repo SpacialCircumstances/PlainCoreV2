@@ -10,10 +10,10 @@ namespace PlainCore.Graphics.Core
     {
         public Vector2Uniform(string name)
         {
-
+            this.name = name;
         }
 
-        protected string name;
+        protected readonly string name;
         public string Name => name;
 
         protected Vector2 vector;
