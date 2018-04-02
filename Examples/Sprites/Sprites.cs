@@ -13,6 +13,7 @@ namespace Sprites
         Texture tex;
         Texture tex2;
         Matrix4fUniform worldMatrix;
+        float rot;
         public void Run()
         {
             var window = new RenderWindow();
@@ -21,6 +22,8 @@ namespace Sprites
 
             while(window.IsOpen)
             {
+                rot++;
+
                 window.PollEvents();
 
                 window.Clear(Color4.Green);
@@ -43,8 +46,7 @@ namespace Sprites
         public void Draw()
         {
             batch.Begin(worldMatrix);
-            batch.Draw(tex, Color4.White, 0f, 0, 1, 1);
-            batch.Draw(tex2, Color4.White, -0.5f, 0.5f, 0.5f, 0.5f);
+            batch.Draw(tex, Color4.White, 0, 0, 1, 1, 0.1f, 0, 0, 1, 1);
             batch.End();
         }
     }
