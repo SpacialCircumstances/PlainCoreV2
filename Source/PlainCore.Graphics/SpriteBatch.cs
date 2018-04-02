@@ -73,6 +73,11 @@ namespace PlainCore.Graphics
             PushIndices();
         }
 
+        public void Draw(ITexture texture, Color4 color, float x, float y)
+        {
+            Draw(texture, color, x, y, texture.Texture.Width, texture.Texture.Height);
+        }
+
         protected void PushVertex(float x, float y, Color4 color, float tx, float ty)
         {
             vertexDataBuffer.Write(x);

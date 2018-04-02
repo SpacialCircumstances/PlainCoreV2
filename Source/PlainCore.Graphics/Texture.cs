@@ -40,6 +40,8 @@ namespace PlainCore.Graphics
         protected FloatRectangle rectangle = new FloatRectangle(0, 0, 1, 1);
 
         public FloatRectangle Rectangle => rectangle;
+        public int Width => deviceTexture.Width;
+        public int Height => deviceTexture.Height;
 
         Texture ITexture.Texture => this;
 

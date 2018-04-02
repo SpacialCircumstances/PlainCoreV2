@@ -28,6 +28,8 @@ namespace PlainCore.Graphics.Core
 
         public readonly uint Handle;
         public string Name => name;
+        public int Width => width;
+        public int Height => height;
 
         public void Bind()
         {
