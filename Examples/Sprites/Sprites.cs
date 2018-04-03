@@ -46,7 +46,7 @@ namespace Sprites
         public void Draw()
         {
             batch.Begin(worldMatrix);
-            batch.Draw(tex, Color4.White, 0, 0, 1, 1, 0.1f, 0, 0, 1, 1);
+            batch.Draw(tex2, Color4.White, 0, 0, 1, 1, 0.1f, 0, 0, 0, 0, 1, 1);
             batch.End();
         }
     }
