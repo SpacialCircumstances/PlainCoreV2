@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
-    public class DeviceTexture : IBindable, IUniform
+    public class DeviceTexture : IDeviceBuffer<byte>, IUniform
     {
         public DeviceTexture(string name, int width, int height, bool genMipmaps = true, bool smooth = false, bool repeated = false)
         {
@@ -38,6 +38,17 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData(byte[] data)
         {
+            SetParameters();
+
+            Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+            if(genMipmaps)
+            {
+                Gl.GenerateMipmap(TextureTarget.Texture2d);
+            }
+        }
+
+        protected void SetParameters()
+        {
             if (repeated)
             {
                 Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureWrapS, Gl.REPEAT);
@@ -59,12 +70,6 @@ namespace PlainCore.Graphics.Core
                 Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMagFilter, Gl.NEAREST);
                 Gl.TexParameter(TextureTarget.Texture2d, TextureParameterName.TextureMinFilter, Gl.NEAREST);
             }
-
-            Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
-            if(genMipmaps)
-            {
-                Gl.GenerateMipmap(TextureTarget.Texture2d);
-            }
         }
 
         public void Dispose()
@@ -83,6 +88,32 @@ namespace PlainCore.Graphics.Core
         public void Unbind()
         {
             //Somehow its not a good idea to unbind a texture...
+        }
+
+        public void CopyRawData(byte[] data)
+        {
+            CopyData(data);
+        }
+
+        public void CopyRawData(IntPtr pointer, uint size)
+        {
+            SetParameters();
+
+            Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pointer);
+            if (genMipmaps)
+            {
+                Gl.GenerateMipmap(TextureTarget.Texture2d);
+            }
+        }
+
+        public void ReplaceData(byte[] data, IntPtr offset)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void ReplaceData(IntPtr data, uint size, IntPtr offset)
+        {
+            throw new NotSupportedException();
         }
     }
 }
