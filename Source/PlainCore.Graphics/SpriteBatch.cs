@@ -57,7 +57,37 @@ namespace PlainCore.Graphics
             indexBuffer.Unbind();
         }
 
-        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float texX1 = 0f, float texY1 = 0f, float texX2 = 1f, float texY2 = 1f)
+        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY)
+        {
+            Draw(texture, color, x, y, width, height, rotation, originX, originY, 0, 0, 1, 1);
+        }
+
+        public void Draw(ITexture texture, float x, float y, float width, float height, float rotation)
+        {
+            Draw(texture, Color4.White, x, y, width, height, rotation);
+        }
+
+        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation)
+        {
+            Draw(texture, color, x, y, width, height, rotation, texture.Texture.Width / 2f, texture.Texture.Height / 2f, 0, 0, 1, 1);
+        }
+
+        public void Draw(ITexture texture, float x, float y, float width, float height)
+        {
+            Draw(texture, Color4.White, x, y, width, height, 0, 0, 1, 1);
+        }
+
+        public void Draw(ITexture texture, float x, float y)
+        {
+            Draw(texture, Color4.White, x, y);
+        }
+
+        public void Draw(ITexture texture, Color4 color, float x, float y)
+        {
+            Draw(texture, color, x, y, texture.Texture.Width, texture.Texture.Height, 0, 0, 1, 1);
+        }
+
+        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float texX1, float texY1, float texX2, float texY2)
         {
             CheckTextureFlush(texture.Texture);
 
@@ -73,12 +103,7 @@ namespace PlainCore.Graphics
             PushIndices();
         }
 
-        public void Draw(ITexture texture, Color4 color, float x, float y)
-        {
-            Draw(texture, color, x, y, texture.Texture.Width, texture.Texture.Height);
-        }
-
-        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX = 0f, float originY = 0f, float texX1 = 0f, float texY1 = 0f, float texX2 = 1f, float texY2 = 1f)
+        public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, float texX1, float texY1, float texX2, float texY2)
         {
             if(rotation == 0)
             {
