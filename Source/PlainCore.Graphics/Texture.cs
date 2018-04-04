@@ -23,6 +23,14 @@ namespace PlainCore.Graphics
             return new Texture(w, h, data, repeated);
         }
 
+        public static Texture FromDeviceTexture(DeviceTexture texture)
+        {
+            return new Texture
+            {
+                deviceTexture = texture
+            };
+        }
+
         public static Texture FromMemory(byte[] data, int width, int height, bool repeated = false)
         {
             return new Texture(width, height, data, repeated);
@@ -33,6 +41,11 @@ namespace PlainCore.Graphics
             deviceTexture = new DeviceTexture("tex", width, height, true, repeated);
             deviceTexture.Bind();
             deviceTexture.CopyData(data);
+        }
+
+        protected Texture()
+        {
+
         }
 
         protected DeviceTexture deviceTexture;
