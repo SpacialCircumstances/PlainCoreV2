@@ -42,6 +42,13 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        public void AttachTexture(DeviceTexture texture)
+        {
+            texture.Bind();
+            Gl.FramebufferTexture(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, texture.Handle, 0);
+            texture.Unbind();
+        }
+
         public void AttachDepthBuffer(DepthBuffer depthBuffer)
         {
             depthBuffer.Bind();
@@ -52,6 +59,19 @@ namespace PlainCore.Graphics.Core
         public void Unbind()
         {
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
+        }
+
+        public void Use()
+        {
+            Gl.DrawBuffers(Gl.COLOR_ATTACHMENT0);
+        }
+
+        public void Check()
+        {
+            if (Gl.CheckFramebufferStatus(FramebufferTarget.Framebuffer) != FramebufferStatus.FramebufferComplete)
+            {
+                throw new InvalidOperationException("Framebuffer not complete");
+            }
         }
 
         public byte[] Read(int width, int height)
