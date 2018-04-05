@@ -20,8 +20,10 @@ namespace PlainCore.Graphics
             framebuffer.AttachDepthBuffer(depthBuffer);
             framebuffer.AttachTexture(deviceTexture);
             deviceTexture.Unbind();
+            framebuffer.Use();
             framebuffer.Check();
             texture = Texture.FromDeviceTexture(deviceTexture);
+            framebuffer.Unbind();
         }
 
         protected DepthBuffer depthBuffer;
@@ -32,5 +34,13 @@ namespace PlainCore.Graphics
         public Texture Texture => texture;
 
         public FloatRectangle Rectangle => texture.Rectangle;
+
+        public Framebuffer Buffer => framebuffer;
+
+        public void Use()
+        {
+            framebuffer.Bind();
+            viewport.Set();
+        }
     }
 }
