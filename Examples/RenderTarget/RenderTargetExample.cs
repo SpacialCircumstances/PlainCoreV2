@@ -15,6 +15,11 @@ namespace RenderTarget
         ShaderPipeline pipeline;
         Matrix4fUniform worldMatrix;
         RenderTexture renderTexture;
+        bool renderTargetDrawn = false;
+        Viewport normal = new Viewport(0, 800, 0, 600);
+        SpriteBatch batch;
+        float rotation;
+        Framebuffer defaultFramebuffer;
 
         public void Run()
         {
@@ -26,13 +31,11 @@ namespace RenderTarget
             {
                 window.PollEvents();
 
-                window.Clear(Color4.Black);
+                window.Clear(Color4.Red);
 
                 Draw();
 
                 window.Display();
-
-                throw new NotSupportedException();
             }
         }
 
@@ -52,19 +55,33 @@ namespace RenderTarget
             vab.Unbind();
             worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
             worldMatrix.Matrix = Matrix4x4.Identity;
+
+            batch = new SpriteBatch();
+            defaultFramebuffer = Framebuffer.GetDefault();
         }
 
         private void Draw()
         {
-            renderTexture.Use();
-            vab.Bind();
-            vao.Bind();
-            pipeline.Bind();
-            worldMatrix.Set(pipeline);
-            vab.DrawDirect(3);
-            var imageData = renderTexture.Buffer.Read(800, 600);
-            var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
-            image.Save("Screenshot.png");
+            if (!renderTargetDrawn)
+            {
+                renderTexture.Use();
+                vab.Bind();
+                vao.Bind();
+                pipeline.Bind();
+                worldMatrix.Set(pipeline);
+                vab.DrawDirect(3);
+                var imageData = renderTexture.Buffer.Read(800, 600);
+                var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
+                image.Save("Screenshot.png");
+                renderTargetDrawn = true;
+            }
+            defaultFramebuffer.Bind();
+            normal.Set();
+
+            rotation += 0.01f;
+            batch.Begin(worldMatrix);
+            batch.Draw(renderTexture, 0.1f, 0.2f, 0.5f, 0.5f);
+            batch.End();
         }
 
         private readonly VertexPositionColor[] vertices = new VertexPositionColor[]
