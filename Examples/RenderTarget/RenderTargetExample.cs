@@ -80,7 +80,7 @@ namespace RenderTarget
 
             rotation += 0.01f;
             batch.Begin(worldMatrix);
-            batch.Draw(renderTexture, 0.1f, 0.2f, 0.5f, 0.5f);
+            batch.Draw(renderTexture, Color4.White, 0.1f, 0.2f, 0.5f, 0.5f, rotation);
             batch.End();
         }
 
