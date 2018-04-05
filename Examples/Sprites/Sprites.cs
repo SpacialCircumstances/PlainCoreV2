@@ -32,6 +32,8 @@ namespace Sprites
 
                 window.Display();
             }
+
+            batch.Dispose();
         }
 
         public void Setup()

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
-    public class SpriteBatch
+    public class SpriteBatch: IDisposable
     {
         private const int MAX_BATCH_SIZE = 1024;
 
@@ -193,6 +193,14 @@ namespace PlainCore.Graphics
             }
 
             currentTexture = texture;
+        }
+
+        public void Dispose()
+        {
+            vertexArrayBuffer.Dispose();
+            vertexArrayObject.Dispose();
+            indexBuffer.Dispose();
+            pipeline.Dispose();
         }
     }
 }
