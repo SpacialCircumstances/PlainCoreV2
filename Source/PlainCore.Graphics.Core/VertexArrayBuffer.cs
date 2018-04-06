@@ -5,8 +5,19 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A buffer holding vertex data.
+    /// </summary>
+    /// <typeparam name="T">Type of the vertex. Must be a struct.</typeparam>
     public class VertexArrayBuffer<T>: IDeviceBuffer<T> where T: struct
     {
+        /// <summary>
+        /// Create a new buffer for array data.
+        /// </summary>
+        /// <param name="vertexSize">Size (in bytes) of a single vertex</param>
+        /// <param name="usage">(Optional) Buffer usage. Defaults to StreamDraw</param>
+        /// <param name="primitive">(Optional) Primitive type. Defaults to Triangles</param>
+        /// <param name="initialCapacity">(Optional) Initial buffer capacity</param>
         public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, PrimitiveType primitive = PrimitiveType.Triangles, int initialCapacity = 3)
         {
             this.vertexSize = vertexSize;

@@ -5,8 +5,18 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// Contains metadata for a vertex drawing operation, for example attribute definitions and shaders.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public class VertexArrayObject<T> : IBindable where T: struct
     {
+        /// <summary>
+        /// Create a new vertex array object
+        /// </summary>
+        /// <param name="buffer">The buffer the metadata applies to</param>
+        /// <param name="pipeline">The shader pipeline for the drawing operation</param>
+        /// <param name="attributes">Vertex attribute definitions</param>
         public VertexArrayObject(VertexArrayBuffer<T> buffer, ShaderPipeline pipeline, params VertexAttributeDescription[] attributes)
         {
             this.buffer = buffer;
