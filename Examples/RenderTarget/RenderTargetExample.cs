@@ -16,7 +16,7 @@ namespace RenderTarget
         Matrix4fUniform worldMatrix;
         RenderTexture renderTexture;
         bool renderTargetDrawn = false;
-        Viewport normal = new Viewport(0, 800, 0, 600);
+        Viewport normal = new Viewport(0, 600, 800, 0);
         SpriteBatch batch;
         float rotation;
         Framebuffer defaultFramebuffer;

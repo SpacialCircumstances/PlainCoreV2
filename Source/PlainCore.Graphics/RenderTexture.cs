@@ -10,7 +10,7 @@ namespace PlainCore.Graphics
     {
         public RenderTexture(int width, int height)
         {
-            viewport = new Viewport(0, width, 0, height);
+            viewport = new Viewport(0, height, width, 0);
             depthBuffer = new DepthBuffer(width, height);
             framebuffer = new Framebuffer();
             deviceTexture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, width, height, false);
