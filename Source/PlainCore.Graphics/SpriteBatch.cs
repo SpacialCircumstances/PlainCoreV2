@@ -69,7 +69,7 @@ namespace PlainCore.Graphics
 
         public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation)
         {
-            Draw(texture, color, x, y, width, height, rotation, width / 2f, height / 2f, 0, 0, 1, 1);
+            Draw(texture, color, x, y, width, height, rotation, 0.5f, 0.5f, 0, 0, 1, 1);
         }
 
         public void Draw(ITexture texture, float x, float y, float width, float height)

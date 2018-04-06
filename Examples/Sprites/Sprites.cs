@@ -22,7 +22,7 @@ namespace Sprites
 
             while(window.IsOpen)
             {
-                rot++;
+                rot += 0.002f;
 
                 window.PollEvents();
 
@@ -48,7 +48,7 @@ namespace Sprites
         public void Draw()
         {
             batch.Begin(worldMatrix);
-            batch.Draw(tex2, Color4.White, 0, 0, 1, 1, 0.1f, 0, 0, 0, 0, 1, 1);
+            batch.Draw(tex2, Color4.White, 0, 0, 1, 1, rot);
             batch.End();
         }
     }
