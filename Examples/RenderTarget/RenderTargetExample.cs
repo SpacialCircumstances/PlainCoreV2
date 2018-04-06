@@ -65,6 +65,7 @@ namespace RenderTarget
             if (!renderTargetDrawn)
             {
                 renderTexture.Use();
+                renderTexture.Clear(Color4.Gray);
                 vab.Bind();
                 vao.Bind();
                 pipeline.Bind();
@@ -78,7 +79,7 @@ namespace RenderTarget
             defaultFramebuffer.Bind();
             normal.Set();
 
-            rotation += 0.01f;
+            rotation += 0.001f;
             batch.Begin(worldMatrix);
             batch.Draw(renderTexture, Color4.White, 0.1f, 0.2f, 0.5f, 0.5f, rotation);
             batch.End();

@@ -42,5 +42,10 @@ namespace PlainCore.Graphics
             framebuffer.Bind();
             viewport.Set();
         }
+
+        public void Clear(Color4 color)
+        {
+            framebuffer.Clear(color);
+        }
     }
 }

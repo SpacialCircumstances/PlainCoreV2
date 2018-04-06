@@ -85,5 +85,11 @@ namespace PlainCore.Graphics.Core
 
             return outData;
         }
+
+        public void Clear(Color4 c)
+        {
+            Gl.ClearColor(c.R, c.G, c.B, c.A);
+            Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+        }
     }
 }
