@@ -6,8 +6,19 @@ using System.Text;
 
 namespace PlainCore.Window
 {
+    /// <summary>
+    /// A window implementation using GLFW
+    /// </summary>
     public class Window: IWindow
     {
+        /// <summary>
+        /// Creates a window.
+        /// </summary>
+        /// <param name="width">The desired width</param>
+        /// <param name="height">The desired height</param>
+        /// <param name="title">The desired title</param>
+        /// <param name="resizable">Should the user be able to change the size</param>
+        /// <param name="settings">ContextSettings for the OpenGL context</param>
         public Window(uint width, uint height, string title, bool resizable, ContextSettings settings)
         {
             this.width = width;
