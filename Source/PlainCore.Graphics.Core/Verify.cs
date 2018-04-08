@@ -29,7 +29,25 @@ namespace PlainCore.Graphics.Core
         /// <param name="shaders">Shaders</param>
         public static void VerifyShaders(ShaderResource[] shaders)
         {
+            bool hasVertex = false;
+            bool hasFragment = false;
 
+            foreach (var shader in shaders)
+            {
+                if (shader.Type == ShaderType.Fragment)
+                {
+                    hasFragment = true;
+                }
+                else if (shader.Type == ShaderType.Vertex)
+                {
+                    hasVertex = true;
+                }
+            }
+
+            if (!hasVertex || !hasFragment)
+            {
+                throw new InvalidOperationException("Shader pipeline not valid: Does not contain vertex shader or fragment shader");
+            }
         }
 
         /// <summary>
