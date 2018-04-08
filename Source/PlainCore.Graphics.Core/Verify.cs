@@ -5,8 +5,15 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// Internal class for verifying correctness.
+    /// </summary>
     internal static class Verify
     {
+        /// <summary>
+        /// Verifies that the resource was created by checking for a correct handle
+        /// </summary>
+        /// <param name="handle">Resource handle</param>
         public static void VerifyResourceCreated(uint handle)
         {
             if (handle <= 0)
@@ -16,11 +23,20 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        /// <summary>
+        /// Verifies that the shaders create a valid pipeline
+        /// </summary>
+        /// <param name="shaders">Shaders</param>
         public static void VerifyShaders(ShaderResource[] shaders)
         {
 
         }
 
+        /// <summary>
+        /// Verifies that a shader attribute was found in a shader
+        /// </summary>
+        /// <param name="attribute">The attributes name</param>
+        /// <param name="position">The position in the shader</param>
         public static void VerifyAttribute(string attribute, int position)
         {
             if (position == -1)
@@ -30,6 +46,11 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        /// <summary>
+        /// Verifies that a shader uniform was found in a shader
+        /// </summary>
+        /// <param name="name">The uniforms name</param>
+        /// <param name="position">The position in the shader</param>
         public static void VerifyUniform(string name, int position)
         {
             if (position == -1)
