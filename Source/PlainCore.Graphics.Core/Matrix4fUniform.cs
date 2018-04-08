@@ -6,8 +6,15 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A shader uniform for setting a Matrix4x4.
+    /// </summary>
     public class Matrix4fUniform : IUniform
     {
+        /// <summary>
+        /// Creates a new uniform for setting a Matrix4x4.
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
         public Matrix4fUniform(string name)
         {
             this.name = name;
@@ -17,6 +24,9 @@ namespace PlainCore.Graphics.Core
         public string Name => name;
         protected Matrix4x4 matrix = Matrix4x4.Identity;
 
+        /// <summary>
+        /// The matrix value.
+        /// </summary>
         public Matrix4x4 Matrix
         {
             get => matrix;
