@@ -17,6 +17,8 @@ namespace PlainCore.Graphics.Core
 
         public ShaderResource(ShaderType type, string[] code)
         {
+            Type = type;
+
             handle = Gl.CreateShader(ToShaderType(type));
             Verify.VerifyResourceCreated(handle);
 
@@ -33,6 +35,8 @@ namespace PlainCore.Graphics.Core
         }
 
         protected readonly uint handle;
+
+        public readonly ShaderType Type;
 
         public uint Handle => handle;
 
