@@ -16,6 +16,7 @@ namespace PlainCore.Window.Test
             Assert.True(window1.IsOpen);
             window1.Title = "Test";
             window1.Close();
+            window1.Dispose();
         }
 
         [Fact]
@@ -35,6 +36,8 @@ namespace PlainCore.Window.Test
                 window1.PollEvents();
                 window1.Display();
             }
+
+            window1.Dispose();
         }
     }
 }
