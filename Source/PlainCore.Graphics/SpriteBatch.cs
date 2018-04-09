@@ -28,7 +28,7 @@ namespace PlainCore.Graphics
                     DefaultShader.FromType(typeof(VertexPositionColorTexture), ShaderType.Vertex),
                     DefaultShader.FromType(typeof(VertexPositionColorTexture), ShaderType.Fragment));
 
-            vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColorTexture>(VertexPositionColorTexture.Size, OpenGL.BufferUsage.StreamDraw, OpenGL.PrimitiveType.Triangles, 6);
+            vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColorTexture>(VertexPositionColorTexture.Size, OpenGL.BufferUsage.StreamDraw, OpenGL.PrimitiveType.Triangles);
             vertexArrayObject = new VertexArrayObject<VertexPositionColorTexture>(vertexArrayBuffer, this.pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
             indexBuffer = new IndexBuffer<VertexPositionColorTexture>();
 
