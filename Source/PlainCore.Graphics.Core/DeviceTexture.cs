@@ -89,6 +89,10 @@ namespace PlainCore.Graphics.Core
             Gl.DeleteTextures(Handle);
         }
 
+        /// <summary>
+        /// Binds this texture as uniform into texture slot 0. Texture must be bound.
+        /// </summary>
+        /// <param name="pipeline">The shader used for drawing</param>
         public void Set(ShaderPipeline pipeline)
         {
             Gl.ActiveTexture(TextureUnit.Texture0);

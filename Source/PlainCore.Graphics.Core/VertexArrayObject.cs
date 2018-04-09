@@ -14,8 +14,8 @@ namespace PlainCore.Graphics.Core
         /// <summary>
         /// Create a new vertex array object
         /// </summary>
-        /// <param name="buffer">The buffer the metadata applies to</param>
-        /// <param name="pipeline">The shader pipeline for the drawing operation</param>
+        /// <param name="buffer">The buffer the metadata applies to. Does not need to be bound.</param>
+        /// <param name="pipeline">The shader pipeline for the drawing operation.</param>
         /// <param name="attributes">Vertex attribute definitions</param>
         public VertexArrayObject(VertexArrayBuffer<T> buffer, ShaderPipeline pipeline, params VertexAttributeDescription[] attributes)
         {

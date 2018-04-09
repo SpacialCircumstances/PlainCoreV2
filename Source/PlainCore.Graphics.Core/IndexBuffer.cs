@@ -44,9 +44,9 @@ namespace PlainCore.Graphics.Core
         }
 
         /// <summary>
-        /// Draw the vertices in the buffer, using this buffer for the indices.
+        /// Draw the vertices in the bound buffer, using this buffer for the indices.
         /// </summary>
-        /// <param name="buffer">Vertex buffer</param>
+        /// <param name="buffer">Vertex buffer. Must be bound.</param>
         /// <param name="elements">Number of elements to draw</param>
         public void DrawIndexed(VertexArrayBuffer<T> buffer, int elements)
         {

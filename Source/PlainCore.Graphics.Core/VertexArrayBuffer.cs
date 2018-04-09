@@ -56,7 +56,7 @@ namespace PlainCore.Graphics.Core
         }
 
         /// <summary>
-        /// Directly draw the vertices without an index buffer.
+        /// Directly draw the vertices without an index buffer. This buffer must be bound.
         /// </summary>
         /// <param name="elements">Number of elements to draw</param>
         public void DrawDirect(int elements)
