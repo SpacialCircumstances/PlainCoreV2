@@ -89,6 +89,7 @@ namespace PlainCore.Window
             //Set hints
             GLFW.WindowHint(GLFW.CLIENT_API, GLFW.OPENGL_API);
             GLFW.WindowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
+            GLFW.WindowHint(GLFW.OPENGL_FORWARD_COMPAT, GLFW.TRUE);
             GLFW.WindowHint(GLFW.CONTEXT_VERSION_MAJOR, 3);
             GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 3);
             GLFW.WindowHint(GLFW.RESIZABLE, resizable ? 1 : 0);
