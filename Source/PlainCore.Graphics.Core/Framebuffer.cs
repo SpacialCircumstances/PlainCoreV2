@@ -6,8 +6,15 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// Represents a framebuffer with attachments.
+    /// </summary>
     public class Framebuffer: IBindable
     {
+        /// <summary>
+        /// Gets the default framebuffer.
+        /// </summary>
+        /// <returns>The default framebuffer</returns>
         public static Framebuffer GetDefault()
         {
             return new Framebuffer(0, true);
@@ -19,12 +26,18 @@ namespace PlainCore.Graphics.Core
             Handle = handle;
         }
 
+        /// <summary>
+        /// Creates a new framebuffer.
+        /// </summary>
         public Framebuffer()
         {
             Handle = Gl.GenFramebuffer();
             Verify.VerifyResourceCreated(Handle);
         }
 
+        /// <summary>
+        /// OpenGL handle.
+        /// </summary>
         public readonly uint Handle;
         protected readonly bool isDefault;
 
@@ -42,6 +55,10 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        /// <summary>
+        /// Attaches a texture as color attachment 0. Texture must be created and allocated. Texture must be bound.
+        /// </summary>
+        /// <param name="texture">The texture to attach.</param>
         public void AttachTexture(DeviceTexture texture)
         {
             texture.Bind();
@@ -49,6 +66,10 @@ namespace PlainCore.Graphics.Core
             texture.Unbind();
         }
 
+        /// <summary>
+        /// Attaches a depth buffer. Depth buffer must be bound.
+        /// </summary>
+        /// <param name="depthBuffer"></param>
         public void AttachDepthBuffer(DepthBuffer depthBuffer)
         {
             depthBuffer.Bind();
@@ -61,11 +82,17 @@ namespace PlainCore.Graphics.Core
             Gl.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
         }
 
+        /// <summary>
+        /// Use this framebuffers color target for rendering.
+        /// </summary>
         public void Use()
         {
             Gl.DrawBuffers(Gl.COLOR_ATTACHMENT0);
         }
 
+        /// <summary>
+        /// Check the validity of the framebuffer. Should be called after initialization. Framebuffer must be bound.
+        /// </summary>
         public void Check()
         {
             if (Gl.CheckFramebufferStatus(FramebufferTarget.Framebuffer) != FramebufferStatus.FramebufferComplete)
@@ -74,6 +101,12 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        /// <summary>
+        /// Read data from the framebuffers color target in RGBA format. Framebuffer must be bound.
+        /// </summary>
+        /// <param name="width">Width of the data</param>
+        /// <param name="height">Height of the data</param>
+        /// <returns></returns>
         public byte[] Read(int width, int height)
         {
             var size = width * height * 4;
@@ -86,6 +119,10 @@ namespace PlainCore.Graphics.Core
             return outData;
         }
 
+        /// <summary>
+        /// Clears the framebuffer for rendering. Framebuffer must be bound.
+        /// </summary>
+        /// <param name="c"></param>
         public void Clear(Color4 c)
         {
             Gl.ClearColor(c.R, c.G, c.B, c.A);

@@ -4,13 +4,28 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// Class containing default shader implementations.
+    /// </summary>
     public static class DefaultShader
     {
+        /// <summary>
+        /// Get a shader from the type of the vertex used for rendering.
+        /// </summary>
+        /// <param name="type">Type of the vertex</param>
+        /// <param name="stage">Stage of the shader</param>
+        /// <returns></returns>
         public static ShaderResource FromType(Type type, ShaderType stage)
         {
             return FromName(type.Name, stage);
         }
 
+        /// <summary>
+        /// Get a shader from the name of the vertex type used for rendering.
+        /// </summary>
+        /// <param name="name">Name of the vertex type</param>
+        /// <param name="stage">Stage of the shader</param>
+        /// <returns></returns>
         public static ShaderResource FromName(string name, ShaderType stage)
         {
             switch (name)
@@ -85,11 +100,31 @@ namespace PlainCore.Graphics.Core
             return null;
         }
 
+        /// <summary>
+        /// Name of default position attribute in the vertex shader.
+        /// </summary>
         public const string POSITION_NAME = "Position";
+
+        /// <summary>
+        /// Name of default color attribute in the vertex shader.
+        /// </summary>
         public const string COLOR_NAME = "Color";
+
+        /// <summary>
+        /// Name of default texture coordinates attribute in the vertex shader.
+        /// </summary>
         public const string TEXTURE_COORDINATES_NAME = "TextureCoordinates";
+
+        /// <summary>
+        /// Name of the default world matrix uniform.
+        /// </summary>
         public const string MVP_UNIFORM_NAME = "uMVP";
+
+        /// <summary>
+        /// Name of the default 2D texture uniform.
+        /// </summary>
         public const string DEFFAULT_TEXTURE_UNIFORM_NAME = "tex";
+
         private const string FRAGMENT_COLOR_NAME = "frColor";
         private const string FRAGMENT_TEXTURE_COORDINATES_NAME = "texCoords";
         private const string OUT_COLOR_NAME = "outColor";
