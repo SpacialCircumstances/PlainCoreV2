@@ -5,6 +5,9 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A color. Internal a Vector4.
+    /// </summary>
     public struct Color4 : IEquatable<Color4>
     {
         public Color4(float r, float g, float b, float a = 1f)

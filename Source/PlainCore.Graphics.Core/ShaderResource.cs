@@ -6,15 +6,29 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A single shader object, for example a vertex shader.
+    /// </summary>
     public class ShaderResource: IDisposable
     {
         private const int MAX_LOG = 1024;
 
+        /// <summary>
+        /// Load the shader code from a file.
+        /// </summary>
+        /// <param name="type">Type of the shader</param>
+        /// <param name="filename">Filename</param>
+        /// <returns></returns>
         public static ShaderResource FromFile(ShaderType type, string filename)
         {
             return new ShaderResource(type, File.ReadAllLines(filename));
         }
 
+        /// <summary>
+        /// Create a new shader.
+        /// </summary>
+        /// <param name="type">Type of the shader</param>
+        /// <param name="code">GLSL code</param>
         public ShaderResource(ShaderType type, string[] code)
         {
             Type = type;

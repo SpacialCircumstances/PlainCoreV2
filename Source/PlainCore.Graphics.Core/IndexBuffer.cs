@@ -3,8 +3,16 @@ using OpenGL;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A buffer for holding index data.
+    /// </summary>
+    /// <typeparam name="T">Data type of the vertices associated with the indices</typeparam>
     public class IndexBuffer<T> : IDeviceBuffer<int> where T: struct
     {
+        /// <summary>
+        /// Create a new index buffer.
+        /// </summary>
+        /// <param name="usage">Buffer usage flag. Defaults to StreamDraw.</param>
         public IndexBuffer(BufferUsage usage = BufferUsage.StreamDraw)
         {
             this.usage = usage;
@@ -35,6 +43,11 @@ namespace PlainCore.Graphics.Core
             Gl.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
         }
 
+        /// <summary>
+        /// Draw the vertices in the buffer, using this buffer for the indices.
+        /// </summary>
+        /// <param name="buffer">Vertex buffer</param>
+        /// <param name="elements">Number of elements to draw</param>
         public void DrawIndexed(VertexArrayBuffer<T> buffer, int elements)
         {
             Gl.DrawElements(buffer.Primitive, elements, DrawElementsType.UnsignedInt, null);

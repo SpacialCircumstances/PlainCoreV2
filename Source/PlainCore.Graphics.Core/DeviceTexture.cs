@@ -5,8 +5,20 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A 2D Texture with RGBA format living on the GPU.
+    /// </summary>
     public class DeviceTexture : IDeviceBuffer<byte>, IUniform
     {
+        /// <summary>
+        /// Create a new 2D GPU Texture.
+        /// </summary>
+        /// <param name="name">Uniform name</param>
+        /// <param name="width">Width in pixels</param>
+        /// <param name="height">Height in pixels</param>
+        /// <param name="genMipmaps">Generate Mipmaps</param>
+        /// <param name="smooth">Smooth filtering</param>
+        /// <param name="repeated">Texture is tileable</param>
         public DeviceTexture(string name, int width, int height, bool genMipmaps = true, bool smooth = false, bool repeated = false)
         {
             this.name = name;
@@ -106,11 +118,22 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        /// <summary>
+        /// Not supported on textures!
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="offset"></param>
         public void ReplaceData(byte[] data, IntPtr offset)
         {
             throw new NotSupportedException();
         }
 
+        /// <summary>
+        /// Not supported on textures!
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="size"></param>
+        /// <param name="offset"></param>
         public void ReplaceData(IntPtr data, uint size, IntPtr offset)
         {
             throw new NotSupportedException();

@@ -5,10 +5,17 @@ using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
+    /// <summary>
+    /// A shader pipeline containing different shader stages.
+    /// </summary>
     public class ShaderPipeline: IBindable
     {
         private const int MAX_LOG = 1024;
 
+        /// <summary>
+        /// Create a shader pipeline.
+        /// </summary>
+        /// <param name="shaders">The shaders</param>
         public ShaderPipeline(List<ShaderResource> shaders)
         {
             Handle = Gl.CreateProgram();
@@ -16,6 +23,10 @@ namespace PlainCore.Graphics.Core
             UploadShaders(shaders.ToArray());
         }
 
+        /// <summary>
+        /// Create a shader pipeline.
+        /// </summary>
+        /// <param name="shaders">The shaders</param>
         public ShaderPipeline(params ShaderResource[] shaders)
         {
             Handle = Gl.CreateProgram();
@@ -67,6 +78,11 @@ namespace PlainCore.Graphics.Core
             Gl.DeleteProgram(Handle);
         }
 
+        /// <summary>
+        /// Get the location of the attribute by the name.
+        /// </summary>
+        /// <param name="name">Name of the attribute</param>
+        /// <returns>Position of the attribute. -1 if not found.</returns>
         public uint GetAttributeLocation(string name)
         {
             int pos = Gl.GetAttribLocation(Handle, name);
@@ -75,6 +91,11 @@ namespace PlainCore.Graphics.Core
             return (uint)pos;
         }
 
+        /// <summary>
+        /// Get the location of the uniform by the name.
+        /// </summary>
+        /// <param name="name">Name of the uniform</param>
+        /// <returns>Position of the uniform. -1 if not found.</returns>
         public int GetUniformLocation(string name)
         {
             if (UniformLocations.ContainsKey(name))
