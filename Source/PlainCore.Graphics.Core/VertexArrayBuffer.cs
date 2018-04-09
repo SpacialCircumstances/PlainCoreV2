@@ -17,8 +17,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="vertexSize">Size (in bytes) of a single vertex</param>
         /// <param name="usage">Buffer usage. Defaults to StreamDraw</param>
         /// <param name="primitive">Primitive type. Defaults to Triangles</param>
-        /// <param name="initialCapacity">Initial buffer capacity</param>
-        public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, PrimitiveType primitive = PrimitiveType.Triangles, int initialCapacity = 3)
+        public VertexArrayBuffer(uint vertexSize, BufferUsage usage = BufferUsage.StreamDraw, PrimitiveType primitive = PrimitiveType.Triangles)
         {
             this.vertexSize = vertexSize;
             this.usage = usage;
