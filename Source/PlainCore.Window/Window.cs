@@ -63,6 +63,7 @@ namespace PlainCore.Window
 
         public void Close()
         {
+            GLFW.SetWindowShouldClose(Handle, GLFW.TRUE);
             GLFW.DestroyWindow(Handle);
         }
 
@@ -86,6 +87,8 @@ namespace PlainCore.Window
         {
             if (GLFW.Init() == 0) throw new NotSupportedException("GLFW init failed");
 
+            GLFW.SetErrorCallback(new GLFW.ErrorFun(Error));
+
             //Set hints
             GLFW.WindowHint(GLFW.CLIENT_API, GLFW.OPENGL_API);
             GLFW.WindowHint(GLFW.OPENGL_PROFILE, GLFW.OPENGL_CORE_PROFILE);
@@ -102,12 +105,62 @@ namespace PlainCore.Window
             }
 
             GLFW.MakeContextCurrent(Handle);
-            //TODO: Callback handling?
+
+            GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed()));
+
+            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged(i)));
+
+            GLFW.SetWindowPosCallback(Handle, new GLFW.WindowPosFun((ptr, x, y) => OnPositionChanged(x, y)));
+
+            GLFW.SetWindowSizeCallback(Handle, new GLFW.WindowSizeFun((ptr, w, h) => OnSizeChanged(w, h)));
+
+            OnSizeChanged += (w, h) =>
+            {
+                this.width = (uint)w;
+                this.height = (uint)h;
+            };
+
+            GLFW.SetCharCallback(Handle, new GLFW.CharFun((ptr, c) => OnTextEntered((char)c)));
+
+            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorEntered(t)));
+
+            GLFW.SetCursorPosCallback(Handle, new GLFW.CursorPosFun((ptr, x, y) => OnMouseMoved(x, y)));
+
+            GLFW.SetFramebufferSizeCallback(Handle, new GLFW.FramebufferSizeFun((ptr, x, y) => OnFramebufferResized(x, y)));
+
+            GLFW.SetJoystickCallback(new GLFW.JoystickFun((i, j) => OnJoystickEventReceived(i, j)));
+
+            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived(i, j, k, l)));
+
+            GLFW.SetMonitorCallback(new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived(ptr, i)));
+
+            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived(i, j, k)));
+
+            GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled(x, y)));
         }
 
         public void Dispose()
         {
             GLFW.Terminate();
         }
+
+        protected void Error(int i, string error)
+        {
+            throw new Exception($"GLFW error {i}: {error}");
+        }
+
+        public Action OnClosed;
+        public Action<int> OnFocusChanged;
+        public Action<int, int> OnPositionChanged;
+        public Action<int, int> OnSizeChanged;
+        public Action<char> OnTextEntered;
+        public Action<int> OnCursorEntered;
+        public Action<double, double> OnMouseMoved;
+        public Action<int, int> OnFramebufferResized;
+        public Action<int, int> OnJoystickEventReceived;
+        public Action<int, int, int, int> OnKeyEventReceived;
+        public Action<IntPtr, int> OnMonitorEventReceived;
+        public Action<int, int, int> OnMouseButtonEventReceived;
+        public Action<double, double> OnScrolled;
     }
 }
