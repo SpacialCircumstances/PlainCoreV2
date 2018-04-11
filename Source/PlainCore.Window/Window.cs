@@ -82,6 +82,22 @@ namespace PlainCore.Window
         {
             GLFW.PollEvents();
         }
+       
+        public void SetCursorMode(CursorMode mode)
+        {
+            if (mode == CursorMode.Normal)
+            {
+                GLFW.SetInputMode(Handle, GLFW.CURSOR, GLFW.CURSOR_NORMAL);
+            }
+            else if (mode == CursorMode.Hidden)
+            {
+                GLFW.SetInputMode(Handle, GLFW.CURSOR, GLFW.CURSOR_HIDDEN);
+            }
+            else if (mode == CursorMode.Disabled)
+            {
+                GLFW.SetInputMode(Handle, GLFW.CURSOR, GLFW.CURSOR_DISABLED);
+            }
+        }
 
         protected virtual void Open(ContextSettings settings)
         {
