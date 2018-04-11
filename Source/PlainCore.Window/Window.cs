@@ -108,7 +108,7 @@ namespace PlainCore.Window
 
             GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed()));
 
-            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged(i)));
+            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged(i == 1)));
 
             GLFW.SetWindowPosCallback(Handle, new GLFW.WindowPosFun((ptr, x, y) => OnPositionChanged(x, y)));
 
@@ -122,7 +122,7 @@ namespace PlainCore.Window
 
             GLFW.SetCharCallback(Handle, new GLFW.CharFun((ptr, c) => OnTextEntered((char)c)));
 
-            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorEntered(t)));
+            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorOnWindowChanged(t == 1)));
 
             GLFW.SetCursorPosCallback(Handle, new GLFW.CursorPosFun((ptr, x, y) => OnMouseMoved(x, y)));
 
@@ -149,18 +149,70 @@ namespace PlainCore.Window
             throw new Exception($"GLFW error {i}: {error}");
         }
 
+        /// <summary>
+        /// Called when the window closes.
+        /// </summary>
         public Action OnClosed;
-        public Action<int> OnFocusChanged;
+
+        /// <summary>
+        /// Called when the window is now in focus (true) or out of focus.
+        /// </summary>
+        public Action<bool> OnFocusChanged;
+
+        /// <summary>
+        /// Called with (x, y) when the position of the window on the screen changes.
+        /// </summary>
         public Action<int, int> OnPositionChanged;
+
+        /// <summary>
+        /// Called with (w, h) when the size of the window changes.
+        /// </summary>
         public Action<int, int> OnSizeChanged;
+
+        /// <summary>
+        /// Called when text input is received.
+        /// </summary>
         public Action<char> OnTextEntered;
-        public Action<int> OnCursorEntered;
+
+        /// <summary>
+        /// Called when cursor enters (true) or leaves window.
+        /// </summary>
+        public Action<bool> OnCursorOnWindowChanged;
+
+        /// <summary>
+        /// Called when the mouse moves.
+        /// </summary>
         public Action<double, double> OnMouseMoved;
+
+        /// <summary>
+        /// Called when the framebuffer object is resized.
+        /// </summary>
+        /// <remarks>This does not mean that the window was resized.</remarks>
         public Action<int, int> OnFramebufferResized;
+
+        /// <summary>
+        /// Called when a joystick connects or disconnects.
+        /// </summary>
         public Action<int, int> OnJoystickEventReceived;
+
+        /// <summary>
+        /// Called with (key, scancode, action, mods) when a key event occurs.
+        /// </summary>
         public Action<int, int, int, int> OnKeyEventReceived;
+
+        /// <summary>
+        /// Called when a monitor was connected or disconnected.
+        /// </summary>
         public Action<IntPtr, int> OnMonitorEventReceived;
+
+        /// <summary>
+        /// Called with (button, action, mods) when a mouse button is pressed/released.
+        /// </summary>
         public Action<int, int, int> OnMouseButtonEventReceived;
+
+        /// <summary>
+        /// Called with (x, y) when the scroll wheel is used.
+        /// </summary>
         public Action<double, double> OnScrolled;
     }
 }
