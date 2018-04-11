@@ -1,6 +1,7 @@
 ﻿using PlainCore.Graphics;
 using PlainCore.Graphics.Core;
 using SixLabors.ImageSharp;
+using System;
 using System.Numerics;
 using System.Text;
 
@@ -21,6 +22,7 @@ namespace HelloWorld
         public void Run()
         {
             var window = new RenderWindow();
+            window.OnClosed += () => Console.WriteLine("Closed!");
 
             Setup();
 
@@ -34,7 +36,6 @@ namespace HelloWorld
 
                 window.Display();
             }
-
         }
 
         protected void Setup()
