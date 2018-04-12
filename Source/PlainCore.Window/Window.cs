@@ -99,6 +99,18 @@ namespace PlainCore.Window
             }
         }
 
+        public string Clipboard
+        {
+            get
+            {
+                return GLFW.GetClipboardString(Handle);
+            }
+            set
+            {
+                GLFW.SetClipboardString(Handle, value);
+            }
+        }
+
         protected virtual void Open(ContextSettings settings)
         {
             if (GLFW.Init() == 0) throw new NotSupportedException("GLFW init failed");
