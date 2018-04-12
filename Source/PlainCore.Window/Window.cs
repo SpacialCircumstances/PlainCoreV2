@@ -163,7 +163,7 @@ namespace PlainCore.Window
 
             GLFW.SetMonitorCallback(new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived?.Invoke(ptr, i)));
 
-            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, j, k)));
+            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, k)));
 
             GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y)));
 
@@ -239,7 +239,7 @@ namespace PlainCore.Window
         /// <summary>
         /// Called with (button, action, mods) when a mouse button is pressed/released.
         /// </summary>
-        public Action<MouseButton, int, int> OnMouseButtonEventReceived;
+        public Action<MouseButton, MouseButtonAction, int> OnMouseButtonEventReceived;
 
         /// <summary>
         /// Called with (x, y) when the scroll wheel is used.
