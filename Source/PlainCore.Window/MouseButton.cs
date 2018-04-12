@@ -1,5 +1,8 @@
 ﻿namespace PlainCore.Window
 {
+    /// <summary>
+    /// Enum describing the buttons a mouse can possibly have.
+    /// </summary>
     public enum MouseButton
     {
         Left = 0,
