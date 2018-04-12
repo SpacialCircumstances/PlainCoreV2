@@ -159,7 +159,7 @@ namespace PlainCore.Window
 
             GLFW.SetJoystickCallback(new GLFW.JoystickFun((i, j) => OnJoystickEventReceived?.Invoke(i, j)));
 
-            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke(i, j, k, l)));
+            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke(i, j, (KeyAction)k, l)));
 
             GLFW.SetMonitorCallback(new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived?.Invoke(ptr, i)));
 
@@ -229,7 +229,7 @@ namespace PlainCore.Window
         /// <summary>
         /// Called with (key, scancode, action, mods) when a key event occurs.
         /// </summary>
-        public Action<int, int, int, int> OnKeyEventReceived;
+        public Action<int, int, KeyAction, int> OnKeyEventReceived;
 
         /// <summary>
         /// Called when a monitor was connected or disconnected.
