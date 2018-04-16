@@ -2,6 +2,9 @@
 
 namespace PlainCore.Window
 {
+    /// <summary>
+    /// Enum for modifiers pressed when receiving key or mouse events
+    /// </summary>
     [Flags]
     public enum Mod: byte
     {
