@@ -19,10 +19,5 @@ namespace PlainCore.Graphics
             Gl.ClearColor(color.R, color.G, color.B, color.A);
             Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
         }
-
-        public void Draw(IDrawable drawable)
-        {
-            drawable.Draw(this, null);
-        }
     }
 }
