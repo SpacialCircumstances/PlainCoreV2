@@ -137,7 +137,7 @@ namespace PlainCore.Window
 #pragma warning disable RCS1163 // Unused parameter.
             GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed?.Invoke()));
 
-            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged?.Invoke((Focus)i)));
+            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged?.Invoke((FocusEvent)i)));
 
             GLFW.SetWindowPosCallback(Handle, new GLFW.WindowPosFun((ptr, x, y) => OnPositionChanged?.Invoke(x, y)));
 
@@ -188,7 +188,7 @@ namespace PlainCore.Window
         /// <summary>
         /// Called when the window is now in focus or out of focus.
         /// </summary>
-        public Action<Focus> OnFocusChanged;
+        public Action<FocusEvent> OnFocusChanged;
 
         /// <summary>
         /// Called with (x, y) when the position of the window on the screen changes.
