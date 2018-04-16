@@ -159,11 +159,11 @@ namespace PlainCore.Window
 
             GLFW.SetJoystickCallback(new GLFW.JoystickFun((i, j) => OnJoystickEventReceived?.Invoke(i, j)));
 
-            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke(i, j, (KeyAction)k, l)));
+            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke(i, j, (KeyAction)k, (Mod)l)));
 
             GLFW.SetMonitorCallback(new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived?.Invoke(ptr, i)));
 
-            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, k)));
+            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, (Mod)k)));
 
             GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y)));
 
@@ -229,7 +229,7 @@ namespace PlainCore.Window
         /// <summary>
         /// Called with (key, scancode, action, mods) when a key event occurs.
         /// </summary>
-        public Action<int, int, KeyAction, int> OnKeyEventReceived;
+        public Action<int, int, KeyAction, Mod> OnKeyEventReceived;
 
         /// <summary>
         /// Called when a monitor was connected or disconnected.
@@ -239,7 +239,7 @@ namespace PlainCore.Window
         /// <summary>
         /// Called with (button, action, mods) when a mouse button is pressed/released.
         /// </summary>
-        public Action<MouseButton, MouseButtonAction, int> OnMouseButtonEventReceived;
+        public Action<MouseButton, MouseButtonAction, Mod> OnMouseButtonEventReceived;
 
         /// <summary>
         /// Called with (x, y) when the scroll wheel is used.
