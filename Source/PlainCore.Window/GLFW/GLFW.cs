@@ -1,4 +1,6 @@
 ﻿// MODIFIED
+// Make dll loading possible for dotnet core
+// Change dll paths
 //
 // MIT License
 // Copyright (c) 2016 - 2017 Zachary Snow
