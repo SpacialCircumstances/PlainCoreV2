@@ -2,6 +2,7 @@
 using PlainCore.Graphics.Core;
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace PlainCore.Graphics
@@ -14,10 +15,17 @@ namespace PlainCore.Graphics
             Gl.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
         }
 
+        protected Framebuffer framebuffer = Framebuffer.GetDefault();
+        protected View view;
+
+        public Framebuffer Framebuffer => framebuffer;
+        public Viewport Viewport => view.Viewport;
+        public Matrix4x4 WorldMatrix => view.WorldMatrix;
+
         public void Clear(Color4 color)
         {
-            Gl.ClearColor(color.R, color.G, color.B, color.A);
-            Gl.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            framebuffer.Bind();
+            framebuffer.Clear(color);
         }
     }
 }
