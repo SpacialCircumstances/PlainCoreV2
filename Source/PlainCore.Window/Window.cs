@@ -151,7 +151,7 @@ namespace PlainCore.Window
 
             GLFW.SetCharCallback(Handle, new GLFW.CharFun((ptr, c) => OnTextEntered?.Invoke((char)c)));
 
-            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorOnWindowChanged?.Invoke(t == 1)));
+            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorOnWindowChanged?.Invoke((CursorEvent)t)));
 
             GLFW.SetCursorPosCallback(Handle, new GLFW.CursorPosFun((ptr, x, y) => OnMouseMoved?.Invoke(x, y)));
 
@@ -206,9 +206,9 @@ namespace PlainCore.Window
         public Action<char> OnTextEntered;
 
         /// <summary>
-        /// Called when cursor enters (true) or leaves window.
+        /// Called when cursor enters or leaves window.
         /// </summary>
-        public Action<bool> OnCursorOnWindowChanged;
+        public Action<CursorEvent> OnCursorOnWindowChanged;
 
         /// <summary>
         /// Called when the mouse moves.
