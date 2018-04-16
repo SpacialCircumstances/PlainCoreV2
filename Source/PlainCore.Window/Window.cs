@@ -82,7 +82,7 @@ namespace PlainCore.Window
         {
             GLFW.PollEvents();
         }
-       
+
         public void SetCursorMode(CursorMode mode)
         {
             if (mode == CursorMode.Normal)
