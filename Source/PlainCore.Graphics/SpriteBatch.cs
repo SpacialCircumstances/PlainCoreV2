@@ -18,6 +18,7 @@ namespace PlainCore.Graphics
         private readonly VertexArrayObject<VertexPositionColorTexture> vertexArrayObject;
         private readonly IndexBuffer<VertexPositionColorTexture> indexBuffer;
         private readonly ShaderPipeline pipeline;
+        private readonly Matrix4fUniform worldMatrixUniform;
 
         private Texture currentTexture;
         private int index;
@@ -34,12 +35,14 @@ namespace PlainCore.Graphics
 
             indexDataBuffer = new DataBuffer<int>(MAX_BATCH_SIZE * sizeof(int), indexBuffer);
             vertexDataBuffer = new DataBuffer<VertexPositionColorTexture>(MAX_BATCH_SIZE * VertexPositionColorTexture.Size, vertexArrayBuffer);
+            worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
         }
 
-        public void Begin(Matrix4fUniform worldMatrix)
+        public void Begin(IRenderTarget target)
         {
             pipeline.Bind();
-            worldMatrix.Set(pipeline);
+            worldMatrixUniform.Matrix = target.WorldMatrix;
+            worldMatrixUniform.Set(pipeline);
             vertexArrayBuffer.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();

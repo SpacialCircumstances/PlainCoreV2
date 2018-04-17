@@ -12,18 +12,19 @@ namespace Sprites
         SpriteBatch batch;
         Texture tex;
         Texture tex2;
-        Matrix4fUniform worldMatrix;
-        float rot;
+        RenderWindow window;
         public void Run()
         {
-            var window = new RenderWindow();
+            window = new RenderWindow();
+            window.OnClosed += () =>
+            {
+                Console.WriteLine("Window closed");
+            };
 
             Setup();
 
             while(window.IsOpen)
             {
-                rot += 0.002f;
-
                 window.PollEvents();
 
                 window.Clear(Color4.Green);
@@ -41,14 +42,12 @@ namespace Sprites
             batch = new SpriteBatch();
             tex = Texture.FromFile("Example.png");
             tex2 = Texture.FromFile("Screenshot.png");
-            worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
-            worldMatrix.Matrix = Matrix4x4.CreateOrthographic(2, 2, -1, 1);
         }
 
         public void Draw()
         {
-            batch.Begin(worldMatrix);
-            batch.Draw(tex2, Color4.White, 0, 0, 1, 1, rot);
+            batch.Begin(window);
+            batch.Draw(tex, 0f, 0f, 100f, 100f);
             batch.End();
         }
     }
