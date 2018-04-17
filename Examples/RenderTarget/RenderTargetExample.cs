@@ -20,10 +20,11 @@ namespace RenderTarget
         SpriteBatch batch;
         float rotation;
         Framebuffer defaultFramebuffer;
+        RenderWindow window;
 
         public void Run()
         {
-            var window = new RenderWindow();
+            window = new RenderWindow();
 
             Setup();
 
@@ -80,7 +81,7 @@ namespace RenderTarget
             normal.Set();
 
             rotation += 0.001f;
-            batch.Begin(worldMatrix);
+            batch.Begin(window);
             batch.Draw(renderTexture, Color4.White, 0.1f, 0.2f, 0.5f, 0.5f, rotation);
             batch.End();
         }
