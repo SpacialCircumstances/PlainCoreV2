@@ -172,6 +172,7 @@ namespace PlainCore.Graphics
 
         protected void Flush()
         {
+            if (currentTexture == null) return;
             indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
             currentTexture.Use(pipeline);
