@@ -11,8 +11,7 @@ namespace PlainCore.Graphics
     {
         private const int MAX_BATCH_SIZE = 1024;
 
-        private readonly DataBuffer<int> indexDataBuffer;
-        private readonly DataBuffer<VertexPositionColorTexture> vertexDataBuffer;
+        private readonly List<VertexPositionColorTexture> vertices;
 
         private readonly VertexArrayBuffer<VertexPositionColorTexture> vertexArrayBuffer;
         private readonly VertexArrayObject<VertexPositionColorTexture> vertexArrayObject;
@@ -32,9 +31,15 @@ namespace PlainCore.Graphics
             vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColorTexture>(VertexPositionColorTexture.Size, OpenGL.BufferUsage.StreamDraw, OpenGL.PrimitiveType.Triangles);
             vertexArrayObject = new VertexArrayObject<VertexPositionColorTexture>(vertexArrayBuffer, this.pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
             indexBuffer = new IndexBuffer<VertexPositionColorTexture>();
+            vertexArrayBuffer.Bind();
+            vertexArrayBuffer.CopyRawData(IntPtr.Zero, MAX_BATCH_SIZE * 4 * VertexPositionColorTexture.Size);
+            vertexArrayBuffer.Unbind();
+            indexBuffer.Bind();
+            indexBuffer.CopyRawData(IntPtr.Zero, MAX_BATCH_SIZE * 6 * sizeof(int));
+            indexBuffer.Unbind();
 
-            indexDataBuffer = new DataBuffer<int>(MAX_BATCH_SIZE * sizeof(int), indexBuffer);
-            vertexDataBuffer = new DataBuffer<VertexPositionColorTexture>(MAX_BATCH_SIZE * VertexPositionColorTexture.Size, vertexArrayBuffer);
+            vertices = new List<VertexPositionColorTexture>(MAX_BATCH_SIZE * 4);
+
             worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
         }
 
@@ -46,8 +51,7 @@ namespace PlainCore.Graphics
             vertexArrayBuffer.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();
-            indexDataBuffer.Clear();
-            vertexDataBuffer.Clear();
+            vertices.Clear();
             index = 0;
         }
 
@@ -103,7 +107,7 @@ namespace PlainCore.Graphics
             PushVertex(x + width, y, color, upperX, lowerY);
             PushVertex(x + width, y + height, color, upperX, upperY);
             PushVertex(x, y + height, color, lowerX, upperY);
-            PushIndices();
+            index++;
         }
 
         public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, float texX1, float texY1, float texX2, float texY2)
@@ -144,41 +148,36 @@ namespace PlainCore.Graphics
             PushVertex(rux, ruy, color, upperX, lowerY);
             PushVertex(rdx, rdy, color, upperX, upperY);
             PushVertex(lux, luy, color, lowerX, upperY);
-            PushIndices();
+            index++;
         }
 
         protected void PushVertex(float x, float y, Color4 color, float tx, float ty)
         {
-            vertexDataBuffer.Write(x);
-            vertexDataBuffer.Write(y);
-            vertexDataBuffer.Write(color.R);
-            vertexDataBuffer.Write(color.G);
-            vertexDataBuffer.Write(color.B);
-            vertexDataBuffer.Write(color.A);
-            vertexDataBuffer.Write(tx);
-            vertexDataBuffer.Write(ty);
-        }
-
-        protected void PushIndices()
-        {
-            indexDataBuffer.Write(index);
-            indexDataBuffer.Write(index + 1);
-            indexDataBuffer.Write(index + 2);
-            indexDataBuffer.Write(index);
-            indexDataBuffer.Write(index + 2);
-            indexDataBuffer.Write(index + 3);
-            index += 6;
+            vertices.Add(new VertexPositionColorTexture(new Vector2(x, y), color, new Vector2(tx, ty)));
         }
 
         protected void Flush()
         {
             if (currentTexture == null) return;
-            indexDataBuffer.Flush();
-            vertexDataBuffer.Flush();
+            vertexArrayBuffer.ReplaceData(vertices.ToArray(), IntPtr.Zero);
+            int[] indices = new int[index * 6];
+
+            for (int i = 0; i < index; i++) //Compute indices
+            {
+                int idx = i * 6;
+                int inst = i * 4;
+                indices[idx] = (ushort)inst;
+                indices[idx + 1] = (ushort)(inst + 1);
+                indices[idx + 2] = (ushort)(inst + 2);
+                indices[idx + 3] = (ushort)(inst);
+                indices[idx + 4] = (ushort)(inst + 2);
+                indices[idx + 5] = (ushort)(inst + 3);
+            }
+
+            indexBuffer.ReplaceData(indices, IntPtr.Zero);
             currentTexture.Use(pipeline);
             indexBuffer.DrawIndexed(vertexArrayBuffer, index);
-            indexDataBuffer.Clear();
-            vertexDataBuffer.Clear();
+            vertices.Clear();
             index = 0;
             currentTexture = null;
         }
