@@ -135,7 +135,7 @@ namespace PlainCore.Window
             GLFW.MakeContextCurrent(Handle);
 
 #pragma warning disable RCS1163 // Unused parameter.
-            GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed?.Invoke()));
+            /*GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed?.Invoke()));
 
             GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged?.Invoke((FocusEvent)i)));
 
@@ -165,7 +165,7 @@ namespace PlainCore.Window
 
             GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, (Mod)k)));
 
-            GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y)));
+            GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y)));*/
 
 #pragma warning restore RCS1163 // Unused parameter.
         }
