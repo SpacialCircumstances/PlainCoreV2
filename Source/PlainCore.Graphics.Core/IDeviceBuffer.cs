@@ -43,5 +43,12 @@ namespace PlainCore.Graphics.Core
         /// <param name="size">Size of replacement data</param>
         /// <param name="offset">Location of the data that gets replaced</param>
         void ReplaceData(IntPtr data, uint size, IntPtr offset);
+
+        /// <summary>
+        /// Replace a part of the buffer data. Buffer must be bound.
+        /// </summary>
+        /// <param name="data">Array of primitives to upload</param>
+        /// <param name="offset">Location of the data that gets replaced</param>
+        void ReplaceData(T[] data, IntPtr offset);
     }
 }
