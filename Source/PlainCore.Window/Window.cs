@@ -135,13 +135,17 @@ namespace PlainCore.Window
             GLFW.MakeContextCurrent(Handle);
 
 #pragma warning disable RCS1163 // Unused parameter.
-            /*GLFW.SetWindowCloseCallback(Handle, new GLFW.WindowCloseFun(ptr => OnClosed?.Invoke()));
+            closeCallback = new GLFW.WindowCloseFun(ptr => OnClosed?.Invoke());
+            GLFW.SetWindowCloseCallback(Handle, closeCallback);
 
-            GLFW.SetWindowFocusCallback(Handle, new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged?.Invoke((FocusEvent)i)));
+            focusCallback = new GLFW.WindowFocusFun((ptr, i) => OnFocusChanged?.Invoke((FocusEvent)i));
+            GLFW.SetWindowFocusCallback(Handle, focusCallback);
 
-            GLFW.SetWindowPosCallback(Handle, new GLFW.WindowPosFun((ptr, x, y) => OnPositionChanged?.Invoke(x, y)));
+            windowPositionCallback = new GLFW.WindowPosFun((ptr, x, y) => OnPositionChanged?.Invoke(x, y));
+            GLFW.SetWindowPosCallback(Handle, windowPositionCallback);
 
-            GLFW.SetWindowSizeCallback(Handle, new GLFW.WindowSizeFun((ptr, w, h) => OnSizeChanged?.Invoke(w, h)));
+            windowSizeCallback = new GLFW.WindowSizeFun((ptr, w, h) => OnSizeChanged?.Invoke(w, h));
+            GLFW.SetWindowSizeCallback(Handle, windowSizeCallback);
 
             OnSizeChanged += (w, h) =>
             {
@@ -149,23 +153,32 @@ namespace PlainCore.Window
                 this.height = (uint)h;
             };
 
-            GLFW.SetCharCallback(Handle, new GLFW.CharFun((ptr, c) => OnTextEntered?.Invoke((char)c)));
+            characterCallback = new GLFW.CharFun((ptr, c) => OnTextEntered?.Invoke((char)c));
+            GLFW.SetCharCallback(Handle, characterCallback);
 
-            GLFW.SetCursorEnterCallback(Handle, new GLFW.CursorEnterFun((ptr, t) => OnCursorOnWindowChanged?.Invoke((CursorEvent)t)));
+            cursorEnterCallback = new GLFW.CursorEnterFun((ptr, t) => OnCursorOnWindowChanged?.Invoke((CursorEvent)t));
+            GLFW.SetCursorEnterCallback(Handle, cursorEnterCallback);
 
-            GLFW.SetCursorPosCallback(Handle, new GLFW.CursorPosFun((ptr, x, y) => OnMouseMoved?.Invoke(x, y)));
+            cursorPositionCallback = new GLFW.CursorPosFun((ptr, x, y) => OnMouseMoved?.Invoke(x, y));
+            GLFW.SetCursorPosCallback(Handle, cursorPositionCallback);
 
-            GLFW.SetFramebufferSizeCallback(Handle, new GLFW.FramebufferSizeFun((ptr, x, y) => OnFramebufferResized?.Invoke(x, y)));
+            framebufferSizeCallback = new GLFW.FramebufferSizeFun((ptr, x, y) => OnFramebufferResized?.Invoke(x, y));
+            GLFW.SetFramebufferSizeCallback(Handle, framebufferSizeCallback);
 
-            GLFW.SetJoystickCallback(new GLFW.JoystickFun((i, j) => OnJoystickEventReceived?.Invoke(i, j)));
+            joystickCallback = new GLFW.JoystickFun((i, j) => OnJoystickEventReceived?.Invoke(i, j));
+            GLFW.SetJoystickCallback(joystickCallback);
 
-            GLFW.SetKeyCallback(Handle, new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke((Key)i, j, (KeyAction)k, (Mod)l)));
+            keyCallback = new GLFW.KeyFun((ptr, i, j, k, l) => OnKeyEventReceived?.Invoke((Key)i, j, (KeyAction)k, (Mod)l));
+            GLFW.SetKeyCallback(Handle, keyCallback);
 
-            GLFW.SetMonitorCallback(new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived?.Invoke(ptr, i)));
+            monitorCallback = new GLFW.MonitorFun((ptr, i) => OnMonitorEventReceived?.Invoke(ptr, i));
+            GLFW.SetMonitorCallback(monitorCallback);
 
-            GLFW.SetMouseButtonCallback(Handle, new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, (Mod)k)));
+            mouseButtonCallback = new GLFW.MouseButtonFun((ptr, i, j, k) => OnMouseButtonEventReceived?.Invoke((MouseButton)i, (MouseButtonAction)j, (Mod)k));
+            GLFW.SetMouseButtonCallback(Handle, mouseButtonCallback);
 
-            GLFW.SetScrollCallback(Handle, new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y)));*/
+            scrollCallback = new GLFW.ScrollFun((ptr, x, y) => OnScrolled?.Invoke(x, y));
+            GLFW.SetScrollCallback(Handle, scrollCallback);
 
 #pragma warning restore RCS1163 // Unused parameter.
         }
@@ -179,6 +192,21 @@ namespace PlainCore.Window
         {
             throw new Exception($"GLFW error {i}: {error}");
         }
+
+        // Store callbacks in instance variables to prevent gc-cleanup (MemoryAccessException)
+        private GLFW.WindowCloseFun closeCallback;
+        private GLFW.WindowFocusFun focusCallback;
+        private GLFW.WindowPosFun windowPositionCallback;
+        private GLFW.WindowSizeFun windowSizeCallback;
+        private GLFW.CharFun characterCallback;
+        private GLFW.CursorEnterFun cursorEnterCallback;
+        private GLFW.CursorPosFun cursorPositionCallback;
+        private GLFW.FramebufferSizeFun framebufferSizeCallback;
+        private GLFW.JoystickFun joystickCallback;
+        private GLFW.KeyFun keyCallback;
+        private GLFW.MonitorFun monitorCallback;
+        private GLFW.MouseButtonFun mouseButtonCallback;
+        private GLFW.ScrollFun scrollCallback;
 
         /// <summary>
         /// Called when the window closes.
