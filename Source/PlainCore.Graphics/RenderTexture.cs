@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 using PlainCore.Graphics.Core;
 using PlainCore.System;
 
 namespace PlainCore.Graphics
 {
-    public class RenderTexture : ITexture
+    public class RenderTexture : ITexture, IRenderTarget
     {
         public RenderTexture(int width, int height)
         {
-            viewport = new Viewport(0, height, width, 0);
+            view = new View(new Viewport(0, height, width, 0), new Vector2(0, 0), new Vector2(width, height));
             depthBuffer = new DepthBuffer(width, height);
             framebuffer = new Framebuffer();
             deviceTexture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, width, height, false);
@@ -27,7 +28,7 @@ namespace PlainCore.Graphics
         }
 
         protected DepthBuffer depthBuffer;
-        protected Viewport viewport;
+        protected View view;
         protected Framebuffer framebuffer;
         protected DeviceTexture deviceTexture;
         protected Texture texture;
@@ -35,12 +36,16 @@ namespace PlainCore.Graphics
 
         public FloatRectangle Rectangle => texture.Rectangle;
 
-        public Framebuffer Buffer => framebuffer;
+        public Framebuffer Framebuffer => framebuffer;
+
+        public Viewport Viewport => view.Viewport;
+
+        public Matrix4x4 WorldMatrix => view.WorldMatrix;
 
         public void Use()
         {
             framebuffer.Bind();
-            viewport.Set();
+            Viewport.Set();
         }
 
         public void Clear(Color4 color)

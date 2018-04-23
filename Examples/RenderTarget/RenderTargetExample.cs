@@ -51,11 +51,10 @@ namespace RenderTarget
             vao.Bind();
             pipeline.Bind();
             vab.CopyData(vertices);
+            worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
             pipeline.Unbind();
             vao.Unbind();
             vab.Unbind();
-            worldMatrix = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
-            worldMatrix.Matrix = Matrix4x4.Identity;
 
             batch = new SpriteBatch();
             defaultFramebuffer = Framebuffer.GetDefault();
@@ -70,9 +69,10 @@ namespace RenderTarget
                 vab.Bind();
                 vao.Bind();
                 pipeline.Bind();
+                worldMatrix.Matrix = renderTexture.WorldMatrix;
                 worldMatrix.Set(pipeline);
                 vab.DrawDirect(3);
-                var imageData = renderTexture.Buffer.Read(800, 600);
+                var imageData = renderTexture.Framebuffer.Read(800, 600);
                 var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
                 image.Save("Screenshot.png");
                 renderTargetDrawn = true;
@@ -82,15 +82,15 @@ namespace RenderTarget
 
             rotation += 0.001f;
             batch.Begin(window);
-            batch.Draw(renderTexture, Color4.White, 0.1f, 0.2f, 0.5f, 0.5f, rotation);
+            batch.Draw(renderTexture, Color4.White, 300f, 500f, 100f, 200f, rotation);
             batch.End();
         }
 
         private readonly VertexPositionColor[] vertices = new VertexPositionColor[]
         {
-            new VertexPositionColor(new Vector2(0.5f, 0.5f), Color4.Blue),
-            new VertexPositionColor(new Vector2(-0.5f, 0.5f), Color4.Blue),
-            new VertexPositionColor(new Vector2(-0.5f, -0.5f), Color4.Blue)
+            new VertexPositionColor(new Vector2(200f, 200f), Color4.Blue),
+            new VertexPositionColor(new Vector2(0f, 0f), Color4.Blue),
+            new VertexPositionColor(new Vector2(400f, 0f), Color4.Blue)
         };
     }
 }
