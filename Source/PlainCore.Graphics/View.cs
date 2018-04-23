@@ -1,4 +1,5 @@
 ﻿using PlainCore.Graphics.Core;
+using PlainCore.System;
 using System;
 using System.Numerics;
 
@@ -21,6 +22,19 @@ namespace PlainCore.Graphics
             this.viewport = viewport;
             this.position = position;
             this.size = size;
+            this.rotation = rotation;
+        }
+
+        /// <summary>
+        /// Creates a new view from a view rectangle, taking it as viewport and as view definition.
+        /// </summary>
+        /// <param name="rect">The view rectangle</param>
+        /// <param name="rotation">The view rotation. Defaults to 0</param>
+        public View(FloatRectangle rect, float rotation = 0f)
+        {
+            this.viewport = new Viewport((int)rect.Position.X, (int)rect.End.Y, (int)rect.End.X, (int)rect.Position.Y);
+            this.position = rect.Position;
+            this.size = rect.Size;
             this.rotation = rotation;
         }
 
