@@ -70,6 +70,8 @@ namespace PlainCore.Graphics.Shapes
             {
                 indexDataBuffer.Write(index + i);
             }
+
+            index += indices.Length;
         }
 
         protected void Flush()
