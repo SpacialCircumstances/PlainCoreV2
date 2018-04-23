@@ -178,6 +178,7 @@ namespace PlainCore.Graphics
         protected void Flush()
         {
             if (currentTexture == null) return;
+            if (index == 0) return;
             indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
             currentTexture.Use(pipeline);
@@ -190,13 +191,19 @@ namespace PlainCore.Graphics
 
         protected void CheckTextureFlush(Texture texture)
         {
-            if(currentTexture == null)
+            if (index >= MAX_BATCH_SIZE)
+            {
+                Flush();
+                currentTexture = null;
+            }
+
+            if (currentTexture == null)
             {
                 currentTexture = texture;
                 return;
             }
 
-            if(texture != currentTexture || index >= MAX_BATCH_SIZE)
+            if (texture != currentTexture || index >= MAX_BATCH_SIZE)
             {
                 Flush();
             }
