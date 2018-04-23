@@ -60,6 +60,11 @@ namespace PlainCore.Graphics
             indexBuffer.Unbind();
         }
 
+        public void Draw(Sprite sprite)
+        {
+            Draw(sprite.Texture, sprite.Color, sprite.Position.X, sprite.Position.Y, sprite.Size.X, sprite.Size.Y, sprite.Rotation, sprite.Origin.X, sprite.Origin.Y);
+        }
+
         public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY)
         {
             Draw(texture, color, x, y, width, height, rotation, originX, originY, 0, 0, 1, 1);
