@@ -47,7 +47,7 @@ namespace Sprites
         public void Draw()
         {
             batch.Begin(window);
-            batch.Draw(tex, 0f, 0f, 100f, 100f);
+            batch.Draw(tex, 0f, 0f, 800f, 600f);
             batch.End();
         }
     }

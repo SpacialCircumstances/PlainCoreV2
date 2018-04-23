@@ -96,7 +96,7 @@ namespace PlainCore.Graphics
                 recomputeWorldMatrix = false;
                 var rotationMatrix = Matrix4x4.CreateRotationZ(rotation);
                 var projectionMatrix = Matrix4x4.CreateOrthographic(size.X, size.Y, -1f, 1f);
-                var translationMatrix = Matrix4x4.CreateTranslation(position.X, position.Y, 0f);
+                var translationMatrix = Matrix4x4.CreateTranslation(position.X - (size.X / 2), position.Y - (size.Y / 2), 0f);
                 worldMatrix = translationMatrix * projectionMatrix * rotationMatrix;
             }
 
