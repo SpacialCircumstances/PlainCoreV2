@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlainCore.Graphics.Test", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sprites", "Examples\Sprites\Sprites.csproj", "{E2450420-0CA9-4BE4-9549-C17455F76D12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderTarget", "Examples\RenderTarget\RenderTarget.csproj", "{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenderTarget", "Examples\RenderTarget\RenderTarget.csproj", "{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes", "Examples\Shapes\Shapes.csproj", "{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{4102F9E5-6D5B-4207-8B28-25DDCC4685AF} = {F56F160B-2629-434F-8C84-39D78D447E10}
 		{E2450420-0CA9-4BE4-9549-C17455F76D12} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
+		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5CA394-7E0E-4480-883C-D83A3C02008F}

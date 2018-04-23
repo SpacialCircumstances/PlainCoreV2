@@ -10,13 +10,13 @@ namespace PlainCore.Graphics.Shapes
         private const int MAX_BATCH_SIZE = 1024;
 
         private readonly DataBuffer<int> indexDataBuffer;
+        private readonly DataBuffer<VertexPositionColor> vertexDataBuffer;
 
         private readonly VertexArrayBuffer<VertexPositionColor> vertexArrayBuffer;
         private readonly VertexArrayObject<VertexPositionColor> vertexArrayObject;
         private readonly IndexBuffer<VertexPositionColor> indexBuffer;
         private readonly ShaderPipeline pipeline;
         private readonly Matrix4fUniform worldMatrixUniform;
-        private readonly List<VertexPositionColor> vertices;
 
         private int index;
 
@@ -26,12 +26,13 @@ namespace PlainCore.Graphics.Shapes
                     DefaultShader.FromType(typeof(VertexPositionColor), ShaderType.Vertex),
                     DefaultShader.FromType(typeof(VertexPositionColor), ShaderType.Fragment));
 
-            vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColor>(VertexPositionColor.Size);
-            vertexArrayObject = new VertexArrayObject<VertexPositionColor>(vertexArrayBuffer, pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColor)));
+            vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColor>(VertexPositionColor.Size, OpenGL.BufferUsage.StreamDraw, OpenGL.PrimitiveType.Triangles);
+            vertexArrayObject = new VertexArrayObject<VertexPositionColor>(vertexArrayBuffer, this.pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColor)));
             indexBuffer = new IndexBuffer<VertexPositionColor>();
-            worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
+
             indexDataBuffer = new DataBuffer<int>(MAX_BATCH_SIZE * sizeof(int), indexBuffer);
-            vertices = new List<VertexPositionColor>(MAX_BATCH_SIZE);
+            vertexDataBuffer = new DataBuffer<VertexPositionColor>(MAX_BATCH_SIZE * VertexPositionColor.Size, vertexArrayBuffer);
+            worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
         }
 
         public void Begin(IRenderTarget target)
@@ -43,6 +44,7 @@ namespace PlainCore.Graphics.Shapes
             vertexArrayObject.Bind();
             indexBuffer.Bind();
             indexDataBuffer.Clear();
+            vertexDataBuffer.Clear();
             index = 0;
         }
 
@@ -55,39 +57,37 @@ namespace PlainCore.Graphics.Shapes
             indexBuffer.Unbind();
         }
 
-        public void Draw(IShape shape)
+        public void PushVertex(float x, float y, Color4 color)
         {
-            var indices = shape.GetIndices();
-            CheckFlush(indices.Length);
-            var vertices = shape.GetVertices();
-            this.vertices.AddRange(vertices);
-            WriteIndices(indices);
+            vertexDataBuffer.Write(x);
+            vertexDataBuffer.Write(y);
+            vertexDataBuffer.Write(color.R);
+            vertexDataBuffer.Write(color.G);
+            vertexDataBuffer.Write(color.B);
+            vertexDataBuffer.Write(color.A);
+            PushIndices();
         }
 
-        protected void WriteIndices(int[] indices)
+        public void PushIndices()
         {
-            foreach (var i in indices)
-            {
-                indexDataBuffer.Write(index + i);
-            }
-
-            index += indices.Length;
+            indexDataBuffer.Write(index);
+            index++;
         }
 
         protected void Flush()
         {
             if (index == 0) return;
             indexDataBuffer.Flush();
-            vertexArrayBuffer.ReplaceData(vertices.ToArray(), IntPtr.Zero);
+            vertexDataBuffer.Flush();
             indexBuffer.DrawIndexed(vertexArrayBuffer, index);
             indexDataBuffer.Clear();
-            vertices.Clear();
+            vertexDataBuffer.Clear();
             index = 0;
         }
 
-        protected void CheckFlush(int numItems)
+        protected void CheckFlush()
         {
-            if (index + numItems >= MAX_BATCH_SIZE)
+            if (index >= MAX_BATCH_SIZE)
             {
                 Flush();
             }
