@@ -51,11 +51,7 @@ namespace Shapes
         public void Draw()
         {
             batch.Begin(window);
-            
-            foreach (var i in triangle.GetVertices())
-            {
-                batch.PushVertex(i.Position.X, i.Position.Y, i.Color);
-            }
+            batch.Draw(triangle);
             batch.End();
         }
     }

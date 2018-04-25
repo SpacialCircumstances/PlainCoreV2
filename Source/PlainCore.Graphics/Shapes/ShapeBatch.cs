@@ -57,21 +57,27 @@ namespace PlainCore.Graphics.Shapes
             indexBuffer.Unbind();
         }
 
-        public void PushVertex(float x, float y, Color4 color)
+        public void Draw(IShape shape)
         {
-            vertexDataBuffer.Write(x);
-            vertexDataBuffer.Write(y);
-            vertexDataBuffer.Write(color.R);
-            vertexDataBuffer.Write(color.G);
-            vertexDataBuffer.Write(color.B);
-            vertexDataBuffer.Write(color.A);
-            PushIndices();
+            var indices = shape.GetIndices();
+            CheckFlush(indices.Length);
+
+            foreach (var vertex in shape.GetVertices())
+            {
+                vertexDataBuffer.WriteVertex(vertex);
+            }
+
+            PushIndices(indices);
         }
 
-        public void PushIndices()
+        protected void PushIndices(int[] indices)
         {
-            indexDataBuffer.Write(index);
-            index++;
+            for (int i = 0; i < indices.Length; i++)
+            {
+                indexDataBuffer.Write(indices[i] + index);
+            }
+
+            index += indices.Length;
         }
 
         protected void Flush()
@@ -85,9 +91,9 @@ namespace PlainCore.Graphics.Shapes
             index = 0;
         }
 
-        protected void CheckFlush()
+        protected void CheckFlush(int indexCount)
         {
-            if (index >= MAX_BATCH_SIZE)
+            if (index + indexCount >= MAX_BATCH_SIZE)
             {
                 Flush();
             }
