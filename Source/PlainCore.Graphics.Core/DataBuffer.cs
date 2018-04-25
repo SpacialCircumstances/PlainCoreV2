@@ -114,5 +114,92 @@ namespace PlainCore.Graphics.Core
             writer.Write(value);
             written += 8;
         }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPositionColor vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.Color.R);
+            Write(vertex.Color.G);
+            Write(vertex.Color.B);
+            Write(vertex.Color.A);
+        }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPosition3Color vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.Position.Z);
+            Write(vertex.Color.R);
+            Write(vertex.Color.G);
+            Write(vertex.Color.B);
+            Write(vertex.Color.A);
+        }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPositionTexture vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.TextureCoordinates.X);
+            Write(vertex.TextureCoordinates.Y);
+        }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPosition3Texture vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.Position.Z);
+            Write(vertex.TextureCoordinates.X);
+            Write(vertex.TextureCoordinates.Y);
+        }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPositionColorTexture vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.Color.R);
+            Write(vertex.Color.G);
+            Write(vertex.Color.B);
+            Write(vertex.Color.A);
+            Write(vertex.TextureCoordinates.X);
+            Write(vertex.TextureCoordinates.Y);
+        }
+
+        /// <summary>
+        /// Writes a vertex to the buffer.
+        /// </summary>
+        /// <param name="vertex">The vertex</param>
+        public void WriteVertex(VertexPosition3ColorTexture vertex)
+        {
+            Write(vertex.Position.X);
+            Write(vertex.Position.Y);
+            Write(vertex.Position.Z);
+            Write(vertex.Color.R);
+            Write(vertex.Color.G);
+            Write(vertex.Color.B);
+            Write(vertex.Color.A);
+            Write(vertex.TextureCoordinates.X);
+            Write(vertex.TextureCoordinates.Y);
+        }
     }
 }
