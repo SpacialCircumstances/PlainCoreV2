@@ -46,7 +46,7 @@ namespace PlainCore.Graphics.Core
         }
 
         /// <summary>
-        /// Resets the stream. Does not clear the GPU memory.
+        /// Resets the buffer. Does not clear the GPU memory.
         /// </summary>
         public void Clear()
         {
@@ -56,39 +56,63 @@ namespace PlainCore.Graphics.Core
         }
 
         /// <summary>
-        /// Writes an integer to the stream.
+        /// Writes an integer to the buffer.
         /// </summary>
         /// <param name="value">The value</param>
         public void Write(int value)
         {
             writer.Write(value);
+            written += 4;
         }
 
         /// <summary>
-        /// Writes a float to the stream.
+        /// Writes a float to the buffer.
         /// </summary>
         /// <param name="value">The value</param>
         public void Write(float value)
         {
             writer.Write(value);
+            written += 4;
         }
 
         /// <summary>
-        /// Writes a byte to the stream.
+        /// Writes a byte to the buffer.
         /// </summary>
         /// <param name="value">The value</param>
         public void Write(byte value)
         {
             writer.Write(value);
+            written++;
         }
 
         /// <summary>
-        /// Writes a byte buffer to the stream.
+        /// Writes a byte buffer to the buffer.
         /// </summary>
         /// <param name="values">The byte buffer</param>
         public void Write(byte[] values)
         {
             writer.Write(values);
+            written += values.Length;
+        }
+
+        /// <summary>
+        /// Writes a double to the buffer.
+        /// </summary>
+        /// <param name="value">The value</param>
+        public void Write(double value)
+        {
+            writer.Write(value);
+            written += 8;
+        }
+
+        /// <summary>
+        /// Writes a long to the buffer.
+        /// </summary>
+        /// <param name="value">The value</param>
+        public void Write(long value)
+        {
+            writer.Write(value);
+            written += 8;
         }
     }
 }
