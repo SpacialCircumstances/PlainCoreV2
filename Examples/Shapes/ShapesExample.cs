@@ -13,6 +13,7 @@ namespace Shapes
         ShapeBatch batch;
         RenderWindow window;
         Triangle triangle;
+        Rectangle rect;
         public void Run()
         {
             window = new RenderWindow();
@@ -45,12 +46,14 @@ namespace Shapes
                 new VertexPositionColor(new Vector2(200f, 200f), Color4.Yellow),
                 new VertexPositionColor(new Vector2(100f, 200f), Color4.Purple)
             );
+            rect = new Rectangle(new Vector2(300f, 200f), new Vector2(200f, 200f), Color4.CornflowerBlue);
         }
 
         public void Draw()
         {
             batch.Begin(window);
             batch.Draw(triangle);
+            batch.Draw(rect);
             batch.End();
         }
     }
