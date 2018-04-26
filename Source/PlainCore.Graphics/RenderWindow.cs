@@ -22,6 +22,7 @@ namespace PlainCore.Graphics
         public Framebuffer Framebuffer => framebuffer;
         public Viewport Viewport => view.Viewport;
         public Matrix4x4 WorldMatrix => view.WorldMatrix;
+        public View View => view;
 
         public void Clear(Color4 color)
         {
