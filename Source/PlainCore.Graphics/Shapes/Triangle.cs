@@ -12,7 +12,6 @@ namespace PlainCore.Graphics.Shapes
     {
         public Triangle(VertexPositionColor vertex1, VertexPositionColor vertex2, VertexPositionColor vertex3)
         {
-            if (vertices.Length != 3) throw new ArgumentOutOfRangeException();
             this.vertices = new VertexPositionColor[3] { vertex1, vertex2, vertex3 };
         }
 
