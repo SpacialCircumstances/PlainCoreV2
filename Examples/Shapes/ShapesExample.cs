@@ -40,12 +40,11 @@ namespace Shapes
         public void Setup()
         {
             batch = new ShapeBatch();
-            triangle = new Triangle(new VertexPositionColor[]
-            {
+            triangle = new Triangle(
                 new VertexPositionColor(new Vector2(100f, 100f), Color4.Red),
                 new VertexPositionColor(new Vector2(200f, 200f), Color4.Yellow),
                 new VertexPositionColor(new Vector2(100f, 200f), Color4.Purple)
-            });
+            );
         }
 
         public void Draw()

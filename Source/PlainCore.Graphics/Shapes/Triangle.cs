@@ -5,12 +5,15 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics.Shapes
 {
+    /// <summary>
+    /// A triangle shape.
+    /// </summary>
     public class Triangle : IShape
     {
-        public Triangle(VertexPositionColor[] vertices)
+        public Triangle(VertexPositionColor vertex1, VertexPositionColor vertex2, VertexPositionColor vertex3)
         {
             if (vertices.Length != 3) throw new ArgumentOutOfRangeException();
-            this.vertices = vertices;
+            this.vertices = new VertexPositionColor[3] { vertex1, vertex2, vertex3 };
         }
 
         private readonly VertexPositionColor[] vertices;
