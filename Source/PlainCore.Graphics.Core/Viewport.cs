@@ -1,7 +1,4 @@
 ﻿using OpenGL;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlainCore.Graphics.Core
 {
@@ -11,6 +8,26 @@ namespace PlainCore.Graphics.Core
     public class Viewport
     {
         protected int left, right, bottom, top;
+
+        /// <summary>
+        /// Left border of the viewport.
+        /// </summary>
+        public int Left => left;
+
+        /// <summary>
+        /// Right border of the viewport.
+        /// </summary>
+        public int Right => right;
+
+        /// <summary>
+        /// Bottom border of the viewport.
+        /// </summary>
+        public int Bottom => bottom;
+
+        /// <summary>
+        /// Top border of the viewport.
+        /// </summary>
+        public int Top => top;
 
         /// <summary>
         /// Creates a viewport from the desired points
