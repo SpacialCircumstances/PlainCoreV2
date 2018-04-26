@@ -13,7 +13,7 @@ namespace PlainCore.Graphics
         {
             Gl.Enable(EnableCap.Blend);
             Gl.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-            view = new View(new Viewport(0, 0, (int)width, (int)height), new Vector2(0, 0), new Vector2(width, height));
+            view = new View(new Viewport(0, (int)height, (int)width, 0), new Vector2(0, 0), new Vector2(width, height));
         }
 
         protected Framebuffer framebuffer = Framebuffer.GetDefault();
