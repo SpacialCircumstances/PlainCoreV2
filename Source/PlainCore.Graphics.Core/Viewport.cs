@@ -30,6 +30,16 @@ namespace PlainCore.Graphics.Core
         public int Top => top;
 
         /// <summary>
+        /// Height of the viewport.
+        /// </summary>
+        public int Height => top - bottom;
+
+        /// <summary>
+        /// Width of the viewport.
+        /// </summary>
+        public int Width => right - left;
+
+        /// <summary>
         /// Creates a viewport from the desired points
         /// </summary>
         /// <param name="left">Left value</param>
