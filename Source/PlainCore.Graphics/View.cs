@@ -40,6 +40,7 @@ namespace PlainCore.Graphics
 
         protected Viewport viewport;
         protected Matrix4x4 worldMatrix;
+        protected Matrix4x4 inverseWorldMatrix;
         protected bool recomputeWorldMatrix = true;
 
         /// <summary>
@@ -112,9 +113,47 @@ namespace PlainCore.Graphics
                 var projectionMatrix = Matrix4x4.CreateOrthographic(size.X, size.Y, -1f, 1f);
                 var translationMatrix = Matrix4x4.CreateTranslation(position.X - (size.X / 2), position.Y - (size.Y / 2), 0f);
                 worldMatrix = translationMatrix * projectionMatrix * rotationMatrix;
+                var success = Matrix4x4.Invert(worldMatrix, out inverseWorldMatrix);
+                if (!success) throw new ArgumentException("Unable to compute inverse matrix");
             }
 
             return worldMatrix;
+        }
+
+        protected Matrix4x4 LazyComputeInverseWorldMatrix()
+        {
+            if (recomputeWorldMatrix)
+            {
+                LazyComputeWorldMatrix();
+            }
+
+            return inverseWorldMatrix;
+        }
+
+        /// <summary>
+        /// Convert world coordinates to screen coordinates.
+        /// </summary>
+        /// <param name="coords">Coordinates in the world coordinate system</param>
+        /// <returns>Coordinates in the screen coordinate system</returns>
+        public Vector2 WorldToScreenCoordinates(Vector2 coords)
+        {
+            var transformed = Vector4.Transform(coords, LazyComputeWorldMatrix());
+            float x = (transformed.X + 1f) / 2f * viewport.Width;
+            float y = (transformed.Y + 1f) / 2f * viewport.Height;
+            return new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// Convert screen coordinates to world coordinates.
+        /// </summary>
+        /// <param name="coords">Coordinates in the screen coordinate system</param>
+        /// <returns>Coordinates in the world coordinate system</returns>
+        public Vector2 ScreenToWorldCoordinates(Vector2 coords)
+        {
+            float x = -1f + 2f * (coords.X - viewport.Left) / viewport.Width;
+            float y = -1f + 2f * (coords.Y - viewport.Bottom) / viewport.Height;
+            var transformed = Vector4.Transform(new Vector2(x, y), LazyComputeInverseWorldMatrix());
+            return new Vector2(transformed.X, transformed.Y);
         }
     }
 }
