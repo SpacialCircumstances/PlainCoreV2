@@ -1,11 +1,12 @@
 ﻿using PlainCore.Graphics.Core;
 using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace PlainCore.Graphics.Shapes
 {
+    /// <summary>
+    /// A regular shape. Can be used to create a circle.
+    /// </summary>
     public class Circle: IShape
     {
         private int points;
@@ -16,6 +17,8 @@ namespace PlainCore.Graphics.Shapes
         private int[] indices;
         private VertexPositionColor[] vertices;
 
+        private bool calculate = false;
+
         public Circle(int points, Vector2 position, float radius, Color4 color)
         {
             this.points = points;
@@ -25,13 +28,63 @@ namespace PlainCore.Graphics.Shapes
             CalculateElements();
         }
 
+        public int Points
+        {
+            set
+            {
+                points = value;
+                calculate = true;
+            }
+            get => points;
+        }
+
+        public float Radius
+        {
+            set
+            {
+                radius = value;
+                calculate = true;
+            }
+            get => radius;
+        }
+
+        public Vector2 Position
+        {
+            set
+            {
+                position = value;
+                calculate = true;
+            }
+            get => position;
+        }
+
+        public Color4 Color
+        {
+            set
+            {
+                color = value;
+                calculate = true;
+            }
+            get => color;
+        }
+
         public int[] GetIndices()
         {
+            if (calculate)
+            {
+                CalculateElements();
+            }
+
             return indices;
         }
 
         public VertexPositionColor[] GetVertices()
         {
+            if (calculate)
+            {
+                CalculateElements();
+            }
+
             return vertices;
         }
 
@@ -56,6 +109,8 @@ namespace PlainCore.Graphics.Shapes
                 if (i == points) lastVertexIndex = 1;
                 indices[indexBaseIndex + 2] = lastVertexIndex;
             }
+
+            calculate = false;
         }
     }
 }
