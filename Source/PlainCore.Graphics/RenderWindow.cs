@@ -9,7 +9,7 @@ namespace PlainCore.Graphics
 {
     public class RenderWindow : OpenGLWindow, IRenderTarget
     {
-        public RenderWindow(uint width = 800, uint height = 600, string title = "PlainCore", bool resizable = false) : base(width, height, title, resizable)
+        public RenderWindow(uint width = 800, uint height = 600, string title = "PlainCore", bool resizable = false, bool fullscreen = false) : base(width, height, title, resizable, fullscreen)
         {
             Gl.Enable(EnableCap.Blend);
             Gl.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);

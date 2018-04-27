@@ -18,14 +18,15 @@ namespace PlainCore.Window
         /// <param name="height">The desired height</param>
         /// <param name="title">The desired title</param>
         /// <param name="resizable">Should the user be able to change the size</param>
+        /// <param name="fullscreen">Fullscreen mode</param>
         /// <param name="settings">ContextSettings for the OpenGL context</param>
-        public Window(uint width, uint height, string title, bool resizable, ContextSettings settings)
+        public Window(uint width, uint height, string title, bool resizable, bool fullscreen, ContextSettings settings)
         {
             this.width = width;
             this.height = height;
             this.resizable = resizable;
             this.title = title;
-            Open(settings);
+            Open(fullscreen, settings);
         }
 
         protected uint width;
@@ -111,7 +112,7 @@ namespace PlainCore.Window
             }
         }
 
-        protected virtual void Open(ContextSettings settings)
+        protected virtual void Open(bool fullscreen, ContextSettings settings)
         {
             if (GLFW.Init() == 0) throw new NotSupportedException("GLFW init failed");
 
@@ -125,7 +126,15 @@ namespace PlainCore.Window
             GLFW.WindowHint(GLFW.CONTEXT_VERSION_MINOR, 3);
             GLFW.WindowHint(GLFW.RESIZABLE, resizable ? 1 : 0);
 
-            Handle = GLFW.CreateWindow((int)width, (int)height, title, IntPtr.Zero, IntPtr.Zero);
+            if (!fullscreen)
+            {
+                Handle = GLFW.CreateWindow((int)width, (int)height, title, IntPtr.Zero, IntPtr.Zero);
+            }
+            else
+            {
+                Handle = GLFW.CreateWindow((int)width, (int)height, title, GLFW.GetPrimaryMonitor(), IntPtr.Zero);
+            }
+
             if(Handle == IntPtr.Zero)
             {
                 GLFW.Terminate();
