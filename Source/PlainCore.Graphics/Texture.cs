@@ -7,7 +7,7 @@ using SixLabors.ImageSharp;
 
 namespace PlainCore.Graphics
 {
-    public class Texture : ITexture
+    public class Texture : ITexture, IUniform
     {
         public static Texture FromFile(string filename, bool repeated = false)
         {
@@ -38,7 +38,7 @@ namespace PlainCore.Graphics
 
         protected Texture(int width, int height, byte[] data, bool repeated = false)
         {
-            deviceTexture = new DeviceTexture("tex", width, height, true, repeated);
+            deviceTexture = new DeviceTexture(DefaultShader.DEFFAULT_TEXTURE_UNIFORM_NAME, width, height, true, repeated);
             deviceTexture.Bind();
             deviceTexture.CopyData(data);
         }
@@ -58,9 +58,12 @@ namespace PlainCore.Graphics
 
         Texture ITexture.Texture => this;
 
-        public void Use(ShaderPipeline shader)
+        public string Name => deviceTexture.Name;
+
+        public void Set(ShaderPipeline pipeline)
         {
-            deviceTexture.Set(shader);
+            deviceTexture.Bind();
+            deviceTexture.Set(pipeline);
         }
     }
 }

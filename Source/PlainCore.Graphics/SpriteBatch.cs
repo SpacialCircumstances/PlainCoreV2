@@ -181,7 +181,7 @@ namespace PlainCore.Graphics
             if (index == 0) return;
             indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
-            currentTexture.Use(pipeline);
+            currentTexture.Set(pipeline);
             indexBuffer.DrawIndexed(vertexArrayBuffer, index);
             indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
