@@ -22,10 +22,20 @@ namespace PlainCore.Graphics
         public Framebuffer Framebuffer => framebuffer;
         public Viewport Viewport => view.Viewport;
         public Matrix4x4 WorldMatrix => view.WorldMatrix;
-        public View View => view;
+
+        public View View
+        {
+            get => view;
+            set
+            {
+                view = value;
+                view.Viewport.Set();
+            }
+        }
 
         public void Clear(Color4 color)
         {
+            view.Viewport.Set();
             framebuffer.Bind();
             framebuffer.Clear(color);
         }
