@@ -4,6 +4,7 @@ using System.Text;
 using PlainCore.Graphics.Core;
 using PlainCore.System;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace PlainCore.Graphics
 {
