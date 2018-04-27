@@ -19,6 +19,7 @@ namespace PlainCore.Graphics.Shapes
         private readonly Matrix4fUniform worldMatrixUniform;
 
         private int index;
+        private int geometryCount;
 
         public ShapeBatch(ShaderPipeline pipeline = null)
         {
@@ -46,6 +47,7 @@ namespace PlainCore.Graphics.Shapes
             indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
             index = 0;
+            geometryCount = 0;
         }
 
         public void End()
@@ -61,33 +63,36 @@ namespace PlainCore.Graphics.Shapes
         {
             var indices = shape.GetIndices();
             CheckFlush(indices.Length);
+            var vertices = shape.GetVertices();
 
-            foreach (var vertex in shape.GetVertices())
+            foreach (var vertex in vertices)
             {
                 vertexDataBuffer.WriteVertex(vertex);
             }
 
-            PushIndices(indices);
+            PushIndices(indices, vertices.Length);
         }
 
-        protected void PushIndices(int[] indices)
+        protected void PushIndices(int[] indices, int vertexCount)
         {
             for (int i = 0; i < indices.Length; i++)
             {
                 indexDataBuffer.Write(indices[i] + index);
             }
 
-            index += indices.Length;
+            geometryCount += indices.Length;
+            index += vertexCount;
         }
 
         protected void Flush()
         {
-            if (index == 0) return;
+            if (index == 0 || geometryCount == 0) return;
             indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
-            indexBuffer.DrawIndexed(vertexArrayBuffer, index);
+            indexBuffer.DrawIndexed(vertexArrayBuffer, geometryCount);
             indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
+            geometryCount = 0;
             index = 0;
         }
 
