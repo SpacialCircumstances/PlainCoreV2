@@ -14,11 +14,16 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="SharpFontCore" Version="0.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PlainCore.Graphics.Core\PlainCore.Graphics.Core.csproj" />
     <ProjectReference Include="..\PlainCore.System\PlainCore.System.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Text\" />
   </ItemGroup>
 
 </Project>
