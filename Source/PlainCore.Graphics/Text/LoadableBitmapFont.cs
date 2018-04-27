@@ -9,7 +9,6 @@ namespace PlainCore.Graphics.Text
 {
     public class LoadableBitmapFont
     {
-
         public static LoadableBitmapFont LoadFromFile(string filename)
         {
             string json = File.ReadAllText(filename);
