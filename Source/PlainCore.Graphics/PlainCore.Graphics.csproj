@@ -22,8 +22,4 @@
     <ProjectReference Include="..\PlainCore.System\PlainCore.System.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Text\" />
-  </ItemGroup>
-
 </Project>
