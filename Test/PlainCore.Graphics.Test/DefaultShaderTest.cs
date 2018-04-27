@@ -11,7 +11,7 @@ namespace PlainCore.Graphics.Test
         [Fact]
         public void TestCompile()
         {
-            var window = new OpenGLWindow(200, 200, "Test", false);
+            var window = new OpenGLWindow(200, 200, "Test", false, false);
 
             new ShaderPipeline(
                 DefaultShader.FromType(typeof(VertexPositionColor), ShaderType.Vertex),

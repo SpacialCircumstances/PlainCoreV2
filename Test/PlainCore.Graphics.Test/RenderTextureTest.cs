@@ -12,7 +12,7 @@ namespace PlainCore.Graphics.Test
         public void TestCreate()
         {
             //Dummy window for context initialization
-            var window = new OpenGLWindow(200, 200, "Test", false);
+            var window = new OpenGLWindow(200, 200, "Test", false, false);
 
             var tex = new RenderTexture(800, 600);
           

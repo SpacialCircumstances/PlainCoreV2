@@ -12,7 +12,7 @@ namespace PlainCore.Window.Test
         public void TestCreate()
         {
             //Default window settings
-            var window1 = new Window(800, 600, "PlainCore", false, new ContextSettings());
+            var window1 = new Window(800, 600, "PlainCore", false, false, new ContextSettings());
             Assert.True(window1.IsOpen);
             window1.Title = "Test";
             window1.Close();
@@ -23,7 +23,7 @@ namespace PlainCore.Window.Test
         public void TestLoop()
         {
             //Should not crash
-            var window1 = new Window(640, 480, "Test", true, new ContextSettings(3, 3, true));
+            var window1 = new Window(640, 480, "Test", true, false, new ContextSettings(3, 3, true));
             var sw = new Stopwatch();
             sw.Start();
             while (window1.IsOpen)
