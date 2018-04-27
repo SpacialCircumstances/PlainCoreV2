@@ -1,4 +1,5 @@
 ﻿using OpenGL;
+using SixLabors.ImageSharp;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -117,6 +118,18 @@ namespace PlainCore.Graphics.Core
             Marshal.FreeHGlobal(data);
 
             return outData;
+        }
+
+        /// <summary>
+        /// Read data from framebuffer to an image. Framebuffer must be bound.
+        /// </summary>
+        /// <param name="width">Width</param>
+        /// <param name="height">Height</param>
+        /// <returns></returns>
+        public Image<Rgba32> ReadToImage(int width, int height)
+        {
+            var bytes = Read(width, height);
+            return Image.LoadPixelData<Rgba32>(bytes, width, height);
         }
 
         /// <summary>
