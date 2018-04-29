@@ -1,4 +1,5 @@
 ﻿using PlainCore.Graphics.Core;
+using PlainCore.Graphics.Text;
 using PlainCore.System;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,11 @@ namespace PlainCore.Graphics
             vertexArrayObject.Unbind();
             vertexArrayBuffer.Unbind();
             indexBuffer.Unbind();
+        }
+
+        public void DrawText(Font font, string text, float x, float y, float scale = 1f)
+        {
+            font.Draw(this, text, x, y, scale);
         }
 
         public void Draw(Sprite sprite)

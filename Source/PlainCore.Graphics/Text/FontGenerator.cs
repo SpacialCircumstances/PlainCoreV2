@@ -38,7 +38,6 @@ namespace PlainCore.Graphics.Text
                     currentX = 0;
                 }
 
-
                 //Glyph is biggest in its line
                 if (h > maxY)
                 {
@@ -92,7 +91,6 @@ namespace PlainCore.Graphics.Text
             var rawData = new byte[len];
             Marshal.Copy(surface.Bits, rawData, 0, len);
             var pixelData = ConvertToPixels(rawData);
-
 
             return Image.LoadPixelData<Rgba32>(pixelData, w, h);
         }
