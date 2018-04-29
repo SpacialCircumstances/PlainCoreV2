@@ -22,6 +22,7 @@ namespace PlainCore.Graphics
 
         private Texture currentTexture;
         private int index;
+        private int geometryCount;
 
         public SpriteBatch(ShaderPipeline pipeline = null)
         {
@@ -49,6 +50,7 @@ namespace PlainCore.Graphics
             indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
             index = 0;
+            geometryCount = 0;
         }
 
         public void End()
@@ -99,15 +101,18 @@ namespace PlainCore.Graphics
         {
             CheckTextureFlush(texture.Texture);
 
+            float w = width;
+            float h = height;
+
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
             float upperX = texX2 * texture.Rectangle.End.X;
-            float upperY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
-            float lowerY = texY2 * texture.Rectangle.End.Y;
+            float lowerY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
+            float upperY = texY2 * texture.Rectangle.End.Y;
 
-            PushVertex(x, y, color, lowerX, lowerY);
-            PushVertex(x + width, y, color, upperX, lowerY);
-            PushVertex(x + width, y + height, color, upperX, upperY);
-            PushVertex(x, y + height, color, lowerX, upperY);
+            PushVertex(x, y + h, color, lowerX, lowerY);
+            PushVertex(x + w, y + h, color, upperX, lowerY);
+            PushVertex(x, y, color, lowerX, upperY);
+            PushVertex(x + w, y, color, upperX, upperY);
             PushIndices();
         }
 
@@ -166,19 +171,19 @@ namespace PlainCore.Graphics
 
         protected void PushIndices()
         {
-            indexDataBuffer.Write(index);
-            indexDataBuffer.Write(index + 1);
-            indexDataBuffer.Write(index + 2);
-            indexDataBuffer.Write(index);
-            indexDataBuffer.Write(index + 2);
-            indexDataBuffer.Write(index + 3);
+            indexDataBuffer.Write(geometryCount);
+            indexDataBuffer.Write(geometryCount + 1);
+            indexDataBuffer.Write(geometryCount + 2);
+            indexDataBuffer.Write(geometryCount + 1);
+            indexDataBuffer.Write(geometryCount + 3);
+            indexDataBuffer.Write(geometryCount + 2);
+            geometryCount += 4;
             index += 6;
         }
 
         protected void Flush()
         {
-            if (currentTexture == null) return;
-            if (index == 0) return;
+            if (currentTexture == null || index == 0 || geometryCount == 0) return;
             indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
             currentTexture.Set(pipeline);
@@ -186,6 +191,7 @@ namespace PlainCore.Graphics
             indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
             index = 0;
+            geometryCount = 0;
             currentTexture = null;
         }
 
