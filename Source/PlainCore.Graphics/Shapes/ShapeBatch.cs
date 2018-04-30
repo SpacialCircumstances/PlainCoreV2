@@ -20,6 +20,7 @@ namespace PlainCore.Graphics.Shapes
 
         private int index;
         private int geometryCount;
+        private bool isStarted;
 
         public ShapeBatch(ShaderPipeline pipeline = null)
         {
@@ -48,10 +49,23 @@ namespace PlainCore.Graphics.Shapes
             vertexDataBuffer.Clear();
             index = 0;
             geometryCount = 0;
+
+            if (isStarted)
+            {
+                throw new InvalidOperationException("Begin may not be called on a running SpriteBatch");
+            }
+
+            isStarted = true;
         }
 
         public void End()
         {
+            if (!isStarted)
+            {
+                throw new InvalidOperationException("SpriteBatch.Begin must be called before End");
+            }
+            isStarted = false;
+
             Flush();
             pipeline.Unbind();
             vertexArrayObject.Unbind();
@@ -98,6 +112,11 @@ namespace PlainCore.Graphics.Shapes
 
         protected void CheckFlush(int indexCount)
         {
+            if (!isStarted)
+            {
+                throw new InvalidOperationException("You must call Begin before drawing");
+            }
+
             if (index + indexCount >= MAX_BATCH_SIZE)
             {
                 Flush();

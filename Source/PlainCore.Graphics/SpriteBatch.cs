@@ -24,6 +24,7 @@ namespace PlainCore.Graphics
         private Texture currentTexture;
         private int index;
         private int geometryCount;
+        private bool isStarted;
 
         public SpriteBatch(ShaderPipeline pipeline = null)
         {
@@ -49,6 +50,11 @@ namespace PlainCore.Graphics
 
         public void Begin(IRenderTarget target)
         {
+            if (isStarted)
+            {
+                throw new InvalidOperationException("Begin may not be called on a running SpriteBatch");
+            }
+
             pipeline.Bind();
             worldMatrixUniform.Matrix = target.WorldMatrix;
             worldMatrixUniform.Set(pipeline);
@@ -58,10 +64,18 @@ namespace PlainCore.Graphics
             vertexDataBuffer.Clear();
             index = 0;
             geometryCount = 0;
+            isStarted = true;
         }
 
         public void End()
         {
+            if (!isStarted)
+            {
+                throw new InvalidOperationException("SpriteBatch.Begin must be called before End");
+            }
+
+            isStarted = false;
+
             Flush();
             pipeline.Unbind();
             vertexArrayObject.Unbind();
@@ -213,6 +227,11 @@ namespace PlainCore.Graphics
 
         protected void CheckTextureFlush(Texture texture)
         {
+            if (!isStarted)
+            {
+                throw new InvalidOperationException("You must call Begin before drawing");
+            }
+
             if (index >= MAX_BATCH_SIZE)
             {
                 Flush();
