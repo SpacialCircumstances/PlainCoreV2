@@ -33,11 +33,18 @@ namespace PlainCore.Graphics
 
             vertexArrayBuffer = new VertexArrayBuffer<VertexPositionColorTexture>(VertexPositionColorTexture.Size, OpenGL.BufferUsage.StreamDraw, OpenGL.PrimitiveType.Triangles);
             vertexArrayObject = new VertexArrayObject<VertexPositionColorTexture>(vertexArrayBuffer, this.pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
-            indexBuffer = new IndexBuffer<VertexPositionColorTexture>();
+            indexBuffer = new IndexBuffer<VertexPositionColorTexture>(OpenGL.BufferUsage.StaticDraw);
 
-            indexDataBuffer = new DataBuffer<int>(MAX_BATCH_SIZE * sizeof(int), indexBuffer);
-            vertexDataBuffer = new DataBuffer<VertexPositionColorTexture>(MAX_BATCH_SIZE * VertexPositionColorTexture.Size, vertexArrayBuffer);
+            indexDataBuffer = new DataBuffer<int>(6 * MAX_BATCH_SIZE * sizeof(int), indexBuffer);
+            vertexDataBuffer = new DataBuffer<VertexPositionColorTexture>(4 * MAX_BATCH_SIZE * VertexPositionColorTexture.Size, vertexArrayBuffer);
             worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
+            vertexArrayObject.Bind();
+            indexBuffer.Bind();
+            indexDataBuffer.Clear();
+            WriteIndices();
+            indexDataBuffer.Flush();
+            indexBuffer.Unbind();
+            vertexArrayObject.Unbind();
         }
 
         public void Begin(IRenderTarget target)
@@ -48,7 +55,6 @@ namespace PlainCore.Graphics
             vertexArrayBuffer.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();
-            indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
             index = 0;
             geometryCount = 0;
@@ -119,12 +125,14 @@ namespace PlainCore.Graphics
             PushVertex(x + w, y + h, color, upperX, lowerY);
             PushVertex(x, y, color, lowerX, upperY);
             PushVertex(x + w, y, color, upperX, upperY);
-            PushIndices();
+
+            geometryCount += 4;
+            index += 6;
         }
 
         public void Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, float texX1, float texY1, float texX2, float texY2)
         {
-            if(rotation == 0)
+            if (rotation == 0)
             {
                 Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2);
             }
@@ -160,7 +168,9 @@ namespace PlainCore.Graphics
             PushVertex(rux, ruy, color, upperX, lowerY);
             PushVertex(rdx, rdy, color, upperX, upperY);
             PushVertex(lux, luy, color, lowerX, upperY);
-            PushIndices();
+
+            geometryCount += 4;
+            index += 6;
         }
 
         protected void PushVertex(float x, float y, Color4 color, float tx, float ty)
@@ -175,26 +185,26 @@ namespace PlainCore.Graphics
             vertexDataBuffer.Write(ty);
         }
 
-        protected void PushIndices()
+        protected void WriteIndices()
         {
-            indexDataBuffer.Write(geometryCount);
-            indexDataBuffer.Write(geometryCount + 1);
-            indexDataBuffer.Write(geometryCount + 2);
-            indexDataBuffer.Write(geometryCount + 1);
-            indexDataBuffer.Write(geometryCount + 3);
-            indexDataBuffer.Write(geometryCount + 2);
-            geometryCount += 4;
-            index += 6;
+            for (int i = 0; i < (MAX_BATCH_SIZE / 4); i++)
+            {
+                int offset = i * 4;
+                indexDataBuffer.Write(offset);
+                indexDataBuffer.Write(offset + 1);
+                indexDataBuffer.Write(offset + 2);
+                indexDataBuffer.Write(offset + 1);
+                indexDataBuffer.Write(offset + 3);
+                indexDataBuffer.Write(offset + 2);
+            }
         }
 
         protected void Flush()
         {
             if (currentTexture == null || index == 0 || geometryCount == 0) return;
-            indexDataBuffer.Flush();
             vertexDataBuffer.Flush();
             currentTexture.Set(pipeline);
             indexBuffer.DrawIndexed(vertexArrayBuffer, index);
-            indexDataBuffer.Clear();
             vertexDataBuffer.Clear();
             index = 0;
             geometryCount = 0;
