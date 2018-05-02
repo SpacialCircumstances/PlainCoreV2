@@ -65,6 +65,7 @@ namespace PlainCore.Graphics
         {
             deviceTexture.Bind();
             deviceTexture.Set(pipeline);
+            deviceTexture.Unbind();
         }
     }
 }
