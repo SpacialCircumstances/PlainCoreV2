@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenderTarget", "Examples\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes", "Examples\Shapes\Shapes.csproj", "{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fonts", "Examples\Fonts\Fonts.csproj", "{66E6D0E7-5518-470B-83D9-F276970C2714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fonts", "Examples\Fonts\Fonts.csproj", "{66E6D0E7-5518-470B-83D9-F276970C2714}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisplayLists", "Examples\DisplayLists\DisplayLists.csproj", "{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{66E6D0E7-5518-470B-83D9-F276970C2714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E6D0E7-5518-470B-83D9-F276970C2714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E6D0E7-5518-470B-83D9-F276970C2714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 		{B4CCCD1D-5BFD-4593-8C07-2E634B191F3B} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 		{66E6D0E7-5518-470B-83D9-F276970C2714} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
+		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5CA394-7E0E-4480-883C-D83A3C02008F}
