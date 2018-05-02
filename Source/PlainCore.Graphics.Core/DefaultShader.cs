@@ -97,7 +97,7 @@ namespace PlainCore.Graphics.Core
                     break;
             }
 
-            return null;
+            throw new ArgumentException($"{name} is not a builtin vertex type");
         }
 
         /// <summary>
