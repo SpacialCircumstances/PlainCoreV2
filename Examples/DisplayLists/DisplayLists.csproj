@@ -9,4 +9,10 @@
     <ProjectReference Include="..\..\Source\PlainCore.Graphics\PlainCore.Graphics.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Windows\X64\glfw3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
