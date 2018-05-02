@@ -7,6 +7,6 @@ namespace PlainCore.Graphics
 {
     public interface IResourceSet
     {
-        IEnumerator<IUniform> GetUniforms();
+        IEnumerable<IUniform> GetUniforms();
     }
 }

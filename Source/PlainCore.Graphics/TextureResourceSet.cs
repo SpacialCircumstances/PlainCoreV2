@@ -13,7 +13,7 @@ namespace PlainCore.Graphics
 
         public Texture Texture { get; set; }
 
-        public override IEnumerator<IUniform> GetUniforms()
+        public override IEnumerable<IUniform> GetUniforms()
         {
             yield return Texture;
             base.GetUniforms();

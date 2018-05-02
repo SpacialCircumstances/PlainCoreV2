@@ -15,7 +15,7 @@ namespace PlainCore.Graphics
         public List<IUniform> Uniforms { get; set; } = new List<IUniform>();
         private readonly Matrix4fUniform worldMatrixUniform = new Matrix4fUniform(DefaultShader.MVP_UNIFORM_NAME);
 
-        public virtual IEnumerator<IUniform> GetUniforms()
+        public virtual IEnumerable<IUniform> GetUniforms()
         {
             if (RenderTarget == null) throw new ArgumentNullException("RenderTarget");
             worldMatrixUniform.Matrix = RenderTarget.WorldMatrix;
