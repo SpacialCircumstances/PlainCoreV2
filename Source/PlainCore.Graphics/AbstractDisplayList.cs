@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PlainCore.Graphics.Core;
 
-namespace PlainCore.Graphics.Core
+namespace PlainCore.Graphics
 {
     public abstract class AbstractDisplayList<T> : IDisplayList where T: struct
     {
