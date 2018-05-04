@@ -18,8 +18,8 @@ namespace PlainCore.Graphics
 
         public StreamDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, uint vertexBufferSize = DEFAULT_BUFFER_SIZE, uint indexBufferSize = 1024, ShaderPipeline pipeline = null, Core.VertexAttributeDescription[] vertexAttributes = null) : base(pipeline, vertexAttributes)
         {
-            vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StaticDraw, primitiveType);
-            indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.StaticDraw);
+            vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StreamDraw, primitiveType);
+            indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.StreamDraw);
             vertexArrayObject = new VertexArrayObject<T>(vertexArrayBuffer, this.pipeline, vertexAttributes);
             vertexArrayBuffer.Bind();
             indexBuffer.Bind();

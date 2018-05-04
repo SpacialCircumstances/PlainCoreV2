@@ -13,8 +13,8 @@ namespace PlainCore.Graphics
 
         protected DynamicDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null) : base(pipeline, vertexAttributes)
         {
-            vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StaticDraw, primitiveType);
-            indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.StaticDraw);
+            vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.DynamicDraw, primitiveType);
+            indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.DynamicDraw);
             vertexArrayObject = new VertexArrayObject<T>(vertexArrayBuffer, this.pipeline, vertexAttributes);
         }
 
