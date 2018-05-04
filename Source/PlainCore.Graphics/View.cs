@@ -137,7 +137,7 @@ namespace PlainCore.Graphics
         /// <returns>Coordinates in the screen coordinate system</returns>
         public Vector2 WorldToScreenCoordinates(Vector2 coords)
         {
-            var transformed = Vector4.Transform(coords, LazyComputeWorldMatrix());
+            var transformed = Vector2.Transform(coords, LazyComputeWorldMatrix());
             float x = (transformed.X + 1f) / 2f * viewport.Width;
             float y = (transformed.Y + 1f) / 2f * viewport.Height;
             return new Vector2(x, y);
@@ -152,8 +152,7 @@ namespace PlainCore.Graphics
         {
             float x = -1f + 2f * (coords.X - viewport.Left) / viewport.Width;
             float y = -1f + 2f * (coords.Y - viewport.Bottom) / viewport.Height;
-            var transformed = Vector4.Transform(new Vector2(x, y), LazyComputeInverseWorldMatrix());
-            return new Vector2(transformed.X, transformed.Y);
+            return Vector2.Transform(new Vector2(x, y), LazyComputeInverseWorldMatrix());
         }
     }
 }
