@@ -20,7 +20,7 @@ namespace PlainCore.Graphics
         {
             vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StreamDraw, primitive);
             indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.DynamicDraw);
-            vertexArrayObject = new VertexArrayObject<T>(vertexArrayBuffer, this.pipeline, vertexAttributes);
+            vertexArrayObject = new VertexArrayObject<T>(vertexArrayBuffer, this.pipeline, this.vertexAttributes);
             vertexArrayBuffer.Bind();
             vertexArrayBuffer.CopyRawData(IntPtr.Zero, vertexSize * vertexBufferSize);
             vertexArrayBuffer.Unbind();
