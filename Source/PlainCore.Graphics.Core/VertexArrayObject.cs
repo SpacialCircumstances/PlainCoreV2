@@ -19,6 +19,11 @@ namespace PlainCore.Graphics.Core
         /// <param name="attributes">Vertex attribute definitions</param>
         public VertexArrayObject(VertexArrayBuffer<T> buffer, ShaderPipeline pipeline, params VertexAttributeDescription[] attributes)
         {
+            if (attributes == null || buffer == null || pipeline == null)
+            {
+                throw new ArgumentNullException();
+            }
+
             this.buffer = buffer;
             Handle = Gl.GenVertexArray();
             Verify.VerifyResourceCreated(Handle);
