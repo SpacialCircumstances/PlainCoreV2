@@ -5,7 +5,7 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics
 {
-    public class BatchDisplayList<T> : AbstractDisplayList<T> where T : struct
+    public class BatchDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;

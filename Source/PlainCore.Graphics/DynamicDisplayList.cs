@@ -2,7 +2,7 @@
 
 namespace PlainCore.Graphics
 {
-    public class DynamicDisplayList<T> : AbstractDisplayList<T> where T : struct
+    public class DynamicDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;

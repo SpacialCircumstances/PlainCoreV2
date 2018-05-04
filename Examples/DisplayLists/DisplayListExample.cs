@@ -13,7 +13,9 @@ namespace DisplayLists
         {
             var window = new RenderWindow();
 
-            var dl = new StaticDisplayList<VertexPositionColor>(vertexArray, indexArray, VertexPositionColor.Size);
+            var dl = new StreamDisplayList<VertexPositionColor>(VertexPositionColor.Size);
+            dl.SetIndices(indexArray);
+            dl.SetVertices(vertexArray);
             var rs = new DefaultResourceSet(window);
 
             while (window.IsOpen)
