@@ -54,6 +54,7 @@ namespace PlainCore.Graphics
                 throw new ArgumentNullException();
             }
 
+            elementCount = indices.Length;
             indexBuffer.Bind();
             indexBuffer.CopyData(indices);
             indexBuffer.Unbind();
