@@ -1,12 +1,11 @@
-﻿using PlainCore.Graphics.Core;
-using System;
+﻿using OpenGL;
+using PlainCore.Graphics.Core;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace PlainCore.Graphics.Shapes
 {
-    public class ShapeRenderer
+    public class ShapeRenderer: IRenderer<VertexPositionColor>
     {
         private int index;
         private int elementCount;
@@ -14,6 +13,7 @@ namespace PlainCore.Graphics.Shapes
         private readonly List<int> indices = new List<int>();
 
         public void Begin()
+        {
             index = 0;
             vertices.Clear();
             indices.Clear();
@@ -63,5 +63,13 @@ namespace PlainCore.Graphics.Shapes
 
         public int[] Indices { get; protected set; }
         public VertexPositionColor[] Vertices { get; protected set; }
+
+        public uint VertexSize => VertexPositionColor.Size;
+
+        public PrimitiveType Primitive => PrimitiveType.Triangles;
+
+        public ShaderPipeline Shader => null; //Use default shader for vertex type
+
+        public VertexAttributeDescription[] VertexAttributes => null; //Use default vertex attributes
     }
 }
