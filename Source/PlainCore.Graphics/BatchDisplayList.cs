@@ -16,7 +16,7 @@ namespace PlainCore.Graphics
         private int elementCount;
         private uint currentVertexBufferSize;
 
-        public BatchDisplayList(uint vertexSize, uint vertexBufferSize = DEFAULT_BUFFER_SIZE, OpenGL.PrimitiveType primitive = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, Core.VertexAttributeDescription[] vertexAttributes = null) : base(pipeline, vertexAttributes)
+        public BatchDisplayList(uint vertexSize, uint vertexBufferSize = DEFAULT_BUFFER_SIZE, OpenGL.PrimitiveType primitive = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, Core.VertexAttributeDescription[] vertexAttributes = null) : base(vertexSize, pipeline, vertexAttributes)
         {
             vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StreamDraw, primitive);
             indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.DynamicDraw);

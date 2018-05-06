@@ -11,7 +11,7 @@ namespace PlainCore.Graphics
         //Current indices count
         private int elements;
 
-        public DynamicDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null) : base(pipeline, vertexAttributes)
+        public DynamicDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null) : base(vertexSize, pipeline, vertexAttributes)
         {
             vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.DynamicDraw, primitiveType);
             indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.DynamicDraw);

@@ -6,14 +6,17 @@ namespace PlainCore.Graphics
     {
         protected ShaderPipeline pipeline;
         protected readonly VertexAttributeDescription[] vertexAttributes;
+        protected readonly uint vertexSize;
 
-        protected AbstractDisplayList(ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null)
+
+        protected AbstractDisplayList(uint vertexSize, ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null)
         {
             this.pipeline = pipeline ?? new ShaderPipeline(
                 DefaultShader.FromType(typeof(T), ShaderType.Vertex),
                 DefaultShader.FromType(typeof(T), ShaderType.Fragment));
 
             this.vertexAttributes = vertexAttributes ?? DefaultVertexDefinition.FromType(typeof(T));
+            this.vertexSize = vertexSize;
         }
 
         public abstract void Draw(IResourceSet resourceSet);
