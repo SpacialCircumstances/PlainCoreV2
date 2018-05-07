@@ -79,5 +79,17 @@ namespace PlainCore.Graphics
             vertexArrayObject.Unbind();
             pipeline.Unbind();
         }
+
+        public void ChangeFromRenderer(IRenderer<T> renderer)
+        {
+            if (renderer.VertexSize != this.vertexSize
+                || renderer.Primitive != this.vertexArrayBuffer.Primitive
+                || (renderer.Shader != null && renderer.Shader != this.pipeline)
+                || (renderer.VertexAttributes != null && renderer.VertexAttributes != this.vertexAttributes))
+            {
+                SetVertices(renderer.Vertices);
+                SetIndices(renderer.Indices); //TODO: Do not change when not needed.
+            }
+        }
     }
 }

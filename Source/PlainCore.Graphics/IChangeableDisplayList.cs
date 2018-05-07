@@ -8,5 +8,6 @@ namespace PlainCore.Graphics
     {
         void SetIndices(int[] indices);
         void SetVertices(T[] vertices);
+        void ChangeFromRenderer(IRenderer<T> renderer);
     }
 }
