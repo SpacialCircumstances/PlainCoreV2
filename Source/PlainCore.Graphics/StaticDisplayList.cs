@@ -14,7 +14,7 @@ namespace PlainCore.Graphics
         private readonly VertexArrayObject<T> vertexArrayObject;
         private readonly int elementCount;
 
-        public StaticDisplayList(T[] vertices, int[] indices, uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, VertexAttributeDescription[] attributes = null): base(pipeline, attributes)
+        public StaticDisplayList(T[] vertices, int[] indices, uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, ShaderPipeline pipeline = null, VertexAttributeDescription[] attributes = null): base(vertexSize, pipeline, attributes)
         {
             vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StaticDraw, primitiveType);
             indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.StaticDraw);
