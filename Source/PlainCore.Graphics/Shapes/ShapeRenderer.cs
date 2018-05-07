@@ -58,8 +58,36 @@ namespace PlainCore.Graphics.Shapes
         public void End()
         {
             Indices = indices.ToArray();
+            onIndicesChanged?.Invoke(Indices);
             Vertices = vertices.ToArray();
+            onVerticesChanged?.Invoke(Vertices);
         }
+
+        public void UseDisplayList(IChangeableDisplayList<VertexPositionColor> displayList)
+        {
+            if (displayList != null)
+            {
+                onVerticesChanged = new VerticesUpdate(verts => displayList.SetVertices(verts));
+                onIndicesChanged = new IndicesUpdate(indices => displayList.SetIndices(indices));
+            }
+            else
+            {
+                onVerticesChanged = null;
+                onIndicesChanged = null;
+            }
+        }
+
+        public void RemoveDisplayList()
+        {
+            onVerticesChanged = null;
+            onIndicesChanged = null;
+        }
+
+        protected delegate void VerticesUpdate(VertexPositionColor[] vertices);
+        protected delegate void IndicesUpdate(int[] Indices);
+
+        protected VerticesUpdate onVerticesChanged;
+        protected IndicesUpdate onIndicesChanged;
 
         public int[] Indices { get; protected set; }
         public VertexPositionColor[] Vertices { get; protected set; }
