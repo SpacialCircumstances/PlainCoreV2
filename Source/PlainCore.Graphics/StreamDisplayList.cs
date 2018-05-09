@@ -11,12 +11,10 @@ namespace PlainCore.Graphics
         private readonly IndexBuffer<T> indexBuffer;
         private readonly VertexArrayObject<T> vertexArrayObject;
 
-        public const uint DEFAULT_BUFFER_SIZE = 1024;
-
         //Current indices count
         private int elements;
 
-        public StreamDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, uint vertexBufferSize = DEFAULT_BUFFER_SIZE, uint indexBufferSize = 1024, ShaderPipeline pipeline = null, Core.VertexAttributeDescription[] vertexAttributes = null) : base(vertexSize, pipeline, vertexAttributes)
+        public StreamDisplayList(uint vertexSize, OpenGL.PrimitiveType primitiveType = OpenGL.PrimitiveType.Triangles, uint vertexBufferSize = 1024, uint indexBufferSize = 1024, ShaderPipeline pipeline = null, Core.VertexAttributeDescription[] vertexAttributes = null) : base(vertexSize, pipeline, vertexAttributes)
         {
             vertexArrayBuffer = new VertexArrayBuffer<T>(vertexSize, OpenGL.BufferUsage.StreamDraw, primitiveType);
             indexBuffer = new IndexBuffer<T>(OpenGL.BufferUsage.StreamDraw);
