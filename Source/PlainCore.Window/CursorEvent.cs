@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlainCore.Window
+﻿namespace PlainCore.Window
 {
     /// <summary>
     /// Enum for describing the cursor state in an cursor event

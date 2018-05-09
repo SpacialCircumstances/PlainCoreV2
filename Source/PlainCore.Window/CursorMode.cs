@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PlainCore.Window
+﻿namespace PlainCore.Window
 {
     /// <summary>
     /// Defines how the cursor should be handled when over the application window.
