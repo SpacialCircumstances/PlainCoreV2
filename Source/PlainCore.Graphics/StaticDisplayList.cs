@@ -4,11 +4,6 @@ namespace PlainCore.Graphics
 {
     public class StaticDisplayList<T> : AbstractDisplayList<T> where T: struct
     {
-        public static StaticDisplayList<T> FromRenderer(IRenderer<T> renderer)
-        {
-            return new StaticDisplayList<T>(renderer.Vertices, renderer.Indices, renderer.VertexSize, renderer.Primitive, renderer.Shader, renderer.VertexAttributes);
-        }
-
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;
         private readonly VertexArrayObject<T> vertexArrayObject;

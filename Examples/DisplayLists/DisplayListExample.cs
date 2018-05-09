@@ -16,7 +16,6 @@ namespace DisplayLists
 
             var renderer = new ShapeRenderer();
             var dl = new StreamDisplayList<VertexPositionColor>(VertexPositionColor.Size);
-            renderer.UseDisplayList(dl);
             var sq1 = new Rectangle(new Vector2(100f, 100f), new Vector2(200f, 200f), Color4.White);
             var c1 = new Circle(12, new Vector2(500, 500), 60f, Color4.Red);
             var rs = new DefaultResourceSet(window);
@@ -29,7 +28,7 @@ namespace DisplayLists
                 renderer.Begin();
                 renderer.Render(c1);
                 renderer.Render(sq1);
-                renderer.End();
+                renderer.End(dl);
                 dl.Draw(rs);
 
                 window.Display();
