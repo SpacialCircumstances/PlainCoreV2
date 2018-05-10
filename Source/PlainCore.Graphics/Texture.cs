@@ -56,6 +56,7 @@ namespace PlainCore.Graphics
         public FloatRectangle Rectangle => rectangle;
         public int Width => deviceTexture.Width;
         public int Height => deviceTexture.Height;
+        public DeviceTexture InternalTexture => deviceTexture;
 
         Texture ITexture.Texture => this;
 
