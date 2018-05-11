@@ -12,9 +12,11 @@ namespace PlainCore.Graphics
     {
         private const int MAX_BATCH_SIZE = 1024;
 
-        private FastList<SpriteRenderItem> spriteItems = new FastList<SpriteRenderItem>(128);
+        private readonly FastList<SpriteRenderItem> spriteItems = new FastList<SpriteRenderItem>(128);
 
         private int[] indices;
+
+        private readonly VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[MAX_BATCH_SIZE];
 
         public SpriteRenderer()
         {
@@ -92,7 +94,8 @@ namespace PlainCore.Graphics
                 LD = new VertexPositionColorTexture(new Vector2(x, y), color, new Vector2(lowerX, upperY)),
                 LT = new VertexPositionColorTexture(new Vector2(x, y + h), color, new Vector2(lowerX, lowerY)),
                 RD = new VertexPositionColorTexture(new Vector2(x + w, y), color, new Vector2(upperX, lowerY)),
-                RT = new VertexPositionColorTexture(new Vector2(x + w, y + h), color, new Vector2(upperX, upperY))
+                RT = new VertexPositionColorTexture(new Vector2(x + w, y + h), color, new Vector2(upperX, upperY)),
+                Texture = texture.Texture
             });
         }
 
@@ -133,13 +136,57 @@ namespace PlainCore.Graphics
                 LT = new VertexPositionColorTexture(new Vector2(ldx, ldy), color, new Vector2(lowerX, lowerY)),
                 RT = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, lowerY)),
                 LD = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(upperX, upperY)),
-                RD = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(lowerX, upperY))
+                RD = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(lowerX, upperY)),
+                Texture = texture.Texture
             });
         }
 
-        public void End()
+        public void End(Action<IntPtr, int, int[], Texture> callback)
         {
+            if (spriteItems.Count == 0) return;
 
+            //Sort sprites by texture
+            Array.Sort(spriteItems.Buffer, 0, spriteItems.Count);
+
+            var batchItems = spriteItems.Buffer;
+
+            int index = 0;
+            int count = spriteItems.Count;
+            unsafe
+            {
+                while (count > 0)
+                {
+                    int itemsForBatch = (count <= MAX_BATCH_SIZE) ? count : MAX_BATCH_SIZE;
+                    Texture texture = null;
+
+                    fixed (VertexPositionColorTexture* varrayPointer = vertexArray)
+                    {
+                        for (int i = 0; i < itemsForBatch; i++)
+                        {
+                            var currentItem = batchItems[i];
+
+                            if (currentItem.Texture != texture)
+                            {
+                                //Flush
+                                callback.Invoke(new IntPtr(varrayPointer), index, indices, texture);
+
+                                index = 0;
+                                texture = currentItem.Texture;
+                            }
+
+                            *(varrayPointer + index) = currentItem.LT;
+                            *(varrayPointer + index + 1) = currentItem.RT;
+                            *(varrayPointer + index + 2) = currentItem.LD;
+                            *(varrayPointer + index + 3) = currentItem.RD;
+                            index += 4;
+                        }
+
+                        callback.Invoke(new IntPtr(varrayPointer), index, indices, texture);
+                    }
+
+                    count -= itemsForBatch;
+                }
+            }
         }
 
         public uint VertexSize => VertexPositionColorTexture.Size;
