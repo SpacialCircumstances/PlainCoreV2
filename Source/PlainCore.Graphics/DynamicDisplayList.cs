@@ -1,4 +1,5 @@
 ﻿using PlainCore.Graphics.Core;
+using System;
 
 namespace PlainCore.Graphics
 {
@@ -51,6 +52,30 @@ namespace PlainCore.Graphics
             indexBuffer.Unbind();
             vertexArrayObject.Unbind();
             pipeline.Unbind();
+        }
+
+        public void SetIndicesFromPointer(IntPtr pointer, int length)
+        {
+            if (length < 0)
+            {
+                throw new ArgumentException(nameof(length));
+            }
+
+            indexBuffer.Bind();
+            indexBuffer.CopyRawData(pointer, (uint)length);
+            indexBuffer.Unbind();
+        }
+
+        public void SetVerticesFromPointer(IntPtr pointer, int length)
+        {
+            if (length < 0)
+            {
+                throw new ArgumentException(nameof(length)); ;
+            }
+
+            vertexArrayBuffer.Bind();
+            vertexArrayBuffer.CopyRawData(pointer, (uint)length);
+            vertexArrayBuffer.Unbind();
         }
     }
 }

@@ -59,5 +59,29 @@ namespace PlainCore.Graphics
             vertexArrayObject.Unbind();
             pipeline.Unbind();
         }
+
+        public void SetIndicesFromPointer(IntPtr pointer, int length)
+        {
+            if (length < 0)
+            {
+                throw new ArgumentException(nameof(length));
+            }
+
+            indexBuffer.Bind();
+            indexBuffer.ReplaceData(pointer, (uint)length, IntPtr.Zero);
+            indexBuffer.Unbind();
+        }
+
+        public void SetVerticesFromPointer(IntPtr pointer, int length)
+        {
+            if (length < 0)
+            {
+                throw new ArgumentException(nameof(length)); ;
+            }
+
+            vertexArrayBuffer.Bind();
+            vertexArrayBuffer.ReplaceData(pointer, (uint)length, IntPtr.Zero);
+            vertexArrayBuffer.Unbind();
+        }
     }
 }
