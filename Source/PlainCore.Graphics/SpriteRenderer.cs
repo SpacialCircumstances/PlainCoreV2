@@ -168,7 +168,10 @@ namespace PlainCore.Graphics
                             if (currentItem.Texture != texture)
                             {
                                 //Flush
-                                callback.Invoke(new IntPtr(varrayPointer), index, indices, texture);
+                                if (index != 0)
+                                {
+                                    callback.Invoke(new IntPtr(varrayPointer), index, indices, texture);
+                                }
 
                                 index = 0;
                                 texture = currentItem.Texture;
