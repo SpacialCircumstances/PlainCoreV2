@@ -16,7 +16,7 @@ namespace PlainCore.Graphics
 
         private int[] indices;
 
-        private readonly VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[MAX_BATCH_SIZE];
+        private readonly VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[MAX_BATCH_SIZE * 4];
 
         public SpriteRenderer()
         {
@@ -27,15 +27,16 @@ namespace PlainCore.Graphics
         {
             indices = new int[MAX_BATCH_SIZE * 6];
 
-            for (int i = 0; i < MAX_BATCH_SIZE; i += 6)
+            for (int i = 0; i < (MAX_BATCH_SIZE / 4); i++)
             {
                 int offset = i * 4;
-                indices[i] = offset;
-                indices[i + 1] = offset + 1;
-                indices[i + 2] = offset + 2;
-                indices[i + 3] = offset + 1;
-                indices[i + 4] = offset + 3;
-                indices[i + 5] = offset + 2;
+                int index = i * 6;
+                indices[index] = offset;
+                indices[index + 1] = offset + 1;
+                indices[index + 2] = offset + 2;
+                indices[index + 3] = offset + 1;
+                indices[index + 4] = offset + 3;
+                indices[index + 5] = offset + 2;
             }
         }
         
