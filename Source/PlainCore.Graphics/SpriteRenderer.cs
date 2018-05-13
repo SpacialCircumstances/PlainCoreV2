@@ -105,6 +105,7 @@ namespace PlainCore.Graphics
             if (rotation == 0)
             {
                 Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2);
+                return;
             }
 
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
