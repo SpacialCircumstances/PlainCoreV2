@@ -76,11 +76,11 @@ namespace PlainCore.Graphics
         {
             if (length < 0)
             {
-                throw new ArgumentException(nameof(length)); ;
+                throw new ArgumentException(nameof(length));
             }
 
             vertexArrayBuffer.Bind();
-            vertexArrayBuffer.ReplaceData(pointer, (uint)length, IntPtr.Zero);
+            vertexArrayBuffer.ReplaceData(pointer, vertexSize * (uint)length, IntPtr.Zero);
             vertexArrayBuffer.Unbind();
         }
     }
