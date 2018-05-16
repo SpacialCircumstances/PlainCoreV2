@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace PlainCore.Graphics.Shapes
 {
-    public class ShapeRenderer: IRenderer<VertexPositionColor>
+    public class ShapeRenderer
     {
         private int index;
         private int elementCount;

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
-    public class SpriteRenderer : IRenderer<VertexPositionColorTexture>
+    public class SpriteRenderer
     {
         
 
