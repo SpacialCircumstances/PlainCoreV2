@@ -14,7 +14,6 @@ namespace DisplayLists
         {
             var window = new RenderWindow();
 
-            var renderer = new SpriteRenderer();
             var dl = new StreamDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
             var rs = new TextureResourceSet(window);
             var t = Texture.FromFile("Example.png");
