@@ -4,7 +4,7 @@ using System;
 
 namespace PlainCore.Graphics
 {
-    public class SpriteRenderer
+    public class SpriteRenderer: IRenderPipelineSettings
     {
         private SpriteRenderItem[] renderItems;
         private int renderItemsIndex;

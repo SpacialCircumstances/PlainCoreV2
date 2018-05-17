@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace PlainCore.Graphics.Shapes
 {
-    public class ShapeRenderer
+    public class ShapeRenderer: IRenderPipelineSettings
     {
         private int index;
         private int elementCount;
