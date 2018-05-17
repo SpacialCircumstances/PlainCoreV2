@@ -3,7 +3,7 @@ using System;
 
 namespace PlainCore.Graphics
 {
-    internal struct SpriteRenderItem: IComparable<SpriteRenderItem>
+    public struct SpriteRenderItem: IComparable<SpriteRenderItem>
     {
         public VertexPositionColorTexture LT;
         public VertexPositionColorTexture RT;

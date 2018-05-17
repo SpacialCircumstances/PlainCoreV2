@@ -1,16 +1,32 @@
 ﻿using OpenGL;
 using PlainCore.Graphics.Core;
-using PlainCore.System;
 using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
 
 namespace PlainCore.Graphics
 {
     public class SpriteRenderer
     {
-        
+        private SpriteRenderItem[] renderItems;
+        private int renderItemsIndex;
+        private int renderItemsCount;
+
+        public void SetRenderItems(SpriteRenderItem[] renderItems, int index = 0)
+        {
+            SetRenderItems(renderItems, index, renderItems.Length);
+        }
+
+        public void SetRenderItems(SpriteRenderItem[] renderItems, int index, int length)
+        {
+            this.renderItems = renderItems;
+            this.renderItemsIndex = index;
+            this.renderItemsCount = length;
+            Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount);
+        }
+
+        public void Render(Action<VertexPositionColorTexture[], int[], Texture> renderCallback)
+        {
+
+        }
 
         public uint VertexSize => VertexPositionColorTexture.Size;
 
