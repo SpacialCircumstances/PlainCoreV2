@@ -71,8 +71,26 @@ namespace PlainCore.Graphics.Shapes
 
         public PrimitiveType Primitive => PrimitiveType.Triangles;
 
-        public ShaderPipeline Shader => null; //Use default shader for vertex type
+        private ShaderPipeline internalShader;
 
-        public VertexAttributeDescription[] VertexAttributes => null; //Use default vertex attributes
+        public ShaderPipeline Shader
+        {
+            get
+            {
+                return internalShader ?? (internalShader = new ShaderPipeline(
+                        DefaultShader.FromType(typeof(VertexPositionColor), Core.ShaderType.Vertex),
+                        DefaultShader.FromType(typeof(VertexPositionColor), Core.ShaderType.Fragment)));
+            }
+        }
+
+        private VertexAttributeDescription[] internalVertexAttributes;
+
+        public VertexAttributeDescription[] VertexAttributes
+        {
+            get
+            {
+                return internalVertexAttributes ?? (internalVertexAttributes = DefaultVertexDefinition.FromType(typeof(VertexPositionColor)));
+            }
+        }
     }
 }
