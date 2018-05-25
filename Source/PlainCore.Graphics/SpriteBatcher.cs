@@ -48,13 +48,13 @@ namespace PlainCore.Graphics
 
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
             float upperX = texX2 * texture.Rectangle.End.X;
-            float lowerY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
-            float upperY = texY2 * texture.Rectangle.End.Y;
+            float lowerY = texY2 * texture.Rectangle.End.Y; //LowerY and UpperY swapped because of image format
+            float upperY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
 
             return new SpriteRenderItem()
             {
-                LD = new VertexPositionColorTexture(new Vector2(x, y), color, new Vector2(lowerX, upperY)),
-                LT = new VertexPositionColorTexture(new Vector2(x, y + h), color, new Vector2(lowerX, lowerY)),
+                LD = new VertexPositionColorTexture(new Vector2(x, y), color, new Vector2(lowerX, lowerY)),
+                LT = new VertexPositionColorTexture(new Vector2(x, y + h), color, new Vector2(lowerX, upperY)),
                 RD = new VertexPositionColorTexture(new Vector2(x + w, y), color, new Vector2(upperX, lowerY)),
                 RT = new VertexPositionColorTexture(new Vector2(x + w, y + h), color, new Vector2(upperX, upperY)),
                 Texture = texture.Texture
@@ -96,9 +96,9 @@ namespace PlainCore.Graphics
             return new SpriteRenderItem()
             {
                 LT = new VertexPositionColorTexture(new Vector2(ldx, ldy), color, new Vector2(lowerX, lowerY)),
-                RT = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, lowerY)),
-                LD = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(upperX, upperY)),
-                RD = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(lowerX, upperY)),
+                RT = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, upperY)),
+                LD = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(lowerX, upperY)),
+                RD = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(upperX, lowerY)),
                 Texture = texture.Texture
             };
         }

@@ -17,11 +17,10 @@ namespace DisplayLists
             var dl = new StreamDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
             var rs = new TextureResourceSet(window);
             var t = Texture.FromFile("Example.png");
-            var sprite = new Sprite(t, new Vector2(100, 100), 0f, new Vector2(200f, 200f));
             var renderer = new SpriteRenderer();
             var sprites = new List<SpriteRenderItem>();
             var indices = SpriteRenderer.GetIndices(1);
-            sprites.Add(SpriteBatcher.Draw(sprite));
+            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f, 200f, 200f, 0f));
             renderer.SetRenderItems(sprites.ToArray());
 
             while (window.IsOpen)
@@ -45,10 +44,10 @@ namespace DisplayLists
         }
 
         private static readonly VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[] {
-            new VertexPositionColorTexture(new Vector2(0.0f, 0.0f), Color4.Blue, new Vector2(0f, 1f)),
-            new VertexPositionColorTexture(new Vector2(400.0f, 0.0f), Color4.Blue, new Vector2(1f, 1f)),
-            new VertexPositionColorTexture(new Vector2(400.0f, 400.0f), Color4.Blue, new Vector2(1f, 0f)),
-            new VertexPositionColorTexture(new Vector2(0.0f, 400.0f), Color4.Blue, new Vector2(0f, 0f))
+            new VertexPositionColorTexture(new Vector2(0.0f, 0.0f), Color4.Blue, new Vector2(0f, 1f)), //LT
+            new VertexPositionColorTexture(new Vector2(400.0f, 0.0f), Color4.Blue, new Vector2(1f, 1f)), //RT
+            new VertexPositionColorTexture(new Vector2(400.0f, 400.0f), Color4.Blue, new Vector2(1f, 0f)), //RD
+            new VertexPositionColorTexture(new Vector2(0.0f, 400.0f), Color4.Blue, new Vector2(0f, 0f)) //LD
         };
 
         private static readonly int[] indexArray = new int[]

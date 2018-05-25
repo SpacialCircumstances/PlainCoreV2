@@ -43,16 +43,7 @@ namespace PlainCore.Graphics
                         if (currentBatchCount != 0)
                         {
                             //Flush
-                            VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[currentBatchCount * 4];
-                            for (int j = batchStart; j < currentBatchCount; j++)
-                            {
-                                var currentItem = renderItems[j];
-                                int vertexIndex = j * 4;
-                                vertexArray[vertexIndex] = currentItem.LT;
-                                vertexArray[vertexIndex + 1] = currentItem.RT;
-                                vertexArray[vertexIndex + 2] = currentItem.LD;
-                                vertexArray[vertexIndex + 3] = currentItem.RD;
-                            }
+                            VertexPositionColorTexture[] vertexArray = Flush(currentBatchCount, batchStart);
 
                             renderCallback.Invoke(vertexArray, texture);
 
@@ -67,19 +58,27 @@ namespace PlainCore.Graphics
                 }
 
                 //Flush
-                VertexPositionColorTexture[] vertexArray2 = new VertexPositionColorTexture[currentBatchCount * 4];
-                for (int j = batchStart; j < currentBatchCount; j++)
-                {
-                    var currentItem = renderItems[j];
-                    int vertexIndex = j * 4;
-                    vertexArray2[vertexIndex] = currentItem.LT;
-                    vertexArray2[vertexIndex + 1] = currentItem.RT;
-                    vertexArray2[vertexIndex + 2] = currentItem.LD;
-                    vertexArray2[vertexIndex + 3] = currentItem.RD;
-                }
+                VertexPositionColorTexture[] vertexArray2 = Flush(currentBatchCount, batchStart);
 
                 renderCallback.Invoke(vertexArray2, texture);
             }
+        }
+
+        protected VertexPositionColorTexture[] Flush(int currentBatchCount, int batchStart)
+        {
+            VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[currentBatchCount * 4];
+
+            for (int j = batchStart; j < currentBatchCount; j++)
+            {
+                var currentItem = renderItems[j];
+                int vertexIndex = j * 4;
+                vertexArray[vertexIndex] = currentItem.LT;
+                vertexArray[vertexIndex + 1] = currentItem.RT;
+                vertexArray[vertexIndex + 2] = currentItem.RD;
+                vertexArray[vertexIndex + 3] = currentItem.LD;
+            }
+
+            return vertexArray;
         }
 
         public static int[] GetIndices(int count)
@@ -95,12 +94,12 @@ namespace PlainCore.Graphics
             {
                 int offset = i;
                 int index = i + (i / 2);
-                indices[index] = offset;
+                indices[index] = offset + 0;
                 indices[index + 1] = offset + 1;
                 indices[index + 2] = offset + 2;
-                indices[index + 3] = offset + 1;
-                indices[index + 4] = offset + 3;
-                indices[index + 5] = offset + 2;
+                indices[index + 3] = offset + 0;
+                indices[index + 4] = offset + 2;
+                indices[index + 5] = offset + 3;
             }
 
             return indices;
