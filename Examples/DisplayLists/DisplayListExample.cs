@@ -18,16 +18,25 @@ namespace DisplayLists
             var rs = new TextureResourceSet(window);
             var t = Texture.FromFile("Example.png");
             var sprite = new Sprite(t, new Vector2(100, 100), 0f, new Vector2(200f, 200f));
+            var renderer = new SpriteRenderer();
+            var sprites = new List<SpriteRenderItem>();
+            var indices = SpriteRenderer.GetIndices(1);
+            sprites.Add(SpriteBatcher.Draw(sprite));
+            renderer.SetRenderItems(sprites.ToArray());
 
             while (window.IsOpen)
             {
                 window.Clear(Color4.Red);
 
                 window.PollEvents();
-                dl.SetIndices(indexArray);
-                dl.SetVertices(vertexArray);
-                rs.Texture = t;
-                dl.Draw(rs);
+
+                renderer.RenderToData((vertices, tex) =>
+                {
+                    dl.SetVertices(vertices);
+                    dl.SetIndices(indices);
+                    rs.Texture = tex;
+                    dl.Draw(rs);
+                });
 
                 window.Display();
             }

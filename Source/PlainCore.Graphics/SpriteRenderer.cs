@@ -65,6 +65,20 @@ namespace PlainCore.Graphics
 
                     currentBatchCount++;
                 }
+
+                //Flush
+                VertexPositionColorTexture[] vertexArray2 = new VertexPositionColorTexture[currentBatchCount * 4];
+                for (int j = batchStart; j < currentBatchCount; j++)
+                {
+                    var currentItem = renderItems[j];
+                    int vertexIndex = j * 4;
+                    vertexArray2[vertexIndex] = currentItem.LT;
+                    vertexArray2[vertexIndex + 1] = currentItem.RT;
+                    vertexArray2[vertexIndex + 2] = currentItem.LD;
+                    vertexArray2[vertexIndex + 3] = currentItem.RD;
+                }
+
+                renderCallback.Invoke(vertexArray2, texture);
             }
         }
 
@@ -77,10 +91,10 @@ namespace PlainCore.Graphics
 
             int[] indices = new int[count * 6];
 
-            for (int i = 0; i < (count / 4); i++)
+            for (int i = 0; i < count; i += 4)
             {
-                int offset = i * 4;
-                int index = i * 6;
+                int offset = i;
+                int index = i + (i / 2);
                 indices[index] = offset;
                 indices[index + 1] = offset + 1;
                 indices[index + 2] = offset + 2;
