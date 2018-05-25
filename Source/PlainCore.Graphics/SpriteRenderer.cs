@@ -12,7 +12,7 @@ namespace PlainCore.Graphics
 
         public void SetRenderItems(SpriteRenderItem[] renderItems, int index = 0)
         {
-            SetRenderItems(renderItems, index, renderItems.Length);
+            SetRenderItems(renderItems, index, renderItems.Length - index);
         }
 
         public void SetRenderItems(SpriteRenderItem[] renderItems, int index, int length)
@@ -33,6 +33,7 @@ namespace PlainCore.Graphics
         public PrimitiveType Primitive => PrimitiveType.Triangles;
 
         private ShaderPipeline internalShader;
+
         public ShaderPipeline Shader
         {
             get
