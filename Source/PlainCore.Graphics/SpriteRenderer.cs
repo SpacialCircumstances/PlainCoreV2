@@ -23,7 +23,7 @@ namespace PlainCore.Graphics
             Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount);
         }
 
-        public void RenderToData(Action<VertexPositionColorTexture[], int[], Texture> renderCallback)
+        public void RenderToData(Action<VertexPositionColorTexture[], Texture> renderCallback)
         {
             int index = renderItemsIndex;
             int count = renderItemsCount;
@@ -54,7 +54,7 @@ namespace PlainCore.Graphics
                                 vertexArray[vertexIndex + 3] = currentItem.RD;
                             }
 
-                            renderCallback.Invoke(vertexArray, null, texture);
+                            renderCallback.Invoke(vertexArray, texture);
 
                             currentBatchCount = 0;
                             batchStart = i;
@@ -66,6 +66,30 @@ namespace PlainCore.Graphics
                     currentBatchCount++;
                 }
             }
+        }
+
+        public static int[] GetIndices(int count)
+        {
+            if (count <= 0)
+            {
+                throw new ArgumentException(nameof(count));
+            }
+
+            int[] indices = new int[count * 6];
+
+            for (int i = 0; i < (count / 4); i++)
+            {
+                int offset = i * 4;
+                int index = i * 6;
+                indices[index] = offset;
+                indices[index + 1] = offset + 1;
+                indices[index + 2] = offset + 2;
+                indices[index + 3] = offset + 1;
+                indices[index + 4] = offset + 3;
+                indices[index + 5] = offset + 2;
+            }
+
+            return indices;
         }
 
         public uint VertexSize => VertexPositionColorTexture.Size;
