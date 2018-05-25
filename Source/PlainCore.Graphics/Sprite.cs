@@ -30,7 +30,7 @@ namespace PlainCore.Graphics
         protected Vector2 position = new Vector2();
         protected float rotation;
         protected Vector2 size = new Vector2();
-        protected Vector2 origin = new Vector2();
+        protected Vector2 origin = new Vector2(0.5f, 0.5f);
         protected Color4 color = Color4.White;
 
         public Vector2 Position { get => position; set => position = value; }
