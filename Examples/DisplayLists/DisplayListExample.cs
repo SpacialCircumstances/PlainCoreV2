@@ -1,6 +1,7 @@
 ﻿using PlainCore.Graphics;
 using PlainCore.Graphics.Core;
 using PlainCore.Graphics.Shapes;
+using PlainCore.Graphics.Text;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -19,8 +20,11 @@ namespace DisplayLists
             var t = Texture.FromFile("Example.png");
             var renderer = new SpriteRenderer();
             var sprites = new List<SpriteRenderItem>();
-            var indices = SpriteRenderer.GetIndices(1);
+            var description = new FontGenerator().GenerateFont("OpenSans-Regular.ttf", 40);
+            var font = Font.FromDescription(description);
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f, 200f, 200f, 0f));
+            sprites.AddRange(font.DrawString("Test", 400f, 400f, 1f));
+            var indices = SpriteRenderer.GetIndices(sprites.Count);
             renderer.SetRenderItems(sprites.ToArray());
 
             while (window.IsOpen)

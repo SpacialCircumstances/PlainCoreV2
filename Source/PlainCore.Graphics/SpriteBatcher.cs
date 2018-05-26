@@ -1,4 +1,5 @@
 ﻿using PlainCore.Graphics.Core;
+using PlainCore.Graphics.Text;
 using System;
 using System.Numerics;
 
@@ -102,6 +103,16 @@ namespace PlainCore.Graphics
                 RD = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, lowerY)),
                 Texture = texture.Texture
             };
+        }
+
+        public static SpriteRenderItem[] DrawString(Font font, string text, Color4 color, float x, float y, float scale = 1f)
+        {
+            return font.DrawString(text, color, x, y, scale);
+        }
+
+        public static SpriteRenderItem[] DrawString(Font font, string text, float x, float y, float scale = 1f)
+        {
+            return font.DrawString(text, x, y, scale);
         }
     }
 }
