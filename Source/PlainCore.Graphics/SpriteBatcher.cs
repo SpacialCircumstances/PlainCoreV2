@@ -68,10 +68,11 @@ namespace PlainCore.Graphics
                 return Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2);
             }
 
+
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
             float upperX = texX2 * texture.Rectangle.End.X;
+            float lowerY = texY2 * texture.Rectangle.End.Y; //LowerY and UpperY swapped because of image format
             float upperY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
-            float lowerY = texY2 * texture.Rectangle.End.Y;
 
             float sin = (float)Math.Sin(rotation);
             float cos = (float)Math.Cos(rotation);
@@ -84,21 +85,21 @@ namespace PlainCore.Graphics
             float ox = originX * width;
             float oy = originY * height;
 
-            var ldx = (-ox * m11) + (-oy * m12) + x;
-            var ldy = (-ox * m21) + (-oy * m22) + y;
-            var lux = (-ox * m11) + ((height - oy) * m12) + x;
-            var luy = (-ox * m21) + ((height - oy) * m22) + y;
-            var rux = ((width - ox) * m11) + (-oy * m12) + x;
-            var ruy = ((width - ox) * m21) + (-oy * m22) + y;
-            var rdx = ((width - ox) * m11) + ((height - oy) * m12) + x;
-            var rdy = ((width - ox) * m21) + ((height - oy) * m22) + y;
+            var ldx = (-ox * m11) + (-oy * m12) + (2 * x);
+            var ldy = (-ox * m21) + (-oy * m22) + (2 * y);
+            var lux = (-ox * m11) + ((height - oy) * m12) + (2 * x);
+            var luy = (-ox * m21) + ((height - oy) * m22) + (2 * y);
+            var rux = ((width - ox) * m11) + (-oy * m12) + (2 * x);
+            var ruy = ((width - ox) * m21) + (-oy * m22) + (2 * y);
+            var rdx = ((width - ox) * m11) + ((height - oy) * m12) + (2 * x);
+            var rdy = ((width - ox) * m21) + ((height - oy) * m22) + (2 * y);
 
             return new SpriteRenderItem()
             {
-                LT = new VertexPositionColorTexture(new Vector2(ldx, ldy), color, new Vector2(lowerX, lowerY)),
-                RT = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, upperY)),
-                LD = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(lowerX, upperY)),
-                RD = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(upperX, lowerY)),
+                LD = new VertexPositionColorTexture(new Vector2(ldx, ldy), color, new Vector2(lowerX, lowerY)),
+                LT = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(lowerX, upperY)),
+                RT = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(upperX, upperY)),
+                RD = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, lowerY)),
                 Texture = texture.Texture
             };
         }

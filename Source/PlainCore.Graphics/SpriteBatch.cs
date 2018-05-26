@@ -135,10 +135,10 @@ namespace PlainCore.Graphics
             float lowerY = texture.Rectangle.Position.Y + (texY1 * texture.Rectangle.End.Y);
             float upperY = texY2 * texture.Rectangle.End.Y;
 
-            PushVertex(x, y + h, color, lowerX, lowerY);
-            PushVertex(x + w, y + h, color, upperX, lowerY);
-            PushVertex(x, y, color, lowerX, upperY);
-            PushVertex(x + w, y, color, upperX, upperY);
+            PushVertex(x, y + h, color, lowerX, lowerY); //LT
+            PushVertex(x + w, y + h, color, upperX, lowerY); //RT
+            PushVertex(x, y, color, lowerX, upperY); //LD
+            PushVertex(x + w, y, color, upperX, upperY); //RD
 
             geometryCount += 4;
             index += 6;
@@ -178,10 +178,10 @@ namespace PlainCore.Graphics
             var rdx = ((width - ox) * m11) + ((height - oy) * m12) + x;
             var rdy = ((width - ox) * m21) + ((height - oy) * m22) + y;
 
-            PushVertex(ldx, ldy, color, lowerX, lowerY);
-            PushVertex(rux, ruy, color, upperX, lowerY);
-            PushVertex(rdx, rdy, color, upperX, upperY);
-            PushVertex(lux, luy, color, lowerX, upperY);
+            PushVertex(ldx, ldy, color, lowerX, lowerY); //LT
+            PushVertex(rux, ruy, color, upperX, lowerY); //RT
+            PushVertex(rdx, rdy, color, upperX, upperY); //LD
+            PushVertex(lux, luy, color, lowerX, upperY); //RD
 
             geometryCount += 4;
             index += 6;
