@@ -31,7 +31,7 @@ namespace PlainCore.Graphics
             unsafe
             {
                 Texture texture = null;
-                int currentBatchCount = 0;
+                int currentBatchCount = 0; //Number of SRIs in current batch
                 int batchStart = 0;
 
                 for (int i = index; i < count; i++)
@@ -68,9 +68,9 @@ namespace PlainCore.Graphics
         {
             VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[currentBatchCount * 4];
 
-            for (int j = batchStart; j < currentBatchCount; j++)
+            for (int j = 0; j < currentBatchCount; j++)
             {
-                var currentItem = renderItems[j];
+                var currentItem = renderItems[j + batchStart];
                 int vertexIndex = j * 4;
                 vertexArray[vertexIndex] = currentItem.LT;
                 vertexArray[vertexIndex + 1] = currentItem.RT;

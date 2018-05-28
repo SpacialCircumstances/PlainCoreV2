@@ -15,15 +15,18 @@ namespace DisplayLists
         {
             var window = new RenderWindow();
 
-            var dl = new StreamDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
+            var dl = new DynamicDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
             var rs = new TextureResourceSet(window);
             var t = Texture.FromFile("Example.png");
             var renderer = new SpriteRenderer();
             var sprites = new List<SpriteRenderItem>();
             var description = new FontGenerator().GenerateFont("OpenSans-Regular.ttf", 40);
             var font = Font.FromDescription(description);
-            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f, 200f, 200f, 0f));
-            var glyphs = font.DrawString("ASDF", 400f, 400f, 1f);
+            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 0f, 0f));
+            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f));
+            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 200f, 200f));
+            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 400f, 400f));
+            var glyphs = font.DrawString("ASDF", 500f, 400f, 1f);
             sprites.AddRange(glyphs);
             var indices = SpriteRenderer.GetIndices(sprites.Count);
             renderer.SetRenderItems(sprites.ToArray());
