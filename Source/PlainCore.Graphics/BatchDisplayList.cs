@@ -56,7 +56,7 @@ namespace PlainCore.Graphics
         {
             this.elementCount = elementCount;
             indexBuffer.Bind();
-            indexBuffer.ReplaceData(indices, IntPtr.Zero);
+            indexBuffer.CopyData(indices);
             indexBuffer.Unbind();
         }
 
