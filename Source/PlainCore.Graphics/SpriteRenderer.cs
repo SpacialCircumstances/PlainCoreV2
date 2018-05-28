@@ -90,7 +90,7 @@ namespace PlainCore.Graphics
 
             int[] indices = new int[count * 6];
 
-            for (int i = 0; i < count; i += 4)
+            for (int i = 0; i < count * 4; i += 4)
             {
                 int offset = i;
                 int index = i + (i / 2);
