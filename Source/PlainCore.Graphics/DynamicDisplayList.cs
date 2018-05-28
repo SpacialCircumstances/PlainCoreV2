@@ -28,9 +28,14 @@ namespace PlainCore.Graphics
 
         public void SetIndices(int[] indices)
         {
-            elements = indices.Length;
+            SetIndices(indices, indices.Length);
+        }
+
+        public void SetIndices(int[] indices, int elementCount)
+        {
+            elements = elementCount;
             indexBuffer.Bind();
-            indexBuffer.CopyData(indices);
+            indexBuffer.ReplaceData(indices, IntPtr.Zero);
             indexBuffer.Unbind();
         }
 

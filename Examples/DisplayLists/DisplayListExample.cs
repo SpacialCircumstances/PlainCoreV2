@@ -23,20 +23,21 @@ namespace DisplayLists
             var description = new FontGenerator().GenerateFont("OpenSans-Regular.ttf", 40);
             var font = Font.FromDescription(description);
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f, 200f, 200f, 0f));
-            sprites.AddRange(font.DrawString("Test", 400f, 400f, 1f));
+            var glyphs = font.DrawString("ASDF", 400f, 400f, 1f);
+            sprites.AddRange(glyphs);
             var indices = SpriteRenderer.GetIndices(sprites.Count);
             renderer.SetRenderItems(sprites.ToArray());
 
             while (window.IsOpen)
             {
-                window.Clear(Color4.Red);
+                window.Clear(Color4.Black);
 
                 window.PollEvents();
 
                 renderer.RenderToData((vertices, tex) =>
                 {
                     dl.SetVertices(vertices);
-                    dl.SetIndices(indices);
+                    dl.SetIndices(indices, vertices.Length + (vertices.Length / 2));
                     rs.Texture = tex;
                     dl.Draw(rs);
                 });

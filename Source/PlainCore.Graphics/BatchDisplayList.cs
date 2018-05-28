@@ -49,14 +49,14 @@ namespace PlainCore.Graphics
 
         public void SetIndices(int[] indices)
         {
-            if (indices == null)
-            {
-                throw new ArgumentNullException();
-            }
+            SetIndices(indices, indices.Length);
+        }
 
-            elementCount = indices.Length;
+        public void SetIndices(int[] indices, int elementCount)
+        {
+            this.elementCount = elementCount;
             indexBuffer.Bind();
-            indexBuffer.CopyData(indices);
+            indexBuffer.ReplaceData(indices, IntPtr.Zero);
             indexBuffer.Unbind();
         }
 
