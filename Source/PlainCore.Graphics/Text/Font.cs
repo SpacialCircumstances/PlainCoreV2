@@ -1,25 +1,21 @@
 ﻿using PlainCore.Graphics.Core;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlainCore.Graphics.Text
 {
     public class Font: IDisposable
     {
-        public static Font FromFile(string filename)
+        public static Font FromDescriptionFile(string filename)
         {
-            var bmfont = LoadableBitmapFont.LoadFromFile(filename);
-            var description = bmfont.CreateDescription();
-            return new Font(description);
+            return new Font(FontDescription.FromDescriptionFile(filename));
         }
 
-        public static Font FromDescription(FontDescription description)
+        public static Font GenerateFromFont(string fontFileName, uint fontSize)
         {
-            return new Font(description);
+            return new Font(FontGenerator.GenerateFont(fontFileName, fontSize));
         }
 
-        protected Font(FontDescription description)
+        public Font(FontDescription description)
         {
             this.texture = Texture.FromImage(description.Bitmap);
             this.description = description;

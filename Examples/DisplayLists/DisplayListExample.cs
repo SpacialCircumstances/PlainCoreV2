@@ -21,7 +21,7 @@ namespace DisplayLists
             var renderer = new SpriteRenderer();
             var sprites = new List<SpriteRenderItem>();
             var description = FontGenerator.GenerateFont("OpenSans-Regular.ttf", 40);
-            var font = Font.FromDescription(description);
+            var font = new Font(description);
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 0f, 0f));
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f));
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 200f, 200f));

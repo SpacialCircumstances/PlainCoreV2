@@ -64,7 +64,7 @@ namespace PlainCore.Graphics.Text
                 }
             });
 
-            return new FontDescription(bitmap, glyphs, fontSize);
+            return new FontDescription(bitmap, fontSize, glyphs);
         }
 
         private static unsafe Image<Rgba32> RenderGlyph(FontFace face, char character, int size)

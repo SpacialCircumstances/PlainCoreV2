@@ -1,42 +1,61 @@
-﻿using SixLabors.ImageSharp;
+﻿using Newtonsoft.Json;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
-using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PlainCore.Graphics.Text
 {
     public class FontDescription
     {
-        private readonly Dictionary<char, GlyphLayout> glyphs;
-
-        public FontDescription(Image<Rgba32> bitmap, Dictionary<char, GlyphLayout> glyphs, uint fontSize)
+        public static FontDescription FromDescriptionFile(string filename)
         {
-            this.Bitmap = bitmap;
-            this.glyphs = glyphs;
-            this.FontSize = fontSize;
+            string content = File.ReadAllText(filename);
+            var fontDescription = JsonConvert.DeserializeObject<FontDescription>(content);
+            fontDescription.LoadImage();
+            return fontDescription;
         }
 
-        public uint FontSize { get; }
-        public Image<Rgba32> Bitmap { get; }
+        public FontDescription(Image<Rgba32> image, uint fontSize, Dictionary<char, GlyphLayout> glyphs)
+        {
+            Bitmap = image;
+            FontSize = fontSize;
+            this.glyphs = glyphs;
+        }
+
+        public FontDescription(string imageFile, uint fontSize, Dictionary<char, GlyphLayout> glyphs)
+        {
+            ImageFile = imageFile;
+            LoadImage();
+            FontSize = fontSize;
+            this.glyphs = glyphs;
+        }
+
+        public string ImageFile { get; private set; }
+
+        [JsonIgnore]
+        public Image<Rgba32> Bitmap { get; private set; }
+
+        public uint FontSize { get; private set; }
+
+        protected Dictionary<char, GlyphLayout> glyphs;
 
         public GlyphLayout GetGlyph(char c)
         {
-            var found = glyphs.TryGetValue(c, out var glyph);
-
-            if (!found)
-            {
-                throw new ArgumentException($"Character {c} not found in Font");
-            }
-
-            return glyph;
+            return glyphs[c];
         }
 
-        public GlyphLayout this[char c]
+        public void Save(string fileName, string imageFileName)
         {
-            get
-            {
-                return GetGlyph(c);
-            }
+            ImageFile = imageFileName;
+            Bitmap.Save(imageFileName);
+            string json = JsonConvert.SerializeObject(this);
+            File.WriteAllText(fileName, json);
+        }
+
+        protected void LoadImage()
+        {
+            Bitmap = Image.Load(ImageFile);
         }
     }
 }
