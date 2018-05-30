@@ -10,12 +10,12 @@ using System.Runtime.InteropServices;
 
 namespace PlainCore.Graphics.Text
 {
-    public class FontGenerator
+    public static class FontGenerator
     {
         private const int MAX_BITMAP_WIDTH = 1024;
         private const int HORIZONTAL_OFFSET = 2; //Reduces artifacts when scaling up
 
-        public FontDescription GenerateFont(string fontFileName, uint fontSize, int lowerChar = 33, int upperChar = 127)
+        public static FontDescription GenerateFont(string fontFileName, uint fontSize, int lowerChar = 33, int upperChar = 127)
         {
             var font = new FontFace(File.OpenRead(fontFileName));
 
@@ -67,7 +67,7 @@ namespace PlainCore.Graphics.Text
             return new FontDescription(bitmap, glyphs, fontSize);
         }
 
-        protected unsafe Image<Rgba32> RenderGlyph(FontFace face, char character, int size)
+        private static unsafe Image<Rgba32> RenderGlyph(FontFace face, char character, int size)
         {
             var glyph = face.GetGlyph(character, size);
             var (w, h) = GetGlyphSize(face, character, size);
@@ -95,13 +95,13 @@ namespace PlainCore.Graphics.Text
             return Image.LoadPixelData<Rgba32>(pixelData, w, h);
         }
 
-        protected (int, int) GetGlyphSize(FontFace face, char character, int size)
+        private static (int, int) GetGlyphSize(FontFace face, char character, int size)
         {
             var glyph = face.GetGlyph(character, size);
             return (glyph.RenderWidth, glyph.RenderHeight);
         }
 
-        private byte[] ConvertToPixels(byte[] rawData)
+        private static byte[] ConvertToPixels(byte[] rawData)
         {
             var len = rawData.Length;
             var pixelData = new byte[len * 4];

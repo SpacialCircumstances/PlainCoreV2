@@ -20,7 +20,7 @@ namespace DisplayLists
             var t = Texture.FromFile("Example.png");
             var renderer = new SpriteRenderer();
             var sprites = new List<SpriteRenderItem>();
-            var description = new FontGenerator().GenerateFont("OpenSans-Regular.ttf", 40);
+            var description = FontGenerator.GenerateFont("OpenSans-Regular.ttf", 40);
             var font = Font.FromDescription(description);
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 0f, 0f));
             sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f));
