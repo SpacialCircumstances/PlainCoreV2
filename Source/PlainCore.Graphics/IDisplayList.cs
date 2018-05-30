@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
-    public interface IDisplayList
+    public interface IDisplayList: IDisposable
     {
         void Draw(IResourceSet resourceSet);
     }

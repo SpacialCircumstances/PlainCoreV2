@@ -20,5 +20,10 @@ namespace PlainCore.Graphics
         }
 
         public abstract void Draw(IResourceSet resourceSet);
+
+        public virtual void Dispose()
+        {
+            pipeline.Dispose();
+        }
     }
 }

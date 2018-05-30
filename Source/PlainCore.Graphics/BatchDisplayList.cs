@@ -103,5 +103,12 @@ namespace PlainCore.Graphics
             vertexArrayBuffer.ReplaceData(pointer, (uint)length, IntPtr.Zero);
             vertexArrayBuffer.Unbind();
         }
+
+        public override void Dispose()
+        {
+            vertexArrayBuffer.Dispose();
+            indexBuffer.Dispose();
+            vertexArrayObject.Dispose();
+        }
     }
 }

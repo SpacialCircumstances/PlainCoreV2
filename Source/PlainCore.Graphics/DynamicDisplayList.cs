@@ -82,5 +82,12 @@ namespace PlainCore.Graphics
             vertexArrayBuffer.CopyRawData(pointer, (uint)length);
             vertexArrayBuffer.Unbind();
         }
+
+        public override void Dispose()
+        {
+            vertexArrayBuffer.Dispose();
+            indexBuffer.Dispose();
+            vertexArrayObject.Dispose();
+        }
     }
 }

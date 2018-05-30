@@ -42,5 +42,12 @@ namespace PlainCore.Graphics
             vertexArrayObject.Unbind();
             pipeline.Unbind();
         }
+
+        public override void Dispose()
+        {
+            vertexArrayBuffer.Dispose();
+            indexBuffer.Dispose();
+            vertexArrayObject.Dispose();
+        }
     }
 }
