@@ -18,10 +18,12 @@ namespace RenderTarget
         RenderTexture renderTexture;
         bool renderTargetDrawn = false;
         Viewport normal = new Viewport(0, 600, 800, 0);
-        SpriteBatch batch;
+        SpriteRenderer spriteRenderer;
         float rotation;
         Framebuffer defaultFramebuffer;
         RenderWindow window;
+        DynamicDisplayList<VertexPositionColorTexture> spriteDisplayList;
+        TextureResourceSet resourceSet;
 
         public void Run()
         {
@@ -57,8 +59,10 @@ namespace RenderTarget
             vao.Unbind();
             vab.Unbind();
 
-            batch = new SpriteBatch();
+            spriteRenderer = new SpriteRenderer();
             defaultFramebuffer = Framebuffer.GetDefault();
+            spriteDisplayList = new DynamicDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
+            resourceSet = new TextureResourceSet(window);
         }
 
         private void Draw()
@@ -77,14 +81,21 @@ namespace RenderTarget
                 var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
                 image.Save("Screenshot.png");
                 renderTargetDrawn = true;
+                var sprite = SpriteBatcher.Draw(renderTexture, 0f, 0f);
+                spriteRenderer.SetRenderItems(new SpriteRenderItem[]{ sprite });
+                spriteRenderer.RenderToData((data, tex) =>
+                {
+                    spriteDisplayList.SetVertices(data);
+                    spriteDisplayList.SetIndices(SpriteRenderer.GetIndices(1));
+                    resourceSet.Texture = tex;
+                });
             }
+
             defaultFramebuffer.Bind();
             normal.Set();
 
             rotation += 0.001f;
-            batch.Begin(window);
-            batch.Draw(renderTexture, Color4.White, 300f, 500f, 100f, 200f, rotation);
-            batch.End();
+            spriteDisplayList.Draw(resourceSet);
         }
 
         private readonly VertexPositionColor[] vertices = new VertexPositionColor[]
