@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlainCore.Graphics.Text
 {
-    public class Font
+    public class Font: IDisposable
     {
         public static Font FromFile(string filename)
         {
@@ -53,6 +53,11 @@ namespace PlainCore.Graphics.Text
             }
 
             return renderItems;
+        }
+
+        public void Dispose()
+        {
+            texture.Dispose();
         }
     }
 }
