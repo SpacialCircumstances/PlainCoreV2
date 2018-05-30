@@ -8,7 +8,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace PlainCore.Graphics
 {
-    public class Texture : ITexture, IUniform
+    public class Texture : ITexture, IUniform, IDisposable
     {
         public static Texture FromFile(string filename, bool repeated = false)
         {
@@ -67,6 +67,11 @@ namespace PlainCore.Graphics
             deviceTexture.Bind();
             deviceTexture.Set(pipeline);
             deviceTexture.Unbind();
+        }
+
+        public void Dispose()
+        {
+            deviceTexture.Dispose();
         }
     }
 }
