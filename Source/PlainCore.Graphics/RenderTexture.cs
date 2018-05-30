@@ -7,7 +7,7 @@ using PlainCore.System;
 
 namespace PlainCore.Graphics
 {
-    public class RenderTexture : ITexture, IRenderTarget
+    public class RenderTexture : ITexture, IRenderTarget, IDisposable
     {
         public RenderTexture(int width, int height)
         {
@@ -51,6 +51,13 @@ namespace PlainCore.Graphics
         public void Clear(Color4 color)
         {
             framebuffer.Clear(color);
+        }
+
+        public void Dispose()
+        {
+            depthBuffer.Dispose();
+            framebuffer.Dispose();
+            texture.Dispose(); //Disposes deviceTexture as well
         }
     }
 }
