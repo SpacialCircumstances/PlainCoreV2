@@ -1,9 +1,10 @@
 ﻿using OpenGL;
 using PlainCore.Graphics.Core;
+using System;
 
 namespace PlainCore.Graphics
 {
-    public interface IRenderPipelineSettings
+    public interface IRenderPipelineSettings: IDisposable
     {
         uint VertexSize { get; }
 

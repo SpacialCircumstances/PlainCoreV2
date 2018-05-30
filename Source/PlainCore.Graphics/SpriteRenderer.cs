@@ -105,6 +105,11 @@ namespace PlainCore.Graphics
             return indices;
         }
 
+        public void Dispose()
+        {
+            internalShader?.Dispose();
+        }
+
         public uint VertexSize => VertexPositionColorTexture.Size;
 
         public PrimitiveType Primitive => PrimitiveType.Triangles;

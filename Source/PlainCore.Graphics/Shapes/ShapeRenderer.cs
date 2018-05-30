@@ -67,6 +67,11 @@ namespace PlainCore.Graphics.Shapes
             return (vertices.ToArray(), indices.ToArray());
         }
 
+        public void Dispose()
+        {
+            internalShader?.Dispose();
+        }
+
         public uint VertexSize => VertexPositionColor.Size;
 
         public PrimitiveType Primitive => PrimitiveType.Triangles;
