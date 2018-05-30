@@ -37,6 +37,14 @@ namespace HelloWorld
 
                 window.Display();
             }
+
+            pipeline.Dispose();
+            vao.Dispose();
+            buffer.Dispose();
+            indexBuffer.Dispose();
+            texture.Dispose();
+            defaultFramebuffer.Dispose();
+            window.Dispose();
         }
 
         protected void Setup()

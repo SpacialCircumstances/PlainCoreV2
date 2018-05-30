@@ -41,6 +41,14 @@ namespace RenderTarget
 
                 window.Display();
             }
+
+            vab.Dispose();
+            vao.Dispose();
+            pipeline.Dispose();
+            renderTexture.Dispose();
+            spriteRenderer.Dispose();
+            spriteDisplayList.Dispose();
+            window.Dispose();
         }
 
         private void Setup()

@@ -48,6 +48,9 @@ namespace DisplayLists
                 window.Display();
             }
 
+            dl.Dispose();
+            font.Dispose();
+            renderer.Dispose();
             window.Dispose();
         }
 
