@@ -5,6 +5,11 @@ namespace PlainCore.Graphics
 {
     public class StreamDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T: struct
     {
+        public static StreamDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)
+        {
+            return new StreamDisplayList<T>(pipelineSettings.VertexSize, pipelineSettings.Primitive, 1024, 1024, pipelineSettings.Shader, pipelineSettings.VertexAttributes);
+        }
+
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;
         private readonly VertexArrayObject<T> vertexArrayObject;

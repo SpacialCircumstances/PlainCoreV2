@@ -5,6 +5,11 @@ namespace PlainCore.Graphics
 {
     public class DynamicDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
+        public static DynamicDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)
+        {
+            return new DynamicDisplayList<T>(pipelineSettings.VertexSize, pipelineSettings.Primitive, pipelineSettings.Shader, pipelineSettings.VertexAttributes);
+        }
+
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;
         private readonly VertexArrayObject<T> vertexArrayObject;

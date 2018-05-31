@@ -7,6 +7,11 @@ namespace PlainCore.Graphics
 {
     public class BatchDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
+        public static BatchDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)
+        {
+            return new BatchDisplayList<T>(pipelineSettings.VertexSize, 1024, pipelineSettings.Primitive, pipelineSettings.Shader, pipelineSettings.VertexAttributes);
+        }
+
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;
         private readonly IndexBuffer<T> indexBuffer;
         private readonly VertexArrayObject<T> vertexArrayObject;
