@@ -23,6 +23,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using PlainCore.System;
 using System;
 using System.IO;
 using System.Reflection;
@@ -2073,12 +2074,13 @@ namespace GLFWDotNet
             {
                 //Modified from original source code:
                 //Use OS + actual architecture for finding native library
+                //Use GLFW search path to configure the location of the GLFW folders
                 var arch = RuntimeInformation.ProcessArchitecture.ToString();
                 string os;
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) os = "Windows";
                 else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) os = "OSX";
                 else os = "Linux";
-                this.LoadUnmanagedDllFromPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), os, arch, Library));
+                LoadUnmanagedDllFromPath(Path.Combine(PlainCoreSettings.GlfwSearchPath, os, arch, Library));
             }
 
             protected override Assembly Load(AssemblyName assemblyName) => null;

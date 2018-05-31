@@ -2,8 +2,10 @@
 using PlainCore.Graphics.Core;
 using PlainCore.Graphics.Shapes;
 using PlainCore.Graphics.Text;
+using PlainCore.System;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
 
@@ -13,6 +15,7 @@ namespace DisplayLists
     {
         public void Run()
         {
+            PlainCoreSettings.GlfwSearchPath = Path.GetFullPath("../../../../../Native/");
             var window = new RenderWindow();
 
             var dl = new DynamicDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);

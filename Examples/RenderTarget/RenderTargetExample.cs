@@ -1,9 +1,11 @@
 ﻿using PlainCore.Graphics;
 using PlainCore.Graphics.Core;
+using PlainCore.System;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
 using System.Text;
 
@@ -27,6 +29,8 @@ namespace RenderTarget
 
         public void Run()
         {
+            PlainCoreSettings.GlfwSearchPath = Path.GetFullPath("../../../../../Native/");
+
             window = new RenderWindow();
 
             Setup();

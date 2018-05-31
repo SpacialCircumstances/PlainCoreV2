@@ -1,8 +1,10 @@
 ﻿using PlainCore.Graphics;
 using PlainCore.Graphics.Core;
+using PlainCore.System;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
+using System.IO;
 using System.Numerics;
 using System.Text;
 
@@ -22,6 +24,8 @@ namespace HelloWorld
 
         public void Run()
         {
+            PlainCoreSettings.GlfwSearchPath = Path.GetFullPath("../../../../../Native/");
+
             var window = new RenderWindow();
             window.OnClosed += () => Console.WriteLine("Closed!");
 
