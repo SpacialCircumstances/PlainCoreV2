@@ -25,6 +25,11 @@ namespace PlainCore.Graphics
 
         public override void Draw(IResourceSet resourceSet)
         {
+            Draw(resourceSet, elementCount);
+        }
+
+        public override void Draw(IResourceSet resourceSet, int elements)
+        {
             pipeline.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();
@@ -35,7 +40,7 @@ namespace PlainCore.Graphics
                 uniform.Set(pipeline);
             }
 
-            indexBuffer.DrawIndexed(vertexArrayBuffer, elementCount);
+            indexBuffer.DrawIndexed(vertexArrayBuffer, elements);
 
             vertexArrayBuffer.Unbind();
             indexBuffer.Unbind();

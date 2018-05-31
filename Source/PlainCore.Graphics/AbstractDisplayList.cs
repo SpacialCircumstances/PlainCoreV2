@@ -20,6 +20,7 @@ namespace PlainCore.Graphics
         }
 
         public abstract void Draw(IResourceSet resourceSet);
+        public abstract void Draw(IResourceSet resourceSet, int elements);
 
         public virtual void Dispose()
         {

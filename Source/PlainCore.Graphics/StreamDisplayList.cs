@@ -52,6 +52,11 @@ namespace PlainCore.Graphics
 
         public override void Draw(IResourceSet resourceSet)
         {
+            Draw(resourceSet, elements);
+        }
+
+        public override void Draw(IResourceSet resourceSet, int elements)
+        {
             pipeline.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();
