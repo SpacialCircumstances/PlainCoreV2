@@ -18,6 +18,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="shaders">The shaders</param>
         public ShaderPipeline(List<ShaderResource> shaders)
         {
+            if (shaders == null) throw new ArgumentNullException(nameof(shaders));
             Handle = Gl.CreateProgram();
             Verify.VerifyResourceCreated(Handle);
             UploadShaders(shaders.ToArray());
@@ -29,6 +30,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="shaders">The shaders</param>
         public ShaderPipeline(params ShaderResource[] shaders)
         {
+            if (shaders == null) throw new ArgumentNullException(nameof(shaders));
             Handle = Gl.CreateProgram();
             Verify.VerifyResourceCreated(Handle);
             UploadShaders(shaders);

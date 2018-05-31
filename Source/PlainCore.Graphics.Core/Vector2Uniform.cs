@@ -39,6 +39,7 @@ namespace PlainCore.Graphics.Core
 
         public void Set(ShaderPipeline pipeline)
         {
+            if (pipeline == null) throw new ArgumentNullException(nameof(pipeline));
             Gl.Uniform2f(pipeline.GetUniformLocation(name), 1, ref vector);
         }
     }

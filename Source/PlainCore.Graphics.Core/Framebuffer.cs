@@ -63,6 +63,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="texture">The texture to attach.</param>
         public void AttachTexture(DeviceTexture texture)
         {
+            if (texture == null) throw new ArgumentNullException(nameof(texture));
             texture.Bind();
             Gl.FramebufferTexture(FramebufferTarget.Framebuffer, FramebufferAttachment.ColorAttachment0, texture.Handle, 0);
             texture.Unbind();
@@ -74,6 +75,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="depthBuffer"></param>
         public void AttachDepthBuffer(DepthBuffer depthBuffer)
         {
+            if (depthBuffer == null) throw new ArgumentNullException(nameof(depthBuffer));
             depthBuffer.Bind();
             Gl.FramebufferRenderbuffer(FramebufferTarget.Framebuffer, FramebufferAttachment.DepthAttachment, RenderbufferTarget.Renderbuffer, depthBuffer.Handle);
             depthBuffer.Unbind();

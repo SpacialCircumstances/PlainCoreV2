@@ -41,6 +41,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData(T[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferData(BufferTarget.ArrayBuffer, (this.vertexSize * (uint)data.Length), data, usage);
         }
 
@@ -65,6 +66,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyRawData(byte[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferData(BufferTarget.ArrayBuffer, (uint)data.Length, data, usage);
         }
 
@@ -75,6 +77,7 @@ namespace PlainCore.Graphics.Core
 
         public void ReplaceData(byte[] data, IntPtr offset)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferSubData(BufferTarget.ArrayBuffer, offset, (uint)data.Length, data);
         }
 
@@ -85,6 +88,7 @@ namespace PlainCore.Graphics.Core
 
         public void ReplaceData(T[] data, IntPtr offset)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferSubData(BufferTarget.ArrayBuffer, offset, vertexSize * (uint)data.Length, data);
         }
     }

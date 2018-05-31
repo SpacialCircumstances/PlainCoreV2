@@ -50,6 +50,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData(byte[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             SetParameters();
 
             Gl.TexImage2D(TextureTarget.Texture2d, 0, InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
@@ -95,6 +96,7 @@ namespace PlainCore.Graphics.Core
         /// <param name="pipeline">The shader used for drawing</param>
         public void Set(ShaderPipeline pipeline)
         {
+            if (pipeline == null) throw new ArgumentNullException(nameof(pipeline));
             Gl.ActiveTexture(TextureUnit.Texture0);
             Bind();
             Gl.Uniform1(pipeline.GetUniformLocation(name), 0);
@@ -108,6 +110,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyRawData(byte[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             CopyData(data);
         }
 

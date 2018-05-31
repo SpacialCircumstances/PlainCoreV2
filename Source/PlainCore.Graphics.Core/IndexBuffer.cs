@@ -30,6 +30,7 @@ namespace PlainCore.Graphics.Core
 
         public void CopyData(int[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)data.Length * sizeof(int), data, usage);
         }
 
@@ -50,11 +51,14 @@ namespace PlainCore.Graphics.Core
         /// <param name="elements">Number of elements to draw</param>
         public void DrawIndexed(VertexArrayBuffer<T> buffer, int elements)
         {
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+            if (elements <= 0) throw new ArgumentOutOfRangeException(nameof(elements));
             Gl.DrawElements(buffer.Primitive, elements, DrawElementsType.UnsignedInt, null);
         }
 
         public void CopyRawData(byte[] data)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferData(BufferTarget.ElementArrayBuffer, (uint)data.Length, data, usage);
         }
 
@@ -65,6 +69,7 @@ namespace PlainCore.Graphics.Core
 
         public void ReplaceData(byte[] data, IntPtr offset)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferSubData(BufferTarget.ElementArrayBuffer, offset, (uint)data.Length, data);
         }
 
@@ -75,6 +80,7 @@ namespace PlainCore.Graphics.Core
 
         public void ReplaceData(int[] data, IntPtr offset)
         {
+            if (data == null) throw new ArgumentNullException(nameof(data));
             Gl.BufferSubData(BufferTarget.ElementArrayBuffer, offset, sizeof(int) * (uint)data.Length, data);
         }
     }
