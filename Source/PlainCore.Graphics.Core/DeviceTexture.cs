@@ -60,6 +60,17 @@ namespace PlainCore.Graphics.Core
             }
         }
 
+        public void ReplaceData(byte[] data, int xOffset, int yOffset, int width, int height)
+        {
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            Gl.TexSubImage2D(TextureTarget.Texture2d, 0, xOffset, yOffset, width, height, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+        }
+
+        public void ReplaceData(IntPtr data, int xOffset, int yOffset, int width, int height)
+        {
+            Gl.TexSubImage2D(TextureTarget.Texture2d, 0, xOffset, yOffset, width, height, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+        }
+
         protected void SetParameters()
         {
             if (repeated)
