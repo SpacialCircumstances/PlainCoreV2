@@ -71,10 +71,13 @@ namespace PlainCore.Window
             GLFW.SwapBuffers(Handle);
         }
 
-        public Vector2 GetPosition()
+        public Vector2 Position
         {
-            GLFW.GetWindowPos(Handle, out int x, out int y);
-            return new Vector2(x, y);
+            get
+            {
+                GLFW.GetWindowPos(Handle, out int x, out int y);
+                return new Vector2(x, y);
+            }
         }
 
         public void PollEvents()
@@ -195,7 +198,7 @@ namespace PlainCore.Window
             GLFW.Terminate();
         }
 
-        protected void Error(int i, string error)
+        protected static void Error(int i, string error)
         {
             throw new Exception($"GLFW error {i}: {error}");
         }

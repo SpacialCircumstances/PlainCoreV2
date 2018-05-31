@@ -66,6 +66,6 @@ namespace PlainCore.Window
         /// Gets the global position in relation to the screen.
         /// </summary>
         /// <returns>The position of the window</returns>
-        Vector2 GetPosition();
+        Vector2 Position { get; }
     }
 }
