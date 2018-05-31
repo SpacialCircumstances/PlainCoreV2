@@ -114,7 +114,7 @@ namespace PlainCore.Graphics
                 var translationMatrix = Matrix4x4.CreateTranslation(position.X - (size.X / 2), position.Y - (size.Y / 2), 0f);
                 worldMatrix = translationMatrix * projectionMatrix * rotationMatrix;
                 var success = Matrix4x4.Invert(worldMatrix, out inverseWorldMatrix);
-                if (!success) throw new ArgumentException("Unable to compute inverse matrix");
+                if (!success) inverseWorldMatrix = Matrix4x4.Identity; //At least it does not crash anything
             }
 
             return worldMatrix;
