@@ -7,7 +7,7 @@ namespace PlainCore.Graphics
 {
     public class TextureAtlas
     {
-        public TextureAtlas LoadFromFile(string atlasFile)
+        public static TextureAtlas LoadFromFile(string atlasFile)
         {
             string json = File.ReadAllText(atlasFile);
             var atlas = JsonConvert.DeserializeObject<TextureAtlasData>(json);
