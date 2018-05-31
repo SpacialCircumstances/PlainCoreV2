@@ -13,19 +13,19 @@ namespace RenderTarget
 {
     public class RenderTargetExample
     {
-        VertexArrayBuffer<VertexPositionColor> vab;
-        VertexArrayObject<VertexPositionColor> vao;
-        ShaderPipeline pipeline;
-        Matrix4fUniform worldMatrix;
-        RenderTexture renderTexture;
-        bool renderTargetDrawn = false;
-        Viewport normal = new Viewport(0, 600, 800, 0);
-        SpriteRenderer spriteRenderer;
-        float rotation;
-        Framebuffer defaultFramebuffer;
-        RenderWindow window;
-        DynamicDisplayList<VertexPositionColorTexture> spriteDisplayList;
-        TextureResourceSet resourceSet;
+        private VertexArrayBuffer<VertexPositionColor> vab;
+        private VertexArrayObject<VertexPositionColor> vao;
+        private ShaderPipeline pipeline;
+        private Matrix4fUniform worldMatrix;
+        private RenderTexture renderTexture;
+        private bool renderTargetDrawn;
+        private readonly Viewport normal = new Viewport(0, 600, 800, 0);
+        private SpriteRenderer spriteRenderer;
+        private float rotation;
+        private Framebuffer defaultFramebuffer;
+        private RenderWindow window;
+        private DynamicDisplayList<VertexPositionColorTexture> spriteDisplayList;
+        private TextureResourceSet resourceSet;
 
         public void Run()
         {
@@ -61,7 +61,7 @@ namespace RenderTarget
             vab = new VertexArrayBuffer<VertexPositionColor>(VertexPositionColor.Size, OpenGL.BufferUsage.StaticDraw);
             vao = new VertexArrayObject<VertexPositionColor>(vab, pipeline, DefaultVertexDefinition.FromType(typeof(VertexPositionColor)));
             renderTexture = new RenderTexture(400, 400);
-           
+
             vab.Bind();
             vao.Bind();
             pipeline.Bind();

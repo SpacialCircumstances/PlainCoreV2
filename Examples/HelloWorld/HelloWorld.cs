@@ -6,21 +6,20 @@ using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.IO;
 using System.Numerics;
-using System.Text;
 
 namespace HelloWorld
 {
-    class HelloWorld
+    public class HelloWorld
     {
-        ShaderPipeline pipeline;
-        VertexArrayObject<VertexPositionColorTexture> vao;
-        VertexArrayBuffer<VertexPositionColorTexture> buffer;
-        IndexBuffer<VertexPositionColorTexture> indexBuffer;
-        Matrix4fUniform worldMatrix;
-        DeviceTexture texture;
-        Framebuffer defaultFramebuffer;
+        private ShaderPipeline pipeline;
+        private VertexArrayObject<VertexPositionColorTexture> vao;
+        private VertexArrayBuffer<VertexPositionColorTexture> buffer;
+        private IndexBuffer<VertexPositionColorTexture> indexBuffer;
+        private Matrix4fUniform worldMatrix;
+        private DeviceTexture texture;
+        private Framebuffer defaultFramebuffer;
 
-        int counter;
+        private int counter;
 
         public void Run()
         {

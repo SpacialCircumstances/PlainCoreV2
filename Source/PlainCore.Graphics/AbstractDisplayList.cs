@@ -8,7 +8,6 @@ namespace PlainCore.Graphics
         protected readonly VertexAttributeDescription[] vertexAttributes;
         protected readonly uint vertexSize;
 
-
         protected AbstractDisplayList(uint vertexSize, ShaderPipeline pipeline = null, VertexAttributeDescription[] vertexAttributes = null)
         {
             this.pipeline = pipeline ?? new ShaderPipeline(

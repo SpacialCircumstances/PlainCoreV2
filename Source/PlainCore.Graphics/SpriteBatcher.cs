@@ -69,7 +69,6 @@ namespace PlainCore.Graphics
                 return Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2);
             }
 
-
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
             float upperX = texX2 * texture.Rectangle.End.X;
             float lowerY = texY2 * texture.Rectangle.End.Y; //LowerY and UpperY swapped because of image format

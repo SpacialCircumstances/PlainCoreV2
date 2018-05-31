@@ -106,7 +106,7 @@ namespace PlainCore.Graphics
         {
             if (length < 0)
             {
-                throw new ArgumentException(nameof(length)); ;
+                throw new ArgumentException(nameof(length));
             }
 
             vertexArrayBuffer.Bind();

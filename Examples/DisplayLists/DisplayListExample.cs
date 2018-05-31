@@ -56,17 +56,5 @@ namespace DisplayLists
             renderer.Dispose();
             window.Dispose();
         }
-
-        private static readonly VertexPositionColorTexture[] vertexArray = new VertexPositionColorTexture[] {
-            new VertexPositionColorTexture(new Vector2(0.0f, 0.0f), Color4.Blue, new Vector2(0f, 1f)), //LT
-            new VertexPositionColorTexture(new Vector2(400.0f, 0.0f), Color4.Blue, new Vector2(1f, 1f)), //RT
-            new VertexPositionColorTexture(new Vector2(400.0f, 400.0f), Color4.Blue, new Vector2(1f, 0f)), //RD
-            new VertexPositionColorTexture(new Vector2(0.0f, 400.0f), Color4.Blue, new Vector2(0f, 0f)) //LD
-        };
-
-        private static readonly int[] indexArray = new int[]
-        {
-            0, 1, 2, 0, 2, 3
-        };
     }
 }

@@ -33,7 +33,7 @@ namespace PlainCore.Window
         protected bool visible = true;
         protected string title;
 
-        public IntPtr Handle = IntPtr.Zero;
+        public IntPtr Handle;
 
         private bool Exists()
         {
