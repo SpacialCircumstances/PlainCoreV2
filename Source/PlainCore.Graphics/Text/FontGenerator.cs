@@ -10,11 +10,22 @@ using System.Runtime.InteropServices;
 
 namespace PlainCore.Graphics.Text
 {
+    /// <summary>
+    /// Allows generating fonts from font files.
+    /// </summary>
     public static class FontGenerator
     {
         private const int MAX_BITMAP_WIDTH = 1024;
         private const int HORIZONTAL_OFFSET = 2; //Reduces artifacts when scaling up
 
+        /// <summary>
+        /// Generate a font from a font file.
+        /// </summary>
+        /// <param name="fontFileName">Name of the font file</param>
+        /// <param name="fontSize">Size of the bitmap font</param>
+        /// <param name="lowerChar">The lowest character to render</param>
+        /// <param name="upperChar">The hightest character</param>
+        /// <returns>A description for the font</returns>
         public static FontDescription GenerateFont(string fontFileName, uint fontSize, int lowerChar = 33, int upperChar = 127)
         {
             var font = new FontFace(File.OpenRead(fontFileName));

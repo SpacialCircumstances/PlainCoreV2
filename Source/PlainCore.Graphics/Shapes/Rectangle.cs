@@ -6,6 +6,9 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics.Shapes
 {
+    /// <summary>
+    /// A rectangular shape.
+    /// </summary>
     public class Rectangle : IShape
     {
         public Rectangle(Vector2 position, Vector2 size, Color4 color)

@@ -5,6 +5,9 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics.Shapes
 {
+    /// <summary>
+    /// A generic convex shape.
+    /// </summary>
     public class FreeShape : IShape
     {
         public FreeShape(int[] indices, VertexPositionColor[] vertices)

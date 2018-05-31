@@ -3,18 +3,36 @@ using System;
 
 namespace PlainCore.Graphics.Text
 {
+    /// <summary>
+    /// A class that defines a font that can be used for drawing text.
+    /// </summary>
     public class Font: IDisposable
     {
+        /// <summary>
+        /// Create the font from a file containing a serialized description.
+        /// </summary>
+        /// <param name="filename">Filename</param>
+        /// <returns>The font</returns>
         public static Font FromDescriptionFile(string filename)
         {
             return new Font(FontDescription.FromDescriptionFile(filename));
         }
 
+        /// <summary>
+        /// Generate the font from a font file.
+        /// </summary>
+        /// <param name="fontFileName">Filename</param>
+        /// <param name="fontSize">The size of the font in pixels</param>
+        /// <returns>The font</returns>
         public static Font GenerateFromFont(string fontFileName, uint fontSize)
         {
             return new Font(FontGenerator.GenerateFont(fontFileName, fontSize));
         }
 
+        /// <summary>
+        /// Create a font.
+        /// </summary>
+        /// <param name="description">Font description</param>
         public Font(FontDescription description)
         {
             this.texture = Texture.FromImage(description.Bitmap);
@@ -24,11 +42,28 @@ namespace PlainCore.Graphics.Text
         private readonly Texture texture;
         private readonly FontDescription description;
 
+        /// <summary>
+        /// Generate the sprites for drawing a string.
+        /// </summary>
+        /// <param name="text">The text to draw</param>
+        /// <param name="x">Position x</param>
+        /// <param name="y">Position y</param>
+        /// <param name="scale">Scale of the text (default 1)</param>
+        /// <returns>A list of sprites</returns>
         public SpriteRenderItem[] DrawString(string text, float x, float y, float scale = 1f)
         {
             return DrawString(text, Color4.White, x, y, scale);
         }
 
+        /// <summary>
+        /// Generate the sprites for drawing a string.
+        /// </summary>
+        /// <param name="text">The text to draw</param>
+        /// <param name="color">The color of the text</param>
+        /// <param name="x">Position x</param>
+        /// <param name="y">Position y</param>
+        /// <param name="scale">Scale of the text (default 1)</param>
+        /// <returns>A list of sprites</returns>
         public SpriteRenderItem[] DrawString(string text, Color4 color, float x, float y, float scale = 1f)
         {
             SpriteRenderItem[] renderItems = new SpriteRenderItem[text.Length];

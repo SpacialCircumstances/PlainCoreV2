@@ -2,6 +2,9 @@
 
 namespace PlainCore.Graphics.Text
 {
+    /// <summary>
+    /// Contains data for rendering a glyph.
+    /// </summary>
     public struct GlyphLayout
     {
         public GlyphLayout(char character, (int x, int y) bitmapPosition, (int w, int h) size)
