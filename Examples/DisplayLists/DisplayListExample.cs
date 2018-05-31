@@ -18,10 +18,10 @@ namespace DisplayLists
             PlainCoreSettings.GlfwSearchPath = Path.GetFullPath("../../../../../Native/");
             var window = new RenderWindow();
 
-            var dl = new DynamicDisplayList<VertexPositionColorTexture>(VertexPositionColorTexture.Size);
             var rs = new TextureResourceSet(window);
             var t = Texture.FromFile("Example.png");
             var renderer = new SpriteRenderer();
+            var dl = DynamicDisplayList<VertexPositionColorTexture>.Create(renderer);
             var sprites = new List<SpriteRenderItem>();
             var description = FontGenerator.GenerateFont("OpenSans-Regular.ttf", 40);
             var font = new Font(description);
