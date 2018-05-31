@@ -40,12 +40,12 @@ namespace DisplayLists
 
                 window.PollEvents();
 
-                renderer.RenderToData((vertices, tex) =>
+                renderer.RenderToData((vertices, count, tex) =>
                 {
                     dl.SetVertices(vertices);
-                    dl.SetIndices(indices, vertices.Length + (vertices.Length / 2));
+                    dl.SetIndices(indices, count);
                     rs.Texture = tex;
-                    dl.Draw(rs);
+                    dl.Draw(rs, count);
                 });
 
                 window.Display();

@@ -23,7 +23,7 @@ namespace PlainCore.Graphics
             Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount);
         }
 
-        public void RenderToData(Action<VertexPositionColorTexture[], Texture> renderCallback)
+        public void RenderToData(Action<VertexPositionColorTexture[], int, Texture> renderCallback)
         {
             int index = renderItemsIndex;
             int count = renderItemsCount;
@@ -45,7 +45,7 @@ namespace PlainCore.Graphics
                             //Flush
                             VertexPositionColorTexture[] vertexArray = Flush(currentBatchCount, batchStart);
 
-                            renderCallback.Invoke(vertexArray, texture);
+                            renderCallback.Invoke(vertexArray, vertexArray.Length + (vertexArray.Length / 2), texture);
 
                             currentBatchCount = 0;
                             batchStart = i;
@@ -60,7 +60,7 @@ namespace PlainCore.Graphics
                 //Flush
                 VertexPositionColorTexture[] vertexArray2 = Flush(currentBatchCount, batchStart);
 
-                renderCallback.Invoke(vertexArray2, texture);
+                renderCallback.Invoke(vertexArray2, vertexArray2.Length + (vertexArray2.Length / 2), texture);
             }
         }
 

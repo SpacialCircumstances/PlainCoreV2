@@ -95,7 +95,7 @@ namespace RenderTarget
                 renderTargetDrawn = true;
                 var sprite = SpriteBatcher.Draw(renderTexture, 0f, 0f);
                 spriteRenderer.SetRenderItems(new SpriteRenderItem[]{ sprite });
-                spriteRenderer.RenderToData((data, tex) =>
+                spriteRenderer.RenderToData((data, count, tex) =>
                 {
                     spriteDisplayList.SetVertices(data);
                     spriteDisplayList.SetIndices(SpriteRenderer.GetIndices(1));
