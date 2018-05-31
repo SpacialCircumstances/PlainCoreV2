@@ -5,6 +5,9 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A drawable texture.
+    /// </summary>
     public interface ITexture
     {
         Texture Texture { get; }

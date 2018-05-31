@@ -7,6 +7,9 @@ using PlainCore.System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A render target that can itself be used like a texture.
+    /// </summary>
     public class RenderTexture : ITexture, IRenderTarget, IDisposable
     {
         public RenderTexture(int width, int height)

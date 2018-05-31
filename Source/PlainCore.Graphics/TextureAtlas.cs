@@ -5,6 +5,10 @@ using System.IO;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// Keeps track of texture regions. Can be loaded.
+    /// </summary>
+    /// <remarks>Useful for tilemaps etc.</remarks>
     public class TextureAtlas
     {
         public static TextureAtlas LoadFromFile(string atlasFile)

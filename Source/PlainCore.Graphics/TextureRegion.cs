@@ -5,6 +5,9 @@ using PlainCore.System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A part of a texture.
+    /// </summary>
     public class TextureRegion : ITexture
     {
         public TextureRegion(Texture texture, FloatRectangle rectangle)

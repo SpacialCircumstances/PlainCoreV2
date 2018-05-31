@@ -7,6 +7,9 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A window that can be used for drawing operations.
+    /// </summary>
     public class RenderWindow : OpenGLWindow, IRenderTarget
     {
         public RenderWindow(uint width = 800, uint height = 600, string title = "PlainCore", bool resizable = false, bool fullscreen = false) : base(width, height, title, resizable, fullscreen)

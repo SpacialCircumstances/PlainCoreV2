@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// Contains the data of a texture atlas.
+    /// </summary>
     public class TextureAtlasData
     {
         private readonly Dictionary<string, FloatRectangle> regions;

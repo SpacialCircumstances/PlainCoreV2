@@ -6,6 +6,9 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A sprite, containing the texture, the color and the transformation.
+    /// </summary>
     public class Sprite
     {
         public Sprite()

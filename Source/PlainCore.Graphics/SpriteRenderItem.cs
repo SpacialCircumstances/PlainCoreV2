@@ -3,6 +3,9 @@ using System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A single sprite that can be rendered.
+    /// </summary>
     public struct SpriteRenderItem: IComparable<SpriteRenderItem>
     {
         public VertexPositionColorTexture LT;

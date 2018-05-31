@@ -6,6 +6,9 @@ using System.Text;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A target for drawing.
+    /// </summary>
     public interface IRenderTarget
     {
         Framebuffer Framebuffer { get; }
