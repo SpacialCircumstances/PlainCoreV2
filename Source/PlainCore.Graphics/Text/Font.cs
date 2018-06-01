@@ -35,6 +35,8 @@ namespace PlainCore.Graphics.Text
         /// <param name="description">Font description</param>
         public Font(FontDescription description)
         {
+            if (description == null) throw new ArgumentNullException(nameof(description));
+
             this.texture = Texture.FromImage(description.Bitmap);
             this.description = description;
         }

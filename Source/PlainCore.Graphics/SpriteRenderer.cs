@@ -17,6 +17,10 @@ namespace PlainCore.Graphics
 
         public void SetRenderItems(SpriteRenderItem[] renderItems, int index, int length)
         {
+            if (renderItems == null) throw new ArgumentNullException(nameof(renderItems));
+            if (index > renderItems.Length) throw new ArgumentOutOfRangeException(nameof(index));
+            if (index + length > renderItems.Length) throw new ArgumentException();
+
             this.renderItems = renderItems;
             this.renderItemsIndex = index;
             this.renderItemsCount = length;

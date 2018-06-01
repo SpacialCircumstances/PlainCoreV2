@@ -14,7 +14,7 @@ namespace PlainCore.Graphics
         public TextureAtlasData(string imageName, Dictionary<string, FloatRectangle> regions)
         {
             ImageName = imageName;
-            this.regions = regions;
+            this.regions = regions ?? throw new ArgumentNullException(nameof(regions));
         }
 
         public FloatRectangle GetRegion(string name)

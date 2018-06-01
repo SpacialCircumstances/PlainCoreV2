@@ -17,7 +17,7 @@ namespace PlainCore.Graphics
 
         public virtual IEnumerable<IUniform> GetUniforms()
         {
-            if (RenderTarget == null) throw new ArgumentNullException("RenderTarget");
+            if (RenderTarget == null) throw new ArgumentNullException(nameof(RenderTarget));
             worldMatrixUniform.Matrix = RenderTarget.WorldMatrix;
 
             yield return worldMatrixUniform;

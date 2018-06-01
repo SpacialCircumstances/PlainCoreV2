@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -26,6 +27,8 @@ namespace PlainCore.Graphics.Text
 
         public FontDescription(Image<Rgba32> image, uint fontSize, Dictionary<char, GlyphLayout> glyphs)
         {
+            if (image == null) throw new ArgumentNullException(nameof(image));
+
             Bitmap = image;
             FontSize = fontSize;
             this.glyphs = glyphs;

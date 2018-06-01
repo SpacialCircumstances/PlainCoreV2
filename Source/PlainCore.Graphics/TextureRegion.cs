@@ -12,7 +12,7 @@ namespace PlainCore.Graphics
     {
         public TextureRegion(Texture texture, FloatRectangle rectangle)
         {
-            this.texture = texture;
+            this.texture = texture ?? throw new ArgumentNullException(nameof(texture));
             this.rectangle = rectangle;
         }
 

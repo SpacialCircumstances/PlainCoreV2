@@ -1,5 +1,6 @@
 ﻿using OpenGL;
 using PlainCore.Graphics.Core;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -31,6 +32,8 @@ namespace PlainCore.Graphics.Shapes
         /// <param name="shape">The shape to render</param>
         public void Render(IShape shape)
         {
+            if (shape == null) throw new ArgumentNullException(nameof(shape));
+
             var shapeIndices = shape.GetIndices();
             var shapeVertices = shape.GetVertices();
 
@@ -52,6 +55,8 @@ namespace PlainCore.Graphics.Shapes
         /// <param name="transform">The transform to use</param>
         public void Render(IShape shape, Matrix4x4 transform)
         {
+            if (shape == null) throw new ArgumentNullException(nameof(shape));
+
             var shapeIndices = shape.GetIndices();
             var shapeVertices = shape.GetVertices();
 
@@ -76,6 +81,8 @@ namespace PlainCore.Graphics.Shapes
         /// <param name="displayList">The display list that should receive the data</param>
         public void End(IChangeableDisplayList<VertexPositionColor> displayList)
         {
+            if (displayList == null) throw new ArgumentNullException(nameof(displayList));
+
             var (verts, inds) = End();
             displayList.SetIndices(inds);
             displayList.SetVertices(verts);

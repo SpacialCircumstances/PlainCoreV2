@@ -37,6 +37,8 @@ namespace PlainCore.Graphics
 
         public void SetIndices(int[] indices, int elementCount)
         {
+            if (indices == null) throw new ArgumentNullException(nameof(indices));
+
             elements = elementCount;
             indexBuffer.Bind();
             indexBuffer.ReplaceData(indices, IntPtr.Zero);
@@ -45,6 +47,8 @@ namespace PlainCore.Graphics
 
         public void SetVertices(T[] vertices)
         {
+            if (vertices == null) throw new ArgumentNullException(nameof(vertices));
+
             vertexArrayBuffer.Bind();
             vertexArrayBuffer.ReplaceData(vertices, IntPtr.Zero);
             vertexArrayBuffer.Unbind();
@@ -57,6 +61,8 @@ namespace PlainCore.Graphics
 
         public override void Draw(IResourceSet resourceSet, int elements)
         {
+            if (resourceSet == null) throw new ArgumentNullException(nameof(resourceSet));
+
             pipeline.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();

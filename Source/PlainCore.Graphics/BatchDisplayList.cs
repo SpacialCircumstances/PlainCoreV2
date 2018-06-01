@@ -44,7 +44,7 @@ namespace PlainCore.Graphics
         {
             if (vertices == null || vertices.Length > currentVertexBufferSize)
             {
-                throw new ArgumentException();
+                throw new ArgumentException(nameof(vertices));
             }
 
             vertexArrayBuffer.Bind();
@@ -59,6 +59,8 @@ namespace PlainCore.Graphics
 
         public void SetIndices(int[] indices, int elementCount)
         {
+            if (indices == null) throw new ArgumentNullException(nameof(indices));
+
             this.elementCount = elementCount;
             indexBuffer.Bind();
             indexBuffer.CopyData(indices);
@@ -72,6 +74,8 @@ namespace PlainCore.Graphics
 
         public override void Draw(IResourceSet resourceSet, int elements)
         {
+            if (resourceSet == null) throw new ArgumentNullException(nameof(resourceSet));
+
             pipeline.Bind();
             vertexArrayObject.Bind();
             indexBuffer.Bind();

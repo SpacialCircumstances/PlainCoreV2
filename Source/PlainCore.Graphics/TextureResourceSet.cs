@@ -21,6 +21,8 @@ namespace PlainCore.Graphics
 
         public override IEnumerable<IUniform> GetUniforms()
         {
+            if (Texture == null) throw new ArgumentNullException(nameof(Texture));
+
             yield return Texture;
 
             foreach(var uniform in base.GetUniforms())

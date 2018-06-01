@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using System;
 using System.IO;
 
 namespace PlainCore.Graphics
@@ -23,7 +24,7 @@ namespace PlainCore.Graphics
 
         public TextureAtlas(TextureAtlasData data)
         {
-            atlasData = data;
+            atlasData = data ?? throw new ArgumentNullException(nameof(data));
             texture = Texture.FromFile(data.ImageName);
         }
 
@@ -33,8 +34,8 @@ namespace PlainCore.Graphics
 
         public TextureAtlas(TextureAtlasData data, Texture replacementTexture)
         {
-            atlasData = data;
-            texture = replacementTexture;
+            atlasData = data ?? throw new ArgumentNullException(nameof(data));
+            texture = replacementTexture ?? throw new ArgumentNullException(nameof(replacementTexture));
         }
 
         public TextureRegion GetRegion(string name)
