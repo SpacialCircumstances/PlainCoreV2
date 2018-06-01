@@ -18,7 +18,7 @@ namespace PlainCore.Graphics
 
         public Sprite(ITexture tex)
         {
-            Texture = tex;
+            Texture = tex ?? throw new ArgumentNullException(nameof(tex));
         }
 
         public Sprite(ITexture texture, Vector2 position, float rotation, Vector2 size) : this(texture)
@@ -28,7 +28,7 @@ namespace PlainCore.Graphics
             this.size = size;
         }
 
-        public ITexture Texture;
+        public ITexture Texture { get; set; }
 
         protected Vector2 position = new Vector2();
         protected float rotation;
