@@ -6,7 +6,7 @@ namespace PlainCore.System
     /// <summary>
     /// A float rectangle.
     /// </summary>
-    public class FloatRectangle: IEquatable<FloatRectangle>
+    public struct FloatRectangle: IEquatable<FloatRectangle>
     {
         /// <summary>
         /// Create a float rectangle.
@@ -15,16 +15,8 @@ namespace PlainCore.System
         /// <param name="size">The size of the rectangle</param>
         public FloatRectangle(Vector2 position, Vector2 size)
         {
-            this.position = position;
-            this.size = size;
-        }
-
-        /// <summary>
-        /// Create a rectangle with the default Position & Size.
-        /// </summary>
-        public FloatRectangle()
-        {
-
+            Position = position;
+            Size = size;
         }
 
         /// <summary>
@@ -39,30 +31,10 @@ namespace PlainCore.System
 
         }
 
-        protected Vector2 position;
-        protected Vector2 size;
+        public Vector2 Position { get; set; }
 
-        /// <summary>
-        /// Gets or sets the position.
-        /// </summary>
-        public Vector2 Position
-        {
-            get => position;
-            set => position = value;
-        }
+        public Vector2 Size { get; set; }
 
-        /// <summary>
-        /// Gets or sets the size.
-        /// </summary>
-        public Vector2 Size
-        {
-            get => size;
-            set => size = value;
-        }
-
-        /// <summary>
-        /// Gets the End of the rectangle. Is equal to Position + Size.
-        /// </summary>
         public Vector2 End
         {
             get => Position + Size;
@@ -75,7 +47,7 @@ namespace PlainCore.System
         /// <returns>The equality of both rectangles</returns>
         public bool Equals(FloatRectangle other)
         {
-            return position == other.position && size == other.size;
+            return Position == other.Position && Size == other.Size;
         }
     }
 }
