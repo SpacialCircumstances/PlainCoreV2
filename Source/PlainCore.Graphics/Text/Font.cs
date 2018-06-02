@@ -81,7 +81,7 @@ namespace PlainCore.Graphics.Text
                 var y1 = fy * (float)glyph.BitmapPosition.Y;
                 var x2 = x1 + (fx * (float)glyph.GlyphSize.W);
                 var y2 = y1 + (fy * (float)glyph.GlyphSize.H);
-                renderItems[i] = SpriteBatcher.Draw(texture, color, currentX, y, glyph.GlyphSize.W * scale, glyph.GlyphSize.H * scale, x1, y1, x2, y2);
+                renderItems[i] = SpriteDrawer.Draw(texture, color, currentX, y, glyph.GlyphSize.W * scale, glyph.GlyphSize.H * scale, x1, y1, x2, y2);
                 currentX += glyph.GlyphSize.W * scale;
             }
 

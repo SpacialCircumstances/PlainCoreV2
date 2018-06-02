@@ -5,7 +5,10 @@ using System.Numerics;
 
 namespace PlainCore.Graphics
 {
-    public static class SpriteBatcher
+    /// <summary>
+    /// Static class for transforming sprites to vertices.
+    /// </summary>
+    public static class SpriteDrawer
     {
         public static SpriteRenderItem Draw(Sprite sprite)
         {

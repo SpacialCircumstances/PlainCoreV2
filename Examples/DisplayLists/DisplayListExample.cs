@@ -25,10 +25,10 @@ namespace DisplayLists
             var sprites = new List<SpriteRenderItem>();
             var description = FontGenerator.GenerateFont("OpenSans-Regular.ttf", 40);
             var font = new Font(description);
-            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 0f, 0f));
-            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 100f, 100f));
-            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 200f, 200f));
-            sprites.Add(SpriteBatcher.Draw(t, Color4.White, 400f, 400f));
+            sprites.Add(SpriteDrawer.Draw(t, Color4.White, 0f, 0f));
+            sprites.Add(SpriteDrawer.Draw(t, Color4.White, 100f, 100f));
+            sprites.Add(SpriteDrawer.Draw(t, Color4.White, 200f, 200f));
+            sprites.Add(SpriteDrawer.Draw(t, Color4.White, 400f, 400f));
             var glyphs = font.DrawString("ASDF", 500f, 400f, 1f);
             sprites.AddRange(glyphs);
             var indices = SpriteRenderer.GetIndices(sprites.Count);

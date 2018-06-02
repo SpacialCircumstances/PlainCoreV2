@@ -93,7 +93,7 @@ namespace RenderTarget
                 var image = Image.LoadPixelData<Rgba32>(imageData, 800, 600);
                 image.Save("Screenshot.png");
                 renderTargetDrawn = true;
-                var sprite = SpriteBatcher.Draw(renderTexture, 0f, 0f);
+                var sprite = SpriteDrawer.Draw(renderTexture, 0f, 0f);
                 spriteRenderer.SetRenderItems(new SpriteRenderItem[]{ sprite });
                 spriteRenderer.RenderToData((data, count, tex) =>
                 {
