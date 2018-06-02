@@ -29,7 +29,7 @@ namespace DisplayLists
             sprites.Add(SpriteDrawer.Draw(t, Color4.White, 100f, 100f));
             sprites.Add(SpriteDrawer.Draw(t, Color4.White, 200f, 200f));
             sprites.Add(SpriteDrawer.Draw(t, Color4.White, 400f, 400f));
-            var glyphs = font.DrawString("ASDF", 500f, 400f, 1f);
+            var glyphs = font.DrawString("ASDF", 500f, 400f);
             sprites.AddRange(glyphs);
             var indices = SpriteRenderer.GetIndices(sprites.Count);
             renderer.SetRenderItems(sprites.ToArray());

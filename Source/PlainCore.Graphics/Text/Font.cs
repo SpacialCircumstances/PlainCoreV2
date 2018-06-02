@@ -52,9 +52,9 @@ namespace PlainCore.Graphics.Text
         /// <param name="y">Position y</param>
         /// <param name="scale">Scale of the text (default 1)</param>
         /// <returns>A list of sprites</returns>
-        public SpriteRenderItem[] DrawString(string text, float x, float y, float scale = 1f)
+        public SpriteRenderItem[] DrawString(string text, float x, float y, int layer = 0, float scale = 1f)
         {
-            return DrawString(text, Color4.White, x, y, scale);
+            return DrawString(text, Color4.White, x, y, layer, scale);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace PlainCore.Graphics.Text
         /// <param name="y">Position y</param>
         /// <param name="scale">Scale of the text (default 1)</param>
         /// <returns>A list of sprites</returns>
-        public SpriteRenderItem[] DrawString(string text, Color4 color, float x, float y, float scale = 1f)
+        public SpriteRenderItem[] DrawString(string text, Color4 color, float x, float y, int layer = 0, float scale = 1f)
         {
             SpriteRenderItem[] renderItems = new SpriteRenderItem[text.Length];
 
@@ -81,7 +81,7 @@ namespace PlainCore.Graphics.Text
                 var y1 = fy * (float)glyph.BitmapPosition.Y;
                 var x2 = x1 + (fx * (float)glyph.GlyphSize.W);
                 var y2 = y1 + (fy * (float)glyph.GlyphSize.H);
-                renderItems[i] = SpriteDrawer.Draw(texture, color, currentX, y, glyph.GlyphSize.W * scale, glyph.GlyphSize.H * scale, x1, y1, x2, y2);
+                renderItems[i] = SpriteDrawer.Draw(texture, color, currentX, y, glyph.GlyphSize.W * scale, glyph.GlyphSize.H * scale, x1, y1, x2, y2, layer);
                 currentX += glyph.GlyphSize.W * scale;
             }
 

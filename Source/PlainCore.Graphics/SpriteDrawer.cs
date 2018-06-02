@@ -10,42 +10,42 @@ namespace PlainCore.Graphics
     /// </summary>
     public static class SpriteDrawer
     {
-        public static SpriteRenderItem Draw(Sprite sprite)
+        public static SpriteRenderItem Draw(Sprite sprite, int layer = 0)
         {
-            return Draw(sprite.Texture, sprite.Color, sprite.Position.X, sprite.Position.Y, sprite.Size.X, sprite.Size.Y, sprite.Rotation, sprite.Origin.X, sprite.Origin.Y);
+            return Draw(sprite.Texture, sprite.Color, sprite.Position.X, sprite.Position.Y, sprite.Size.X, sprite.Size.Y, sprite.Rotation, sprite.Origin.X, sprite.Origin.Y, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY)
+        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, int layer = 0)
         {
-            return Draw(texture, color, x, y, width, height, rotation, originX, originY, 0, 0, 1, 1);
+            return Draw(texture, color, x, y, width, height, rotation, originX, originY, 0, 0, 1, 1, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, float x, float y, float width, float height, float rotation)
+        public static SpriteRenderItem Draw(ITexture texture, float x, float y, float width, float height, float rotation, int layer = 0)
         {
-            return Draw(texture, Color4.White, x, y, width, height, rotation);
+            return Draw(texture, Color4.White, x, y, width, height, rotation, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation)
+        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, int layer = 0)
         {
-            return Draw(texture, color, x, y, width, height, rotation, 0.5f, 0.5f, 0, 0, 1, 1);
+            return Draw(texture, color, x, y, width, height, rotation, 0.5f, 0.5f, 0, 0, 1, 1, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, float x, float y, float width, float height)
+        public static SpriteRenderItem Draw(ITexture texture, float x, float y, float width, float height, int layer = 0)
         {
-            return Draw(texture, Color4.White, x, y, width, height, 0, 0, 1, 1);
+            return Draw(texture, Color4.White, x, y, width, height, 0, 0, 1, 1, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, float x, float y)
+        public static SpriteRenderItem Draw(ITexture texture, float x, float y, int layer = 0)
         {
-            return Draw(texture, Color4.White, x, y);
+            return Draw(texture, Color4.White, x, y, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y)
+        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, int layer = 0)
         {
-            return Draw(texture, color, x, y, texture.Texture.Width, texture.Texture.Height, 0, 0, 1, 1);
+            return Draw(texture, color, x, y, texture.Texture.Width, texture.Texture.Height, 0, 0, 1, 1, layer);
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float texX1, float texY1, float texX2, float texY2)
+        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float texX1, float texY1, float texX2, float texY2, int layer)
         {
             float w = width;
             float h = height;
@@ -61,15 +61,16 @@ namespace PlainCore.Graphics
                 LT = new VertexPositionColorTexture(new Vector2(x, y + h), color, new Vector2(lowerX, upperY)),
                 RD = new VertexPositionColorTexture(new Vector2(x + w, y), color, new Vector2(upperX, lowerY)),
                 RT = new VertexPositionColorTexture(new Vector2(x + w, y + h), color, new Vector2(upperX, upperY)),
-                Texture = texture.Texture
+                Texture = texture.Texture,
+                Layer = layer
             };
         }
 
-        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, float texX1, float texY1, float texX2, float texY2)
+        public static SpriteRenderItem Draw(ITexture texture, Color4 color, float x, float y, float width, float height, float rotation, float originX, float originY, float texX1, float texY1, float texX2, float texY2, int layer)
         {
             if (rotation == 0)
             {
-                return Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2);
+                return Draw(texture, color, x, y, width, height, texX1, texY1, texX2, texY2, layer);
             }
 
             float lowerX = texture.Rectangle.Position.X + (texX1 * texture.Rectangle.End.X);
@@ -103,18 +104,19 @@ namespace PlainCore.Graphics
                 LT = new VertexPositionColorTexture(new Vector2(lux, luy), color, new Vector2(lowerX, upperY)),
                 RT = new VertexPositionColorTexture(new Vector2(rdx, rdy), color, new Vector2(upperX, upperY)),
                 RD = new VertexPositionColorTexture(new Vector2(rux, ruy), color, new Vector2(upperX, lowerY)),
-                Texture = texture.Texture
+                Texture = texture.Texture,
+                Layer = layer
             };
         }
 
-        public static SpriteRenderItem[] DrawString(Font font, string text, Color4 color, float x, float y, float scale = 1f)
+        public static SpriteRenderItem[] DrawString(Font font, string text, Color4 color, float x, float y, int layer = 0, float scale = 1f)
         {
-            return font.DrawString(text, color, x, y, scale);
+            return font.DrawString(text, color, x, y, layer, scale);
         }
 
-        public static SpriteRenderItem[] DrawString(Font font, string text, float x, float y, float scale = 1f)
+        public static SpriteRenderItem[] DrawString(Font font, string text, float x, float y, int layer = 0, float scale = 1f)
         {
-            return font.DrawString(text, x, y, scale);
+            return font.DrawString(text, x, y, layer, scale);
         }
     }
 }
