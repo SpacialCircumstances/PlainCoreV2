@@ -6,7 +6,7 @@ namespace PlainCore.Graphics
     /// <summary>
     /// A single sprite that can be rendered.
     /// </summary>
-    public struct SpriteRenderItem: IComparable<SpriteRenderItem>
+    public struct SpriteRenderItem
     {
         public VertexPositionColorTexture LT;
         public VertexPositionColorTexture RT;
@@ -14,7 +14,6 @@ namespace PlainCore.Graphics
         public VertexPositionColorTexture LD;
         public Texture Texture;
         public int Layer;
-        public int SortKey => (Layer * 256) + (int)Texture.InternalTexture.Handle;
 
         public SpriteRenderItem(VertexPositionColorTexture lT, VertexPositionColorTexture rT, VertexPositionColorTexture rD, VertexPositionColorTexture lD, Texture texture, int layer = 0)
         {
@@ -24,11 +23,6 @@ namespace PlainCore.Graphics
             LD = lD;
             Texture = texture;
             Layer = layer;
-        }
-
-        public int CompareTo(SpriteRenderItem other)
-        {
-            return SortKey - other.SortKey;
         }
     }
 }

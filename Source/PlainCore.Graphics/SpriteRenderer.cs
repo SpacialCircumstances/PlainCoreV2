@@ -1,6 +1,7 @@
 ﻿using OpenGL;
 using PlainCore.Graphics.Core;
 using System;
+using System.Collections.Generic;
 
 namespace PlainCore.Graphics
 {
@@ -17,19 +18,21 @@ namespace PlainCore.Graphics
         /// Sets the current sprite items for rendering.
         /// </summary>
         /// <param name="renderItems">Sprite items</param>
+        /// <param name="sortMode">Sort mode for sprites</param>
         /// <param name="index">Start index of items array</param>
-        public void SetRenderItems(SpriteRenderItem[] renderItems, int index = 0)
+        public void SetRenderItems(SpriteRenderItem[] renderItems, SpriteSortMode sortMode = SpriteSortMode.TextureLayer, int index = 0)
         {
-            SetRenderItems(renderItems, index, renderItems.Length - index);
+            SetRenderItems(renderItems, sortMode, index, renderItems.Length - index);
         }
 
         /// <summary>
         /// Sets the current sprite items for rendering.
         /// </summary>
         /// <param name="renderItems">Sprite items</param>
+        /// <param name="sortMode">Sort mode for sprites</param>
         /// <param name="index">Start index of items array</param>
         /// <param name="length">Length of sprite array part</param>
-        public void SetRenderItems(SpriteRenderItem[] renderItems, int index, int length)
+        public void SetRenderItems(SpriteRenderItem[] renderItems, SpriteSortMode sortMode, int index, int length)
         {
             if (renderItems == null) throw new ArgumentNullException(nameof(renderItems));
             if (index > renderItems.Length) throw new ArgumentOutOfRangeException(nameof(index));
@@ -38,7 +41,7 @@ namespace PlainCore.Graphics
             this.renderItems = renderItems;
             this.renderItemsIndex = index;
             this.renderItemsCount = length;
-            Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount);
+            Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount, GetComparer(sortMode));
         }
 
         /// <summary>
@@ -160,6 +163,51 @@ namespace PlainCore.Graphics
             get
             {
                 return internalVertexAttributes ?? (internalVertexAttributes = DefaultVertexDefinition.FromType(typeof(VertexPositionColorTexture)));
+            }
+        }
+
+        private IComparer<SpriteRenderItem> GetComparer(SpriteSortMode mode)
+        {
+            switch (mode)
+            {
+                case SpriteSortMode.TextureLayer:
+                    return new TextureLayerComparer();
+                case SpriteSortMode.None:
+                    return new NoOperationComparer();
+                case SpriteSortMode.LayerFirst:
+                    return new LayerFirstComparer();
+                default:
+                    throw new NotSupportedException();
+            }
+        }
+
+        private class TextureLayerComparer : IComparer<SpriteRenderItem>
+        {
+            public int Compare(SpriteRenderItem x, SpriteRenderItem y)
+            {
+                int xKey = ((int)x.Texture.InternalTexture.Handle * 512) + x.Layer;
+                int yKey = ((int)y.Texture.InternalTexture.Handle * 512) + y.Layer;
+
+                return xKey - yKey;
+            }
+        }
+
+        private class NoOperationComparer : IComparer<SpriteRenderItem>
+        {
+            public int Compare(SpriteRenderItem x, SpriteRenderItem y)
+            {
+                return 0;
+            }
+        }
+
+        private class LayerFirstComparer : IComparer<SpriteRenderItem>
+        {
+            public int Compare(SpriteRenderItem x, SpriteRenderItem y)
+            {
+                int xKey = (x.Layer * 512) + (int)x.Texture.InternalTexture.Handle;
+                int yKey = (y.Layer * 512) + (int)y.Texture.InternalTexture.Handle;
+
+                return xKey - yKey;
             }
         }
     }
