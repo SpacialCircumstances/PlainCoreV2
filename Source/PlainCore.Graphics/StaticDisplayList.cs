@@ -3,6 +3,10 @@ using System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A display list for vertex and index data that never changes.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public class StaticDisplayList<T> : AbstractDisplayList<T> where T: struct
     {
         private readonly VertexArrayBuffer<T> vertexArrayBuffer;

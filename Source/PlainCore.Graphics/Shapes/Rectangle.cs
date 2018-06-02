@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
+﻿using System.Numerics;
 using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics.Shapes
@@ -28,7 +25,7 @@ namespace PlainCore.Graphics.Shapes
         private Vector2 size;
         private Color4 color;
         private VertexPositionColor[] vertices;
-        private int[] indices = { 0, 1, 2, 0, 1, 3 };
+        private static readonly int[] indices = { 0, 1, 2, 0, 1, 3 };
 
         public Vector2 Position
         {
@@ -67,7 +64,6 @@ namespace PlainCore.Graphics.Shapes
             vertices[1] = new VertexPositionColor(position + size, color);
             vertices[2] = new VertexPositionColor(new Vector2(position.X, position.Y + size.Y), color);
             vertices[3] = new VertexPositionColor(new Vector2(position.X + size.X, position.Y), color);
-
         }
 
         public int[] GetIndices()

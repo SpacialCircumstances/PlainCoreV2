@@ -2,6 +2,10 @@
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// An abstract display list with a shader and vertex attributes.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public abstract class AbstractDisplayList<T> : IDisplayList where T: struct
     {
         protected ShaderPipeline pipeline;

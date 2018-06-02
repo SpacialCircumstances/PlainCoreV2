@@ -3,6 +3,10 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A display list for frequently changing index and vertex data.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public class StreamDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T: struct
     {
         public static StreamDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)

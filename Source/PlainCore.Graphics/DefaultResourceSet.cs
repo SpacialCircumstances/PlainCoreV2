@@ -4,6 +4,9 @@ using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A default resource set with the world matrix.
+    /// </summary>
     public class DefaultResourceSet : IResourceSet
     {
         public DefaultResourceSet(IRenderTarget renderTarget)

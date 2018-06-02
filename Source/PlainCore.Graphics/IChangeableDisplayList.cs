@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// Interface for a display list with changeable data.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public interface IChangeableDisplayList<T>: IDisplayList
     {
         void SetIndices(int[] indices);

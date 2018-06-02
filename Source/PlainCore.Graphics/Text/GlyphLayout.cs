@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PlainCore.Graphics.Text
+﻿namespace PlainCore.Graphics.Text
 {
     /// <summary>
     /// Contains data for rendering a glyph.

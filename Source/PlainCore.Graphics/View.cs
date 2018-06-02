@@ -1,6 +1,5 @@
 ﻿using PlainCore.Graphics.Core;
 using PlainCore.System;
-using System;
 using System.Numerics;
 
 namespace PlainCore.Graphics
@@ -150,8 +149,8 @@ namespace PlainCore.Graphics
         /// <returns>Coordinates in the world coordinate system</returns>
         public Vector2 ScreenToWorldCoordinates(Vector2 coords)
         {
-            float x = -1f + 2f * (coords.X - viewport.Left) / viewport.Width;
-            float y = -1f + 2f * (coords.Y - viewport.Bottom) / viewport.Height;
+            float x = -1f + (2f * (coords.X - viewport.Left) / viewport.Width);
+            float y = -1f + (2f * (coords.Y - viewport.Bottom) / viewport.Height);
             return Vector2.Transform(new Vector2(x, y), LazyComputeInverseWorldMatrix());
         }
     }

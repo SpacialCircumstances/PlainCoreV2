@@ -3,6 +3,10 @@ using System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A display list for changeable data that is not changed very often.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public class DynamicDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
         public static DynamicDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)

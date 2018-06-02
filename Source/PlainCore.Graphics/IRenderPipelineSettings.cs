@@ -4,6 +4,9 @@ using System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A interface describing the settings for a display list.
+    /// </summary>
     public interface IRenderPipelineSettings: IDisposable
     {
         uint VertexSize { get; }

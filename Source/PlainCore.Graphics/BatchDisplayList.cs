@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using PlainCore.Graphics.Core;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// A display list for frequently changing vertex data and changeable index data.
+    /// </summary>
+    /// <typeparam name="T">Vertex type</typeparam>
     public class BatchDisplayList<T> : AbstractDisplayList<T>, IChangeableDisplayList<T> where T : struct
     {
         public static BatchDisplayList<T> Create(IRenderPipelineSettings pipelineSettings)

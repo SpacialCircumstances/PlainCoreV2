@@ -4,17 +4,31 @@ using System;
 
 namespace PlainCore.Graphics
 {
+    /// <summary>
+    /// Renderer for rendering sprites.
+    /// </summary>
     public class SpriteRenderer: IRenderPipelineSettings
     {
         private SpriteRenderItem[] renderItems;
         private int renderItemsIndex;
         private int renderItemsCount;
 
+        /// <summary>
+        /// Sets the current sprite items for rendering.
+        /// </summary>
+        /// <param name="renderItems">Sprite items</param>
+        /// <param name="index">Start index of items array</param>
         public void SetRenderItems(SpriteRenderItem[] renderItems, int index = 0)
         {
             SetRenderItems(renderItems, index, renderItems.Length - index);
         }
 
+        /// <summary>
+        /// Sets the current sprite items for rendering.
+        /// </summary>
+        /// <param name="renderItems">Sprite items</param>
+        /// <param name="index">Start index of items array</param>
+        /// <param name="length">Length of sprite array part</param>
         public void SetRenderItems(SpriteRenderItem[] renderItems, int index, int length)
         {
             if (renderItems == null) throw new ArgumentNullException(nameof(renderItems));
@@ -27,6 +41,10 @@ namespace PlainCore.Graphics
             Array.Sort(this.renderItems, renderItemsIndex, renderItemsCount);
         }
 
+        /// <summary>
+        /// Applies the batching and creates vertex data for the sprites.
+        /// </summary>
+        /// <param name="renderCallback">Function called with (vertex data, element count, texture) for each batch to draw</param>
         public void RenderToData(Action<VertexPositionColorTexture[], int, Texture> renderCallback)
         {
             int index = renderItemsIndex;
@@ -85,6 +103,11 @@ namespace PlainCore.Graphics
             return vertexArray;
         }
 
+        /// <summary>
+        /// Creates an indices array for rendering sprites.
+        /// </summary>
+        /// <param name="count">Amount of sprites to render</param>
+        /// <returns>Indices array</returns>
         public static int[] GetIndices(int count)
         {
             if (count <= 0)

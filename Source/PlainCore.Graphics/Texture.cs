@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using PlainCore.Graphics.Core;
 using PlainCore.System;
 using SixLabors.ImageSharp;
