@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RenderTarget", "Examples\Re
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DisplayLists", "Examples\DisplayLists\DisplayLists.csproj", "{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloCore", "Examples\HelloCore\HelloCore.csproj", "{29E8979A-8DAA-4DF7-8C65-2CB610D458D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29E8979A-8DAA-4DF7-8C65-2CB610D458D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29E8979A-8DAA-4DF7-8C65-2CB610D458D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29E8979A-8DAA-4DF7-8C65-2CB610D458D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29E8979A-8DAA-4DF7-8C65-2CB610D458D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{4102F9E5-6D5B-4207-8B28-25DDCC4685AF} = {F56F160B-2629-434F-8C84-39D78D447E10}
 		{2D9392E8-3FF2-4DF2-A422-770D7FFD01E5} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 		{4A796A92-4DFE-4E9A-80B1-BDC03FFDA3E1} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
+		{29E8979A-8DAA-4DF7-8C65-2CB610D458D9} = {8745D38E-9ED0-4F6B-B4E5-8BAB915FE332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5CA394-7E0E-4480-883C-D83A3C02008F}
