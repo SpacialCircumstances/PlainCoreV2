@@ -17,9 +17,9 @@ namespace PlainCore.Graphics.Shapes
         private readonly List<int> indices = new List<int>();
 
         /// <summary>
-        /// Begin the batching process.
+        /// Reset the batching process.
         /// </summary>
-        public void Begin()
+        public void Reset()
         {
             index = 0;
             vertices.Clear();
@@ -30,7 +30,7 @@ namespace PlainCore.Graphics.Shapes
         /// Add the shape to the batch.
         /// </summary>
         /// <param name="shape">The shape to render</param>
-        public void Render(IShape shape)
+        public void AddShape(IShape shape)
         {
             if (shape == null) throw new ArgumentNullException(nameof(shape));
 
@@ -53,7 +53,7 @@ namespace PlainCore.Graphics.Shapes
         /// </summary>
         /// <param name="shape">The shape to render</param>
         /// <param name="transform">The transform to use</param>
-        public void Render(IShape shape, Matrix4x4 transform)
+        public void AddShape(IShape shape, Matrix4x4 transform)
         {
             if (shape == null) throw new ArgumentNullException(nameof(shape));
 
@@ -76,23 +76,23 @@ namespace PlainCore.Graphics.Shapes
         }
 
         /// <summary>
-        /// End the batching and upload the data to a display list.
+        /// Upload the data to a display list.
         /// </summary>
         /// <param name="displayList">The display list that should receive the data</param>
-        public void End(IChangeableDisplayList<VertexPositionColor> displayList)
+        public void Render(IChangeableDisplayList<VertexPositionColor> displayList)
         {
             if (displayList == null) throw new ArgumentNullException(nameof(displayList));
 
-            var (verts, inds) = End();
+            var (verts, inds) = Render();
             displayList.SetIndices(inds);
             displayList.SetVertices(verts);
         }
 
         /// <summary>
-        /// End the batching and get the drawing data.
+        /// Get the data for drawing the shapes.
         /// </summary>
         /// <returns>A tuple containing the vertex and index data.</returns>
-        public (VertexPositionColor[], int[]) End()
+        public (VertexPositionColor[], int[]) Render()
         {
             return (vertices.ToArray(), indices.ToArray());
         }
